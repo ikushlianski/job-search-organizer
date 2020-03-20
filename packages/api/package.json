@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "Job search organizer API",
+  "author": "Ilya Kushlianski <kushliansky@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "typescript": "3.8.3"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.3",
+    "@types/node": "13.9.2"
+  }
+}
