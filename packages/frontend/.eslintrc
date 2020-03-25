@@ -1,0 +1,33 @@
+{
+        "extends": [
+            "react-app",
+            "plugin:react/recommended",
+            "plugin:prettier/recommended"
+        ],
+        "plugins": ["react-hooks", "import"],
+        "parser": "@typescript-eslint/parser",
+        "overrides": [
+            {
+                "files": [
+                    "**/*.ts?(x)"
+                ],
+                "rules": {
+                    "prettier/prettier": ["warn", {
+                        "semi": true,
+                        "trailingComma": "all",
+                        "singleQuote": true,
+                        "printWidth": 80,
+                        "tabWidth": 2
+                    }],
+                    "react-hooks/rules-of-hooks": "warn",
+                    "react-hooks/exhaustive-deps": "warn",
+                    "react/prop-types": "off",
+                    "import/order": ["warn", {
+                        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index"],
+                        "newlines-between": "always-and-inside-groups"
+                    }],
+                    "newline-before-return": "warn"
+                }
+            }
+        ]
+}
