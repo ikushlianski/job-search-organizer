@@ -1,5 +1,5 @@
 import {IterationQuestion} from "../iteration-question";
-import {ID} from "../types";
+import {ID} from "../../types";
 
 export interface Iteration {
     id: ID;
