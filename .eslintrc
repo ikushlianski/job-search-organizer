@@ -1,0 +1,28 @@
+{
+        "extends": [
+            "plugin:prettier/recommended"
+        ],
+        "plugins": ["import"],
+        "parser": "@typescript-eslint/parser",
+        "overrides": [
+            {
+                "files": [
+                    "**/*.ts?(x)"
+                ],
+                "rules": {
+                    "prettier/prettier": ["warn", {
+                        "semi": true,
+                        "trailingComma": "all",
+                        "singleQuote": true,
+                        "printWidth": 80,
+                        "tabWidth": 2
+                    }],
+                    "import/order": ["warn", {
+                        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index"],
+                        "newlines-between": "always-and-inside-groups"
+                    }],
+                    "newline-before-return": "warn"
+                }
+            }
+        ]
+}
