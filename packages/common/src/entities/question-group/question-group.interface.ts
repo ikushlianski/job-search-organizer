@@ -1,6 +1,6 @@
-import {ID} from "../../types";
+import { ID } from '../../types';
 
 export interface QuestionGroup {
-    id: ID;
-    name: string;
+  id: ID;
+  name: string;
 }

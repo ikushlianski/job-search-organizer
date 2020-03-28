@@ -3,6 +3,8 @@ import { ID } from '../../types';
 export interface Opportunity {
   id: ID;
   userId: ID;
+  iterationId: ID;
+  status: OpportunityStatus;
 
   /*
   Company info
@@ -11,16 +13,13 @@ export interface Opportunity {
   contactPerson: string;
   contactPhone: string;
   address: string;
-
-  iterationId: ID;
-  status: OpportunityStatus;
 }
 
 enum OpportunityStatus {
   Conversation,
   ConversationStopped,
   Interview,
-  PendingIterviewResult,
+  PendingInterviewFeedback,
   Rejected,
   OfferReceived,
   OfferDismissed,

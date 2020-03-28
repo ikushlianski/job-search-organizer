@@ -1,8 +1,7 @@
 import { ID } from '../../types';
 
-export interface IterationQuestion {
-  id: ID;
-  iterationId: ID;
+export interface QuestionOption {
+  id?: ID;
   questionId: ID;
   optionId: ID;
 }

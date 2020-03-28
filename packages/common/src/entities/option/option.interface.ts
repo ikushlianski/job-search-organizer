@@ -1,7 +1,7 @@
-import {ID, Nullable} from "../../types";
+import { ID, Nullable } from '../../types';
 
 export interface Option {
-    id: ID;
-    questionId: ID;
-    value: Nullable<string | boolean | number>
+  id: ID;
+  questionId: ID;
+  value: string | boolean | number;
 }
