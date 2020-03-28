@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "api/*": ["api/src/*"],
+      "frontend/*": ["frontend/src/*"],
+      "common/*": ["common/src/*"]
+    }
+  }
+}
+

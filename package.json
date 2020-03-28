@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "job-search-organizer",
   "private": true,
   "devDependencies": {
     "lerna": "^3.19.0"

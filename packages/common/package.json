@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Common stuff for job search organizer monorepo",
   "author": "Ilya Kushlianski <kushliansky@gmail.com>",
-  "homepage": "",
   "license": "ISC",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
