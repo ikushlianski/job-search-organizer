@@ -1,4 +1,4 @@
-import { ID, Nullable } from '../../types';
+import { ID, Nullable } from '../types';
 
 export interface Option {
   id: ID;

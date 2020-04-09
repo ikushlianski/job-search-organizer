@@ -1,8 +1,10 @@
-import { ID } from '../../types';
+import { ID } from '../types';
 
-export interface IterationParamPriority {
+export interface IterationParam {
   id: ID;
-  parameterId: ID;
+  iterationId: ID;
+  questionId: ID; // question that's important for user in this iteration
+  optionId: ID; // answer value
   priority: ParamPriority;
 }
 

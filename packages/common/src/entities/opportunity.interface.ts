@@ -1,4 +1,4 @@
-import { ID } from '../../types';
+import { ID } from '../types';
 
 export interface Opportunity {
   id: ID;
