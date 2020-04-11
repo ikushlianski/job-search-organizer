@@ -1,5 +1,5 @@
 {
-  "name": "common",
+  "name": "@job-search-organizer/common",
   "version": "0.1.0",
   "description": "Common stuff for job search organizer monorepo",
   "author": "Ilya Kushlianski <kushliansky@gmail.com>",

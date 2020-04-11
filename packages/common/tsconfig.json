@@ -6,9 +6,12 @@
     "pretty": true,
     "sourceMap": true,
     "target": "es6",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": ".",
+    "composite": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "../common" }]
 }

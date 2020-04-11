@@ -1,11 +1,21 @@
 {
+  "include": ["packages/common/src", "packages/frontend/src", "packages/api/src"],
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "declaration": true,
+    "composite": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
     "paths": {
-      "api/*": ["api/src/*"],
-      "frontend/*": ["frontend/src/*"],
-      "common/*": ["common/src/*"]
+      "@job-search-organizer/api": ["packages/api/src"],
+      "@job-search-organizer/common/*": ["packages/common/src/*"],
+      "@job-search-organizer/frontend": ["packages/frontend/src"]
     }
-  }
+  },
+  "references": [
+    { "path": "packages/api" },
+    { "path": "packages/common" },
+    { "path": "packages/frontend" }
+  ]
 }
 
