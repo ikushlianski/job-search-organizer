@@ -1,10 +1,10 @@
-import * as express from 'express';
+import express from 'express';
+
+import { iterationController } from './entities';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello efff');
-});
+app.use(iterationController);
 
 const PORT = process.env.PORT || 3000;
 
