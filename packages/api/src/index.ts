@@ -4,7 +4,7 @@ import { iterationController } from './entities';
 
 const app = express();
 
-app.use(iterationController);
+app.use([iterationController]);
 
 const PORT = process.env.PORT || 3000;
 

@@ -7,11 +7,11 @@ const iterationService = new IterationService();
 export const iterationController = express.Router();
 
 iterationController
-  .route('/iteration')
+  .route('/iterations')
   .get(getIterations)
   .post(createIteration);
 
-iterationController.route('/iteration/:id').get(getIterationById);
+iterationController.route('/iterations/:id').get(getIterationById);
 
 async function getIterations(req: Request, res: Response) {
   try {
