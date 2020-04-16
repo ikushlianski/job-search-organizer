@@ -1,8 +1,8 @@
-import {ID} from "../types";
+import { ID } from '../types';
 
-export interface User {
-    id: ID;
-    name: string;
-    email: string;
-    password: string;
+export interface UserInterface {
+  id: ID;
+  name: string;
+  email: string;
+  password: string;
 }

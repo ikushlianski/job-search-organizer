@@ -1,3 +1,3 @@
-import { Iteration } from './iteration.interface';
+import { IterationInterface } from './iteration.interface';
 
-export type IterationDto = Partial<Iteration>;
+export type IterationDto = Omit<IterationInterface, 'id'>;

@@ -21,7 +21,7 @@ async function getIterations(req: Request, res: Response) {
   } catch (e) {
     console.error('getIterations -> ', e);
 
-    return res.sendStatus(500).json('Could not get iterations');
+    return res.status(500).json('Could not get iterations');
   }
 }
 
@@ -29,11 +29,11 @@ async function createIteration(req: Request, res: Response) {
   try {
     const newIteration = await iterationService.create(req.body);
 
-    return res.sendStatus(201).json(newIteration);
+    return res.status(201).json(newIteration);
   } catch (e) {
     console.error('createIteration -> ', e);
 
-    return res.sendStatus(500).json('Could not create iteration');
+    return res.status(500).json('Could not create iteration');
   }
 }
 
@@ -41,12 +41,12 @@ async function getIterationById(req: Request, res: Response) {
   try {
     const iteration = await iterationService.getById(req.params.id);
 
-    return res.sendStatus(200).json(iteration);
+    return res.status(200).json(iteration);
   } catch (e) {
     console.error('getIterationById -> ', e);
 
     return res
-      .sendStatus(500)
+      .status(500)
       .json(`Could not get iteration with id ${req.params.id}`);
   }
 }

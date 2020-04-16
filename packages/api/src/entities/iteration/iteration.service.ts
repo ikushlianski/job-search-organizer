@@ -1,6 +1,6 @@
 import { IterationDto } from '@job-search-organizer/common/src';
 
-import { IterationModel } from './iteration.model';
+import { IterationModel } from '../../db/models/iteration.model';
 
 export class IterationService {
   async getAll() {

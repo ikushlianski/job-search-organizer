@@ -1,10 +1,10 @@
 import { ID } from '../../types';
 
-export interface Iteration {
+export interface IterationInterface {
   id: ID;
   name?: string;
   startDate: number; // timestamp
   endDate: number; // timestamp
   minSalary: number;
-  desirableSalary: number;
+  comfortableSalary: number;
 }
