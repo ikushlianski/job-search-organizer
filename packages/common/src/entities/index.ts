@@ -8,4 +8,4 @@ export * from './question.interface';
 export * from './question-answer.interface';
 export * from './question-group.interface';
 export * from './question-option.interface';
-export * from './user.interface';
+export * from './user';

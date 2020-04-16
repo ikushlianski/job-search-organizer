@@ -1,13 +1,12 @@
 import express, { Request, Response } from 'express';
 
-import { UserService } from './iteration.service';
+import { UserService } from './user.service';
 
 const userService = new UserService();
 
 export const userController = express.Router();
 
 userController.route('/users').post(createUser);
-
 userController.route('/users/:id').get(getUserById);
 
 async function createUser(req: Request, res: Response) {
@@ -28,10 +27,8 @@ async function getUserById(req: Request, res: Response) {
 
     return res.status(200).json(iteration);
   } catch (e) {
-    console.error('getIterationById -> ', e);
+    console.error('getUserById -> ', e);
 
-    return res
-      .status(500)
-      .json(`Could not get iteration with id ${req.params.id}`);
+    return res.status(500).json(`Could not get user with id ${req.params.id}`);
   }
 }
