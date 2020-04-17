@@ -51,7 +51,9 @@ IterationModel.init(
   },
 );
 
-IterationModel.belongsTo(UserModel, { foreignKey: {
+IterationModel.belongsTo(UserModel, {
+  foreignKey: {
     name: 'userId',
     allowNull: false,
-  } });
+  },
+});

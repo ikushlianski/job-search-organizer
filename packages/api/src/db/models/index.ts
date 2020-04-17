@@ -1,4 +1,4 @@
-import { Model, Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize';
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config.ts')[env];

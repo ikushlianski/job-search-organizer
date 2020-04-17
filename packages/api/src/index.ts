@@ -11,6 +11,9 @@ app.use(express.json());
  */
 app.use([iterationController, userController]);
 
+/*
+  Run app
+ */
 const PORT = process.env.PORT || 3000;
 
 sequelizeConnection
