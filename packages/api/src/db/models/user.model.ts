@@ -1,4 +1,4 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 
 import { sequelizeConnection } from './index';
 
@@ -7,6 +7,8 @@ export class UserModel extends Model {
   public name: string;
   public email: string;
   public password: string;
+  public refreshToken?: string;
+  public accessToken?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -29,6 +31,14 @@ UserModel.init(
     password: {
       type: new DataTypes.STRING(255),
       allowNull: false,
+    },
+    refreshToken: {
+      type: new DataTypes.STRING(1000),
+      allowNull: true,
+    },
+    accessToken: {
+      type: new DataTypes.STRING(1000),
+      allowNull: true,
     },
   },
   {

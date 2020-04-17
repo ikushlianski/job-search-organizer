@@ -5,4 +5,6 @@ export interface UserInterface {
   name: string;
   email: string;
   password: string;
+  accessToken?: string;
+  refreshToken?: string;
 }
