@@ -17,12 +17,13 @@ export interface OpportunityInterface {
 }
 
 export enum OpportunityStatus {
-  ConversationOngoing = 'ConversationOngoing',
+  Conversation = 'Conversation',
   ConversationStoppedByMe = 'ConversationStoppedByMe',
   ConversationStoppedByCompany = 'ConversationStoppedByCompany',
-  PendingInterview = 'PendingInterview',
-  InterviewCancelled = 'InterviewCancelled',
-  PendingInterviewFeedback = 'PendingInterviewFeedback',
+  InterviewPending = 'InterviewPending',
+  InterviewCancelledByCompany = 'InterviewCancelledByCompany',
+  InterviewCancelledByMe = 'InterviewCancelledByMe',
+  AwaitingInterviewFeedback = 'AwaitingInterviewFeedback',
   RejectedByCompany = 'RejectedByCompany',
   OfferReceived = 'OfferReceived',
   OfferDismissedByMe = 'OfferDismissedByMe',
