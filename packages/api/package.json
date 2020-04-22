@@ -10,6 +10,7 @@
     "start": "NODE_PATH=src node --inspect=5858 -r dotenv/config -r ts-node/register ./src/index.ts",
     "start:watch": "nodemon",
     "db:create": "env-cmd -f .env sequelize db:create",
+    "db:seed": "env-cmd -f .env sequelize db:seed:all",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
