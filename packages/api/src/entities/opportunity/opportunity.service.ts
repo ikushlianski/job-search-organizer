@@ -1,4 +1,7 @@
-import { OpportunityDto } from '@job-search-organizer/common/src';
+import {
+  EntityToCreate,
+  OpportunityInterface,
+} from '@job-search-organizer/common/src';
 
 import { OpportunityModel } from '../../db/models/opportunity.model';
 
@@ -19,7 +22,7 @@ export class OpportunityService {
     });
   }
 
-  async create(data: OpportunityDto) {
+  async create(data: EntityToCreate<OpportunityInterface>) {
     return OpportunityModel.create(data);
   }
 }

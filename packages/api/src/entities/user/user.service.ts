@@ -1,4 +1,7 @@
-import { UserDto } from '@job-search-organizer/common/src';
+import {
+  EntityToCreate,
+  UserInterface,
+} from '@job-search-organizer/common/src';
 
 import { UserModel } from '../../db/models/user.model';
 
@@ -15,7 +18,7 @@ export class UserService {
     });
   }
 
-  async create(data: UserDto) {
+  async create(data: EntityToCreate<UserInterface>) {
     return UserModel.create(data);
   }
 }
