@@ -4,24 +4,35 @@ module.exports = {
       "questionGroups",
       [
         {
+          id: 1,
           name: "project",
         },
         {
+          id: 2,
           name: "office",
         },
         {
+          id: 3,
+          name: "coding",
+        },
+        {
+          id: 4,
           name: "employment",
         },
         {
+          id: 5,
           name: "workplace",
         },
         {
+          id: 6,
           name: "company",
         },
         {
+          id: 7,
           name: "benefits",
         },
         {
+          id: 8,
           name: "others",
         },
       ],

@@ -8,6 +8,7 @@ export interface QuestionGroup {
 export enum QuestionGroupNames {
   project = 'project',
   office = 'office',
+  coding = 'coding',
   employment = 'employment',
   workplace = 'workplace',
   company = 'company',
