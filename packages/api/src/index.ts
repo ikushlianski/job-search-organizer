@@ -2,14 +2,17 @@ import express from 'express';
 
 import { iterationController, userController } from './entities';
 import { sequelizeConnection } from './db/models';
+import { questionGroupController } from './entities/question-group';
 
 const app = express();
+const appRouter = express.Router();
 app.use(express.json());
+app.use(process.env.API_BASE_URL, appRouter);
 
 /*
   Controllers
  */
-app.use([iterationController, userController]);
+appRouter.use([iterationController, userController, questionGroupController]);
 
 /*
   Run app

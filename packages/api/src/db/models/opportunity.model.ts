@@ -29,7 +29,7 @@ OpportunityModel.init(
     status: {
       type: new DataTypes.ENUM({ values: Object.keys(OpportunityStatus) }),
       allowNull: false,
-      defaultValue: OpportunityStatus.ConversationOngoing,
+      defaultValue: OpportunityStatus.Conversation,
     },
     endReason: {
       type: DataTypes.STRING,
