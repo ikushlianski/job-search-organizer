@@ -26,10 +26,6 @@ QuestionModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    groupId: {
-      type: DataTypes.SMALLINT,
-      allowNull: true,
-    },
   },
   {
     tableName: 'questions',
