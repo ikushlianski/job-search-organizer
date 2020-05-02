@@ -3,6 +3,9 @@ import { Model, DataTypes } from 'sequelize';
 import { ID } from '@job-search-organizer/common/src';
 
 import { sequelizeConnection } from './index';
+import {UserModel} from "./user.model";
+import {IterationModel} from "./iteration.model";
+import {QuestionGroupModel} from "./question-group.model";
 
 export class QuestionModel extends Model {
   public id: ID;
@@ -24,7 +27,7 @@ QuestionModel.init(
       allowNull: false,
     },
     groupId: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.SMALLINT,
       allowNull: true,
     },
   },
@@ -34,3 +37,10 @@ QuestionModel.init(
     freezeTableName: true,
   },
 );
+
+QuestionModel.belongsTo(QuestionGroupModel, {
+  foreignKey: {
+    name: 'groupId',
+    allowNull: false,
+  },
+});
