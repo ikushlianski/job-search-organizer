@@ -6,7 +6,7 @@ const questionData = [
   },
   {
     id: 2,
-    text: "outsource_or_product",
+    text: "company_type", // business_type?
     groupId: 1,
   },
   {
@@ -64,11 +64,11 @@ const questionData = [
     text: "team_processes", // from 'strictly defined' to 'absent'
     groupId: 1,
   },
-  {
-    id: 14,
-    text: "time_tracking_project",
-    groupId: 1,
-  },
+  // {
+  //   id: 14,
+  //   text: "task_estimation",
+  //   groupId: 1,
+  // },
   {
     id: 15,
     text: "time_tracking_company",
@@ -134,14 +134,14 @@ const questionData = [
     text: "sport_compensation",
     groupId: 7,
   },
-  {
-    id: 28,
-    text: "sick_day_count",
-    groupId: 7,
-  },
+  // {
+  //   id: 28,
+  //   text: "sick_day_count",
+  //   groupId: 7,
+  // },
   {
     id: 29,
-    text: "bonus_day_count", // TODO do we need this?
+    text: "bonus_day_count", // includes sick days
     groupId: 7,
   },
   {
