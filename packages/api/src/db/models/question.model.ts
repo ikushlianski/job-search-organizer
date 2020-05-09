@@ -2,10 +2,9 @@ import { Model, DataTypes } from 'sequelize';
 
 import { ID } from '@job-search-organizer/common/src';
 
+import { QuestionGroupModel } from './question-group.model';
+
 import { sequelizeConnection } from './index';
-import {UserModel} from "./user.model";
-import {IterationModel} from "./iteration.model";
-import {QuestionGroupModel} from "./question-group.model";
 
 export class QuestionModel extends Model {
   public id: ID;
