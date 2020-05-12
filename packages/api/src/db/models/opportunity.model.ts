@@ -12,9 +12,12 @@ export class OpportunityModel extends Model {
   public id: number;
   public status: OpportunityStatus;
   public endReason: string;
-  public contactPerson: string;
-  public contactPhone: string;
-  public address: string;
+  public contactPerson1: string;
+  public contactPerson2: string;
+  public contactPhone1: string;
+  public contactPhone2: string;
+  public address1: string;
+  public address2: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

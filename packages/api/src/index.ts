@@ -1,9 +1,14 @@
 import express from 'express';
 
-import { iterationController, userController } from './entities';
+import {
+  iterationController,
+  opportunityController,
+  userController,
+} from './entities';
 import { sequelizeConnection } from './db/models';
 import { questionGroupController } from './entities/question-group';
 import { questionController } from './entities/question';
+import { interviewController } from './entities/interview/interview.controller';
 
 const app = express();
 const appRouter = express.Router();
@@ -18,6 +23,8 @@ appRouter.use([
   userController,
   questionGroupController,
   questionController,
+  opportunityController,
+  interviewController,
 ]);
 
 /*

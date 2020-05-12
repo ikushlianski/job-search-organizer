@@ -1,5 +1,6 @@
 export * from './company/company.interface';
 export * from './iteration';
+export * from './interview';
 export * from './question';
 export * from './iteration-param.interface';
 export * from './opportunity';
