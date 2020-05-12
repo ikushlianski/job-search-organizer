@@ -35,15 +35,27 @@ OpportunityModel.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactPerson: {
+    contactPerson1: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactPhone: {
+    contactPhone1: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    address: {
+    contactPerson2: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    contactPhone2: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address1: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address2: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -11,9 +11,12 @@ export interface OpportunityInterface {
   Company info
    */
   companyId?: ID;
-  contactPerson?: string;
-  contactPhone?: string;
-  address?: string;
+  contactPerson1?: string;
+  contactPerson2?: string;
+  contactPhone1?: string;
+  contactPhone2?: string;
+  address1?: string;
+  address2?: string;
 }
 
 export enum OpportunityStatus {
