@@ -1,5 +1,5 @@
 {
-  "include": ["packages/common/src", "packages/frontend/src", "packages/api/src"],
+  "include": ["./packages/common/src", "./packages/frontend/src", "./packages/api/src"],
   "compilerOptions": {
     "declaration": true,
     "composite": true,
@@ -7,9 +7,9 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@job-search-organizer/api": ["packages/api/src"],
-      "@job-search-organizer/common": ["packages/common/src"],
-      "@job-search-organizer/frontend": ["packages/frontend/src"]
+      "@job-search-organizer/api": ["packages/api/src/index.ts"],
+      "@job-search-organizer/common": ["packages/common/src/index.ts"],
+      "@job-search-organizer/frontend": ["packages/frontend/src/index.ts"]
     }
   },
   "references": [

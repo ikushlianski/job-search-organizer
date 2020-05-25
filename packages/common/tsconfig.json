@@ -8,7 +8,7 @@
     "target": "es6",
     "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "composite": true
   },
   "include": ["src"],
