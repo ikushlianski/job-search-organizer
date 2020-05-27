@@ -18,7 +18,7 @@ app.use(process.env.API_BASE_URL, appRouter);
 /*
   Controllers
  */
-appRouter.use([
+appRouter.use('/', [
   iterationController,
   userController,
   questionGroupController,

@@ -4,14 +4,14 @@ import { IterationService } from './iteration.service';
 
 const iterationService = new IterationService();
 
-export const iterationController = express.Router();
+export const iterationController = express.Router({ mergeParams: true });
 
 iterationController
   .route('/iterations')
   .get(getIterations)
   .post(createIteration);
 
-iterationController.route('/iterations/:id').get(getIterationById);
+iterationController.route('/iterations/:iterationId').get(getIterationById);
 
 async function getIterations(req: Request, res: Response) {
   try {
@@ -39,9 +39,9 @@ async function createIteration(req: Request, res: Response) {
 
 async function getIterationById(req: Request, res: Response) {
   try {
-    const iteration = await iterationService.getById(req.params.id);
+    const iteration = await iterationService.getById(req.params.iterationId);
 
-    return res.status(200).json(iteration);
+    return res.send(iteration);
   } catch (e) {
     console.error('getIterationById -> ', e);
 

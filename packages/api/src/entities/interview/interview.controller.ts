@@ -1,24 +1,25 @@
 import express, { Request, Response } from 'express';
 
 import { InterviewService } from './interview.service';
+import { opportunityController } from '../opportunity';
 
 const interviewService = new InterviewService();
 
-export const interviewController = express.Router();
+export const interviewController = express.Router({ mergeParams: true });
+
+opportunityController.use('/opportunities/:opportunityId', interviewController);
 
 interviewController
-  .route('iterations/:iterId/opportunities/:oppId/interviews')
+  .route('/interviews')
   .get(getOpportunityInterviews)
   .post(createInterview);
 
-interviewController
-  .route('iterations/:iterId/opportunities/:oppId/interviews/:id')
-  .get(getInterviewById);
+interviewController.route('/interviews/:interviewId').get(getInterviewById);
 
 async function getOpportunityInterviews(req: Request, res: Response) {
   try {
     const interviews = await interviewService.getByOpportunityId(
-      req.params.oppId,
+      req.params.opportunityId,
     );
 
     return res.send(interviews);

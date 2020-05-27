@@ -1,18 +1,21 @@
 import express, { Request, Response } from 'express';
 
 import { OpportunityService } from './opportunity.service';
+import { iterationController } from '../iteration';
 
 const opportunityService = new OpportunityService();
 
-export const opportunityController = express.Router();
+export const opportunityController = express.Router({ mergeParams: true });
+
+iterationController.use('/iterations/:iterationId', opportunityController);
 
 opportunityController
-  .route('/iterations/:iterationId/opportunities')
+  .route('/opportunities')
   .get(getIterationOpportunities)
   .post(createOpportunity);
 
 opportunityController
-  .route('iterations/:iterationId/opportunities/:id')
+  .route('/opportunities/:opportunityId')
   .get(getOpportunityById);
 
 async function getIterationOpportunities(req: Request, res: Response) {
