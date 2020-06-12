@@ -32,6 +32,11 @@ InterviewModel.init(
       type: new DataTypes.STRING(255),
       allowNull: true,
     },
+    topic: {
+      type: new DataTypes.STRING(128),
+      allowNull: true,
+      defaultValue: 'technical', // could also be project intro interview, offer interview etc...
+    },
   },
   {
     tableName: 'interviews',

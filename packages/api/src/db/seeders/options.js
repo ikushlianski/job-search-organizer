@@ -50,7 +50,7 @@ module.exports = {
         },
         {
           id: 7,
-          text: "not IT field", // a bank with IT dep
+          text: "not IT field", // e.x. a bank with IT dep
           value: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -128,21 +128,21 @@ module.exports = {
         // scope_of_responsibilities
         {
           id: 17,
-          text: "one field (e.g. only frontend, only backend)",
+          text: "narrow", // e.x. only frontend
           value: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: 18,
-          text: "frontend and backend",
+          text: "medium", // e.x. frontend with some backend
           value: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: 19,
-          text: "frontend, backend and dev-ops",
+          text: "wide", // e.x. full-stack (both frontend and backend)
           value: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
