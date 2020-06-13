@@ -32,10 +32,3 @@ QuestionModel.init(
     freezeTableName: true,
   },
 );
-
-QuestionModel.belongsTo(QuestionGroupModel, {
-  foreignKey: {
-    name: 'groupId',
-    allowNull: false,
-  },
-});

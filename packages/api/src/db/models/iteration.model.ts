@@ -35,11 +35,7 @@ IterationModel.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    minSalary: {
-      type: DataTypes.SMALLINT,
-      allowNull: true,
-    },
-    comfortableSalary: {
+    salary: {
       type: DataTypes.SMALLINT,
       allowNull: true,
     },
