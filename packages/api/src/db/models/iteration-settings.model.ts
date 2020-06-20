@@ -3,35 +3,22 @@ import { Model, DataTypes } from 'sequelize';
 import { UserModel } from './user.model';
 
 import { sequelizeConnection } from './index';
+import { IterationModel } from './iteration.model';
 
-export class IterationModel extends Model {
+export class IterationSettingsModel extends Model {
   public id: number;
-  public name: string;
-  public startDate: number;
-  public endDate: number;
-  public userId: number;
+  public iterationId: number;
+  public salary: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-IterationModel.init(
+IterationSettingsModel.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-    },
-    name: {
-      type: new DataTypes.STRING(255),
-      allowNull: false,
-    },
-    startDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    endDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
     salary: {
       type: DataTypes.SMALLINT,
@@ -39,15 +26,15 @@ IterationModel.init(
     },
   },
   {
-    tableName: 'iterations',
+    tableName: 'iteration_settings',
     sequelize: sequelizeConnection,
     freezeTableName: true,
   },
 );
 
-IterationModel.belongsTo(UserModel, {
+IterationSettingsModel.belongsTo(IterationModel, {
   foreignKey: {
-    name: 'userId',
+    name: 'iterationId',
     allowNull: false,
   },
 });
