@@ -1,9 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 
-import { UserModel } from './user.model';
+import { IterationModel } from './iteration.model';
 
 import { sequelizeConnection } from './index';
-import { IterationModel } from './iteration.model';
 
 export class IterationSettingsModel extends Model {
   public id: number;
