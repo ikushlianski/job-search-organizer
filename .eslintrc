@@ -7,7 +7,8 @@
         "overrides": [
             {
                 "files": [
-                    "**/*.ts?(x)"
+                    "**/*.ts?(x)",
+                    "**/*.js?(x)"
                 ],
                 "rules": {
                     "prettier/prettier": ["warn", {
