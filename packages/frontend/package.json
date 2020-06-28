@@ -1,54 +1,36 @@
 {
   "name": "@job-search-organizer/frontend",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@job-search-organizer/common": "*",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "bootstrap": "4.4.1",
-    "react": "^16.13.1",
-    "react-bootstrap": "1.0.0-beta.17",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.0",
-    "styled-components": "5.0.1",
-    "typescript": "3.8.3"
+  "description": "> TODO: description",
+  "author": "Ilya Kushlianski <kushliansky@gmail.com>",
+  "homepage": "https://github.com/ikushlianski/job-search-organizer#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "type": "node",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikushlianski/job-search-organizer.git"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "start": "npx ts-node src/index.ts"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "bugs": {
+    "url": "https://github.com/ikushlianski/job-search-organizer/issues"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-bootstrap": "0.32.20",
-    "@types/react-dom": "^16.9.0",
-    "@types/styled-components": "5.0.1",
-    "@typescript-eslint/parser": "2.25.0",
-    "eslint-config-prettier": "6.10.1",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-prettier": "3.1.2",
-    "eslint-plugin-react": "7.19.0",
-    "eslint-plugin-react-hooks": "2.5.1",
-    "prettier": "2.0.2"
+    "@types/node": "^14.14.2",
+    "@typescript-eslint/eslint-plugin": "4.5.0",
+    "@typescript-eslint/parser": "4.5.0",
+    "eslint": "^7.11.0",
+    "lerna": "^3.22.1",
+    "ts-node": "^9.0.0"
+  },
+  "dependencies": {
+    "@job-search-organizer/shared": "^0.1.0",
+    "typescript": "^4.0.3"
   }
 }
