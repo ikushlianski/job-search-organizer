@@ -27,6 +27,7 @@
     "url": "https://github.com/ikushlianski/job-search-organizer/issues"
   },
   "homepage": "https://github.com/ikushlianski/job-search-organizer#readme",
-  "dependencies": {
+  "devDependencies": {
+    "eslint": "^7.11.0"
   }
 }
