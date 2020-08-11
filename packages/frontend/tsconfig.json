@@ -4,8 +4,10 @@
     "baseUrl": "./packages/frontend/src",
     "paths": {
       "./": [
-        "/*"
-      ]
-    }
+        "./*"
+      ],
+      "~*": ["./*"]
+    },
+    "jsx": "react"
   }
 }
