@@ -26,5 +26,8 @@
   },
   "bugs": {
     "url": "https://github.com/ikushlianski/job-search-organizer/issues"
+  },
+  "devDependencies": {
+    "@types/parcel-env": "^0.0.0"
   }
 }
