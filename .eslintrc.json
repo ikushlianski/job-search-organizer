@@ -20,6 +20,9 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "warn"
+        "prettier/prettier": "warn",
+        "newline-before-return": "warn",
+        "max-lines": "warn",
+        "newline-after-var": "warn"
     }
 }
