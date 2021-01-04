@@ -4,16 +4,17 @@ export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const sequelize = new Sequelize({
-        dialect: 'postgres',
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-      });
+      const port = parseInt(process.env.DB_PORT, 10);
+      const sequelize = new Sequelize(
+        process.env.DB_NAME,
+        process.env.DB_USER,
+        process.env.DB_PASSWORD,
+        {
+          dialect: 'postgres',
+          host: process.env.DB_HOST,
+          port,
+        },
+      );
 
       sequelize.addModels([]);
       await sequelize.sync();

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/packages/api" libraries="{job-search-organizer/packages/api/node_modules}" />
-    <file url="file://$PROJECT_DIR$/packages/api_initial" libraries="{job-search-organizer/packages/api/node_modules}" />
-  </component>
-</project>
