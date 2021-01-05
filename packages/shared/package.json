@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "eslint-config-prettier": "^6.14.0",
+    "pg": "^8.5.1",
     "typeorm": "^0.2.28"
   }
 }
