@@ -1,6 +1,5 @@
-import { Model, ModelCtor, Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize-typescript';
 import { Iteration } from '../entities/iteration/iteration.model';
-import * as path from 'path';
 
 export const databaseProviders = [
   {
