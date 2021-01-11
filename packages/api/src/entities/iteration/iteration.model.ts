@@ -1,4 +1,11 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  ForeignKey,
+  HasMany,
+} from 'sequelize-typescript';
+import { Opportunity } from '../opportunity/opportunity.model';
 
 @Table({ timestamps: false, tableName: 'iteration' })
 export class Iteration extends Model<Iteration> {
@@ -10,4 +17,7 @@ export class Iteration extends Model<Iteration> {
 
   @Column
   name: string;
+
+  @HasMany(() => Opportunity)
+  opportunities: Opportunity[];
 }
