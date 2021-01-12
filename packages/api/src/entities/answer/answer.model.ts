@@ -1,14 +1,21 @@
-import { Table, Model, Column, BelongsTo } from 'sequelize-typescript';
-import { User } from '../user/user.model';
-import { Iteration } from '../iteration/iteration.model';
+import { Table, Model, Column, ForeignKey } from 'sequelize-typescript';
+import { Opportunity } from '../opportunity/opportunity.model';
+import { SuitabilityEnum } from './suitability.enum';
+import { Question } from '../question/question.model';
 
-@Table({ timestamps: false, tableName: 'question-set' })
-export class QuestionSet extends Model<QuestionSet> {
-  @BelongsTo(() => User)
+@Table({ timestamps: false, tableName: 'answer' })
+export class Answer extends Model<Answer> {
+  @ForeignKey(() => Opportunity)
   @Column
-  user: User;
+  opportunityId: number;
 
-  @BelongsTo(() => Iteration)
+  @ForeignKey(() => Question)
   @Column
-  iteration: Iteration;
+  questionId: number;
+
+  @Column
+  answer: SuitabilityEnum;
+
+  @Column
+  notes: string;
 }
