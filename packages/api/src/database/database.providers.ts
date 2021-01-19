@@ -5,6 +5,9 @@ import { Company } from '../entities/company/company.model';
 import { Project } from '../entities/project/project.model';
 import { Question } from '../entities/question/question.model';
 import { QuestionCategory } from '../entities/question-category/question-category.model';
+import { IterationSettings } from '../entities/iteration-settings/iteration-settings.model';
+import { Answer } from '../entities/answer/answer.model';
+import { OpportunityAnswer } from '../entities/opportunity-answer/opportunity-answer.model';
 
 export const databaseProviders = [
   {
@@ -20,9 +23,12 @@ export const databaseProviders = [
       );
 
       sequelize.addModels([
-        Iteration,
-        Opportunity,
+        Answer,
         Company,
+        Iteration,
+        IterationSettings,
+        Opportunity,
+        OpportunityAnswer,
         Project,
         Question,
         QuestionCategory,
