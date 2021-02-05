@@ -6,8 +6,10 @@ import {
   AutoIncrement,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
 import { QuestionCategory } from '../question-category/question-category.model';
+import { Answer } from '../answer/answer.model';
 
 @Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
@@ -25,4 +27,7 @@ export class Question extends Model {
 
   @BelongsTo(() => QuestionCategory)
   question_category: QuestionCategory;
+
+  @HasMany(() => Answer)
+  answers: Answer[];
 }

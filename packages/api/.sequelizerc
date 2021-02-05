@@ -2,4 +2,5 @@ const path = require('path');
 
 module.exports = {
   'seeders-path': path.resolve('src', 'database', 'seeders-dev'),
+  'config': path.resolve('src', 'database', 'config.json'),
 }

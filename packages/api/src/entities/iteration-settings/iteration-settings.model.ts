@@ -16,10 +16,4 @@ export class IterationSettings extends Model {
   @Column
   @ForeignKey(() => Answer)
   answer_id: number;
-
-  @Column({
-    comment:
-      'If an iteration setting is not an enum, but just a value (like salary), use `fixed_value`',
-  })
-  fixed_value: number | string;
 }

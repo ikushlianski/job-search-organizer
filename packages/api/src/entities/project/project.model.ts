@@ -20,6 +20,12 @@ export class Project extends Model {
   name: string;
 
   @Column
+  start_date: Date;
+
+  @Column
+  end_date: Date;
+
+  @Column
   @ForeignKey(() => Company)
   company_id: number;
 
