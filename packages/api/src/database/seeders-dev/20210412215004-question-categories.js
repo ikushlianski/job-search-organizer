@@ -17,7 +17,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.sequelize.query(`
-      truncate table public.jso_question_category cascade;
+      truncate public.jso_question_category RESTART IDENTITY CASCADE;
     `);
   },
 };

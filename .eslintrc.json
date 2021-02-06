@@ -24,5 +24,13 @@
         "newline-before-return": "warn",
         "max-lines": "warn",
         "newline-after-var": "warn"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["**/*.js"],
+            "rules": {
+                "@typescript-eslint/no-var-requires": "off"
+            }
+        }
+    ]
 }
