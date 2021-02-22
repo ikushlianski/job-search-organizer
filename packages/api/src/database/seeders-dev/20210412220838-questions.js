@@ -1,6 +1,6 @@
 'use strict';
 
-const { QuestionEnum } = require('../../entities/question/question.enum');
+const questions = require('../constants/question.constant');
 
 module.exports = {
   up: async (queryInterface) => {
@@ -18,9 +18,9 @@ module.exports = {
       insert into public.jso_question
       (question_text, question_category_id)
       VALUES
-      ('${QuestionEnum.net_salary}', ${categoriesByName['financial'].id}),
-      ('${QuestionEnum.min_salary}', ${categoriesByName['financial'].id}),
-      ('${QuestionEnum.probation_salary}', ${categoriesByName['financial'].id})
+      ('${questions.financial.net_salary}', ${categoriesByName['financial'].id}),
+      ('${questions.financial.min_salary}', ${categoriesByName['financial'].id}),
+      ('${questions.financial.probation_salary}', ${categoriesByName['financial'].id})
     `);
   },
 
