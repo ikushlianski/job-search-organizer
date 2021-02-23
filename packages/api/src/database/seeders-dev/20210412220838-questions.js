@@ -24,5 +24,9 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {},
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.sequelize.query(`
+      truncate public.jso_question RESTART IDENTITY CASCADE;
+    `);
+  },
 };
