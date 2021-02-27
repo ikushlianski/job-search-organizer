@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Opportunity } from '../opportunity/opportunity.model';
 
-@Table({ timestamps: true, tableName: 'jso_iteration' })
+@Table({ timestamps: false, tableName: 'jso_iteration' })
 export class Iteration extends Model {
   @PrimaryKey
   @AutoIncrement

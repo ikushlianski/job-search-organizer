@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Company } from '../company/company.model';
 
-@Table({ timestamps: true, tableName: 'jso_project' })
+@Table({ timestamps: false, tableName: 'jso_project' })
 export class Project extends Model {
   @PrimaryKey
   @AutoIncrement

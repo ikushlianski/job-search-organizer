@@ -7,9 +7,11 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { QuestionCategory } from '../question-category/question-category.model';
 import { Answer } from '../answer/answer.model';
+import { IterationSettings } from '../iteration-settings/iteration-settings.model';
 
 @Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
