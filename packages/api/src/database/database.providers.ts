@@ -8,6 +8,7 @@ import { QuestionCategory } from '../entities/question-category/question-categor
 import { IterationSettings } from '../entities/iteration-settings/iteration-settings.model';
 import { Answer } from '../entities/answer/answer.model';
 import { OpportunityAnswer } from '../entities/opportunity-answer/opportunity-answer.model';
+import { IterationQuestions } from '../entities/iteration-questions/iteration-questions.model';
 
 export const databaseProviders = [
   {
@@ -27,6 +28,7 @@ export const databaseProviders = [
         Company,
         Iteration,
         IterationSettings,
+        IterationQuestions,
         Opportunity,
         OpportunityAnswer,
         Project,
