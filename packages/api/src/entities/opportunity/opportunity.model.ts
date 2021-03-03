@@ -6,10 +6,13 @@ import {
   ForeignKey,
   BelongsTo,
   AutoIncrement,
+  HasMany,
 } from 'sequelize-typescript';
 import { Iteration } from '../iteration/iteration.model';
 import { Company } from '../company/company.model';
 import { Project } from '../project/project.model';
+import { User } from '../user/user.model';
+import { Interview } from '../interview/interview.model';
 
 @Table({ timestamps: false, tableName: 'jso_opportunity' })
 export class Opportunity extends Model {
@@ -34,17 +37,27 @@ export class Opportunity extends Model {
   @BelongsTo(() => Iteration)
   iteration: Iteration;
 
-  @Column
   @ForeignKey(() => Company)
+  @Column
   company_id: number;
 
   @BelongsTo(() => Company)
   company: Company;
 
-  @Column
   @ForeignKey(() => Project)
+  @Column
   project_id: number;
 
   @BelongsTo(() => Project)
   project: Project;
+
+  @ForeignKey(() => User)
+  @Column
+  user_id: number;
+
+  @BelongsTo(() => User)
+  user: User;
+
+  @HasMany(() => Interview)
+  interviews: Interview[];
 }

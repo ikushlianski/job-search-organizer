@@ -6,7 +6,7 @@ import { Answer } from '../answer/answer.model';
 @Table({
   timestamps: false,
   tableName: 'jso_iteration_settings',
-  comment: "User's answers to questions, i.e. their settings for the iteration",
+  comment: 'User answers to questions, i.e. their settings for the iteration',
 })
 export class IterationSettings extends Model {
   @Column
@@ -24,9 +24,11 @@ export class IterationSettings extends Model {
   @Column
   boolean_answer: boolean;
 
+  // todo do we need it?
   @Column
   numeric_answer: number;
 
+  // todo do we need it?
   @Column
   string_answer: string;
 

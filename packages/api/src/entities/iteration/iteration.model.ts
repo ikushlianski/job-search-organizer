@@ -5,8 +5,11 @@ import {
   PrimaryKey,
   AutoIncrement,
   HasMany,
+  BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Opportunity } from '../opportunity/opportunity.model';
+import { User } from '../user/user.model';
 
 @Table({ timestamps: false, tableName: 'jso_iteration' })
 export class Iteration extends Model {
@@ -26,4 +29,11 @@ export class Iteration extends Model {
 
   @HasMany(() => Opportunity)
   opportunities: Opportunity[];
+
+  @BelongsTo(() => User)
+  user: User;
+
+  @ForeignKey(() => User)
+  @Column
+  user_id: number;
 }

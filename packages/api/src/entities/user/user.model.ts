@@ -10,19 +10,11 @@ import { Iteration } from '../iteration/iteration.model';
 import { Opportunity } from '../opportunity/opportunity.model';
 
 @Table({ timestamps: true, tableName: 'jso_user' })
-export class User extends Model<User> {
+export class User extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
   id: number;
-
-  @HasMany(() => Iteration)
-  @Column
-  iterations: Iteration[];
-
-  @HasMany(() => Opportunity)
-  @Column
-  opportunities: Opportunity[];
 
   @Column
   name: string;
@@ -41,4 +33,10 @@ export class User extends Model<User> {
 
   @Column
   currentAccessToken: string;
+
+  @HasMany(() => Iteration)
+  iterations: Iteration[];
+
+  @HasMany(() => Opportunity)
+  opportunities: Opportunity[];
 }

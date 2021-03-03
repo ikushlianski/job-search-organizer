@@ -7,6 +7,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { Project } from '../project/project.model';
+import { ContactPerson } from '../contact-person/contact-person.model';
 
 @Table({ timestamps: false, tableName: 'jso_company' })
 export class Company extends Model {
@@ -20,6 +21,9 @@ export class Company extends Model {
 
   @HasMany(() => Project)
   projects: Project[];
+
+  @HasMany(() => ContactPerson)
+  contact_persons: ContactPerson[];
 
   // @HasMany(() => Benefit)
   // benefits: Benefit[]
