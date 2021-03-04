@@ -22,7 +22,24 @@ module.exports = {
       ('${questions.project.is_new}', ${categoriesByName['project'].id}),
       ('${questions.project.is_rewrite}', ${categoriesByName['project'].id}),
       ('${questions.project.tech_stack}', ${categoriesByName['project'].id}),
-      ('${questions.project.is_tech_stack_ok}', ${categoriesByName['project'].id})
+      ('${questions.project.is_remote_work}', ${categoriesByName['project'].id}),
+      ('${questions.project.project_topic}', ${categoriesByName['project'].id}),
+      ('${questions.project.project_staffing_type}', ${categoriesByName['project'].id}),
+      ('${questions.project.is_foreign_project}', ${categoriesByName['project'].id}),
+      ('${questions.project.interview_count}', ${categoriesByName['project'].id}),
+      ('${questions.project.position_type}', ${categoriesByName['project'].id}),
+      ('${questions.project.team_people_count}', ${categoriesByName['project'].id}),
+      ('${questions.project.project_people_count}', ${categoriesByName['project'].id}),
+      ('${questions.project.dev_ops_work_required}', ${categoriesByName['project'].id}),
+      ('${questions.project.has_ba}', ${categoriesByName['project'].id}),
+      ('${questions.project.customer_communication}', ${categoriesByName['project'].id}),
+      ('${questions.project.is_scrum}', ${categoriesByName['project'].id}),
+      ('${questions.project.strict_time_tracking}', ${categoriesByName['project'].id}),
+      ('${questions.project.release_cycle}', ${categoriesByName['project'].id}),
+      ('${questions.project.story_points}', ${categoriesByName['project'].id}),
+      ('${questions.project.project_planned_duration}', ${categoriesByName['project'].id}),
+      ('${questions.project.why_position_opened}', ${categoriesByName['project'].id}),
+      ('${questions.project.overtimes}', ${categoriesByName['project'].id})
     `);
   },
 

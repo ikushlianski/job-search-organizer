@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.sequelize.query(`
-      insert into public.jso_iteration_questions 
+      insert into public.jso_iteration_question 
       (iteration_id, question_id, hr_visible)
       VALUES
       (1, 1, true),
@@ -21,7 +21,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.sequelize.query(`
-      truncate public.jso_iteration_questions RESTART IDENTITY CASCADE;
+      truncate public.jso_iteration_question RESTART IDENTITY CASCADE;
     `);
   },
 };

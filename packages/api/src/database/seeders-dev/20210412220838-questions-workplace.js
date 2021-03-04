@@ -19,7 +19,8 @@ module.exports = {
       (question_text, question_category_id)
       VALUES
       ('${questions.workplace.is_32_gb}', ${categoriesByName['workplace'].id}),
-      ('${questions.workplace.is_linux_installed}', ${categoriesByName['workplace'].id})
+      ('${questions.workplace.is_linux_installed}', ${categoriesByName['workplace'].id}),
+      ('${questions.workplace.licences}', ${categoriesByName['workplace'].id})
     `);
   },
 

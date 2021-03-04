@@ -9,6 +9,9 @@ import { IterationSettings } from '../entities/iteration-settings/iteration-sett
 import { Answer } from '../entities/answer/answer.model';
 import { OpportunityAnswer } from '../entities/opportunity-answer/opportunity-answer.model';
 import { IterationQuestions } from '../entities/iteration-questions/iteration-questions.model';
+import { User } from '../entities/user/user.model';
+import { Interview } from '../entities/interview/interview.model';
+import { ContactPerson } from '../entities/contact-person/contact-person.model';
 
 export const databaseProviders = [
   {
@@ -26,6 +29,8 @@ export const databaseProviders = [
       sequelize.addModels([
         Answer,
         Company,
+        ContactPerson,
+        Interview,
         Iteration,
         IterationSettings,
         IterationQuestions,
@@ -34,6 +39,7 @@ export const databaseProviders = [
         Project,
         Question,
         QuestionCategory,
+        User,
       ] as ModelCtor[]);
       await sequelize.sync({ force: true });
 

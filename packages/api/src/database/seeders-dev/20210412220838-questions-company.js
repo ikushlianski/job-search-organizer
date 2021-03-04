@@ -18,7 +18,11 @@ module.exports = {
       insert into public.jso_question
       (question_text, question_category_id)
       VALUES
-      ('${questions.company.is_remote_work}', ${categoriesByName['company'].id})
+      ('${questions.company.office_location}', ${categoriesByName['company'].id}),
+      ('${questions.company.interview_count}', ${categoriesByName['company'].id}),
+      ('${questions.company.company_project_count}', ${categoriesByName['company'].id}),
+      ('${questions.company.salary_currency}', ${categoriesByName['company'].id})
+      
     `);
   },
 
