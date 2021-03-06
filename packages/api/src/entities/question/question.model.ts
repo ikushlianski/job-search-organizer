@@ -6,12 +6,13 @@ import {
   AutoIncrement,
   ForeignKey,
   BelongsTo,
-  HasMany,
   Default,
+  HasMany,
 } from 'sequelize-typescript';
 import { QuestionCategory } from '../question-category/question-category.model';
-import { Answer } from '../answer/answer.model';
 import { User } from '../user/user.model';
+import { Answer } from '../answer/answer.model';
+import { DEFAULT_USER_ID } from '../../app.constant';
 
 @Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
@@ -19,6 +20,9 @@ export class Question extends Model {
   @AutoIncrement
   @Column
   id: number;
+
+  @Column
+  question_key: string;
 
   @Column('varchar')
   question_text: string;
@@ -33,7 +37,7 @@ export class Question extends Model {
   @HasMany(() => Answer)
   answers: Answer[];
 
-  @Default(-1)
+  @Default(DEFAULT_USER_ID)
   @Column({
     comment:
       'User with id=-1 means this is a common question not belonging to any user and relevant for all app users',
