@@ -16,11 +16,11 @@ module.exports = {
 
     await queryInterface.sequelize.query(`
       insert into public.jso_question
-      (question_text, question_category_id)
+      (question_text, question_category_id, question_key)
       VALUES
-      ('${questions.financial.net_salary}', ${categoriesByName['financial'].id}),
-      ('${questions.financial.min_salary}', ${categoriesByName['financial'].id}),
-      ('${questions.financial.probation_salary}', ${categoriesByName['financial'].id})
+      ('${questions.financial.net_salary}', ${categoriesByName['financial'].id}, 'net_salary'),
+      ('${questions.financial.min_salary}', ${categoriesByName['financial'].id}, 'min_salary'),
+      ('${questions.financial.probation_salary}', ${categoriesByName['financial'].id}, 'probation_salary')
     `);
   },
 

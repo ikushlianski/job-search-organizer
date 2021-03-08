@@ -16,11 +16,9 @@ module.exports = {
 
     await queryInterface.sequelize.query(`
       insert into public.jso_question
-      (question_text, question_category_id)
+      (question_text, question_category_id, question_key)
       VALUES
-      ('${questions.workplace.is_32_gb}', ${categoriesByName['workplace'].id}),
-      ('${questions.workplace.is_linux_installed}', ${categoriesByName['workplace'].id}),
-      ('${questions.workplace.licences}', ${categoriesByName['workplace'].id})
+      ('${questions.misc.start_date}', ${categoriesByName['misc'].id}, 'start_date')
     `);
   },
 

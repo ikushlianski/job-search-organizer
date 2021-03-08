@@ -46,6 +46,9 @@ const questions = {
     is_linux_installed: 'Does the company pre-install Linux?',
     licences: 'Does the company give WebStorm licenses?',
   },
+  [categories['misc']]: {
+    start_date: 'When is the start date possible for this position',
+  },
 };
 
 module.exports = questions;
