@@ -32,8 +32,8 @@ export const databaseProviders = [
         ContactPerson,
         Interview,
         Iteration,
-        IterationSettings,
         IterationQuestions,
+        IterationSettings,
         Opportunity,
         OpportunityAnswer,
         Project,
@@ -41,7 +41,7 @@ export const databaseProviders = [
         QuestionCategory,
         User,
       ] as ModelCtor[]);
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ force: false });
 
       return sequelize;
     },

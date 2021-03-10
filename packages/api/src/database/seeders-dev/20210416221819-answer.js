@@ -13,8 +13,6 @@ module.exports = {
       return acc;
     }, {});
 
-    console.log('questionsByKey', questionsByKey);
-
     await queryInterface.sequelize.query(`
       insert into public.jso_answer
       (question_id, answer_text)
