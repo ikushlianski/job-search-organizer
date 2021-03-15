@@ -40,6 +40,8 @@ const questions = {
       'How much communication with customer is expected from me?',
     why_position_opened: 'Why did this position open?',
     overtimes: 'How often do overtimes happen on this project?',
+    customer_business_size: 'What is the size of customer we are working with?',
+    project_business_model: 'What is the business model of the project?',
   },
   [categories['workplace']]: {
     is_32_gb: 'Is the PC going to have 32GB RAM on it?',

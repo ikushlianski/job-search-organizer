@@ -22,7 +22,9 @@ export class OpportunityAnswer extends Model {
   @ForeignKey(() => Answer)
   answer_id: number;
 
-  @Column
+  @Column({
+    comment: 'Some comment to the answer if HR wants to be more specific',
+  })
   answer_string: string;
 
   @Column({

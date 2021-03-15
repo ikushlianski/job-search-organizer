@@ -19,6 +19,8 @@ module.exports = {
       insert into public.jso_answer
       (question_id, answer_text)
       VALUES
+      
+      -- COMPANY --
       (${questionsByKey['office_location'].id}, 'Near me'),
       (${questionsByKey['office_location'].id}, 'Quite suitable'),
       (${questionsByKey['office_location'].id}, 'Not so suitable'),
@@ -33,6 +35,7 @@ module.exports = {
       (${questionsByKey['salary_currency'].id}, 'Possible in USD'),
       (${questionsByKey['salary_currency'].id}, 'Possible in EUR'),
       
+      -- PROJECT: CODE --
       (${questionsByKey['is_legacy'].id}, 'No, only new technologies'),
       (${questionsByKey['is_legacy'].id}, 'Yes, but not you will not face them'),
       (${questionsByKey['is_legacy'].id}, 'Yes, some part is legacy'),
@@ -49,23 +52,39 @@ module.exports = {
       (${questionsByKey['is_rewrite'].id}, 'Yes, partially. You will not have to dive into old code'),
       (${questionsByKey['is_rewrite'].id}, 'Yes, partially. You will work with old code'),
       (${questionsByKey['is_rewrite'].id}, 'Yes, full rewrite. You will work with old code'),
-      
-      (${questionsByKey['is_remote_work'].id}, 'Yes, fully remote, even after COVID'),
-      (${questionsByKey['is_remote_work'].id}, 'Remote during COVID, we will see in the future'),
-      (${questionsByKey['is_remote_work'].id}, 'Remote during COVID, then you will have to work from office'),
-      (${questionsByKey['is_remote_work'].id}, 'Work is only from office'),
-      
-      (${questionsByKey['project_staffing_type'].id}, 'Outsource'),
-      (${questionsByKey['project_staffing_type'].id}, 'Outstaffing'),
-      (${questionsByKey['project_staffing_type'].id}, 'Mixed outsource and outstaffing'),
-      (${questionsByKey['project_staffing_type'].id}, 'We are a product company'),
-      
-      (${questionsByKey['is_foreign_project'].id}, 'From USA'),
-      (${questionsByKey['is_foreign_project'].id}, 'From UK'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Europe'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Asia'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Russia'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Belarus'),
+     
+      (${questionsByKey['tech_stack'].id}, 'Node.js'),
+      (${questionsByKey['tech_stack'].id}, 'Javascript'),
+      (${questionsByKey['tech_stack'].id}, 'Typescript'),
+      (${questionsByKey['tech_stack'].id}, 'React.js'),
+      (${questionsByKey['tech_stack'].id}, 'NEXT.js'),
+      (${questionsByKey['tech_stack'].id}, 'Angular 2+'),
+      (${questionsByKey['tech_stack'].id}, 'Angular 1 (Angular.js)'),
+      (${questionsByKey['tech_stack'].id}, 'HTML/CSS'),
+      (${questionsByKey['tech_stack'].id}, 'Vue.js'),
+      (${questionsByKey['tech_stack'].id}, 'PHP'),
+      (${questionsByKey['tech_stack'].id}, 'Java'),
+      (${questionsByKey['tech_stack'].id}, '.NET'),
+      (${questionsByKey['tech_stack'].id}, 'Docker'),
+      (${questionsByKey['tech_stack'].id}, 'AWS'),
+      (${questionsByKey['tech_stack'].id}, 'Azure'),
+      (${questionsByKey['tech_stack'].id}, 'Google Cloud Platform'),
+      (${questionsByKey['tech_stack'].id}, 'Apache Kafka'),
+      (${questionsByKey['tech_stack'].id}, 'Microservices'),
+      (${questionsByKey['tech_stack'].id}, 'RabbitMQ'),
+      (${questionsByKey['tech_stack'].id}, 'Express.js'),
+      (${questionsByKey['tech_stack'].id}, 'Nest.js'),
+      (${questionsByKey['tech_stack'].id}, 'Loopback'),
+      (${questionsByKey['tech_stack'].id}, 'Koa.js'),
+      (${questionsByKey['tech_stack'].id}, 'Hapi.js'),
+      (${questionsByKey['tech_stack'].id}, 'Postgres'),
+      (${questionsByKey['tech_stack'].id}, 'MySQL'),
+      (${questionsByKey['tech_stack'].id}, 'MongoDB'),
+      (${questionsByKey['tech_stack'].id}, 'Mongoose'),
+      (${questionsByKey['tech_stack'].id}, 'Oracle'),
+      (${questionsByKey['tech_stack'].id}, 'TypeORM'),
+      (${questionsByKey['tech_stack'].id}, 'Sequelize'),
+      (${questionsByKey['tech_stack'].id}, 'RxJS'),
       
       (${questionsByKey['position_type'].id}, 'Frontend only'),
       (${questionsByKey['position_type'].id}, 'Frontend, with some backend'),
@@ -77,6 +96,48 @@ module.exports = {
       (${questionsByKey['dev_ops_work_required'].id}, 'Required, but only the development part of CI/CD. Other things are handled by a dedicated devOps'),
       (${questionsByKey['dev_ops_work_required'].id}, 'Almost not required, as devOps handle most of CI/CD activities'),
       (${questionsByKey['dev_ops_work_required'].id}, 'Not required at all, devOps handle all of CI/CD activities'),
+      
+      -- PROJECT: ORG --
+      (${questionsByKey['is_remote_work'].id}, 'Yes, fully remote, even after COVID'),
+      (${questionsByKey['is_remote_work'].id}, 'Remote during COVID, we will see in the future'),
+      (${questionsByKey['is_remote_work'].id}, 'Remote during COVID, then you will have to work from office'),
+      (${questionsByKey['is_remote_work'].id}, 'Work is only from office'),
+      
+      (${questionsByKey['project_staffing_type'].id}, 'Outsource'),
+      (${questionsByKey['project_staffing_type'].id}, 'Outstaffing'),
+      (${questionsByKey['project_staffing_type'].id}, 'Mixed outsource and outstaffing'),
+      (${questionsByKey['project_staffing_type'].id}, 'We are a product company'),
+      
+      -- PROJECT: CUSTOMER --
+      (${questionsByKey['is_foreign_project'].id}, 'From USA'),
+      (${questionsByKey['is_foreign_project'].id}, 'From UK'),
+      (${questionsByKey['is_foreign_project'].id}, 'From Europe'),
+      (${questionsByKey['is_foreign_project'].id}, 'From Asia'),
+      (${questionsByKey['is_foreign_project'].id}, 'From Russia'),
+      (${questionsByKey['is_foreign_project'].id}, 'From Belarus'),
+      
+      (${questionsByKey['customer_business_size'].id}, 'Large company'),
+      (${questionsByKey['customer_business_size'].id}, 'Medium-sized company'),
+      (${questionsByKey['customer_business_size'].id}, 'Small business'),
+      (${questionsByKey['customer_business_size'].id}, 'Startup'),
+      
+      (${questionsByKey['project_business_model'].id}, 'B2B'),
+      (${questionsByKey['project_business_model'].id}, 'B2C'),
+      (${questionsByKey['project_business_model'].id}, 'C2C'),
+      (${questionsByKey['project_business_model'].id}, 'Other'),
+      
+      (${questionsByKey['project_topic'].id}, 'Real estate'),
+      (${questionsByKey['project_topic'].id}, 'E-commerce'),
+      (${questionsByKey['project_topic'].id}, 'Healthcare'),
+      (${questionsByKey['project_topic'].id}, 'Travel'),
+      (${questionsByKey['project_topic'].id}, 'Education'),
+      (${questionsByKey['project_topic'].id}, 'Lifestyle'),
+      (${questionsByKey['project_topic'].id}, 'Sport'),
+      (${questionsByKey['project_topic'].id}, 'Gambling'),
+      (${questionsByKey['project_topic'].id}, 'Online games'),
+      (${questionsByKey['project_topic'].id}, 'Finance'),
+      (${questionsByKey['project_topic'].id}, 'Cryptocurrencies'),
+      (${questionsByKey['project_topic'].id}, 'Other'),
       
       (${questionsByKey['has_ba'].id}, 'Yes, BA is fully responsible for stories'),
       (${questionsByKey['has_ba'].id}, 'Yes, BA is responsible for stories, but developers need to talk to customer as well'),
@@ -125,6 +186,7 @@ module.exports = {
       (${questionsByKey['overtimes'].id}, 'Happen almost every day, but this is going to end soon'),
       (${questionsByKey['overtimes'].id}, 'Happen almost every day and things are unlikely to change'),
       
+      -- WORKPLACE --
       (${questionsByKey['is_32_gb'].id}, 'No, our laptops are 16GB by default, cannot be changed'),
       (${questionsByKey['is_32_gb'].id}, 'No, our laptops are 16GB by default, 32GB can be requested per project need'),
       (${questionsByKey['is_32_gb'].id}, 'Yes, 32GB is given you by default'),

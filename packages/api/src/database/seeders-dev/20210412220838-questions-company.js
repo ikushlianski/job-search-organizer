@@ -16,12 +16,12 @@ module.exports = {
 
     await queryInterface.sequelize.query(`
       insert into public.jso_question
-      (question_text, question_category_id, question_key)
+      (question_text, question_category_id, question_key, is_multi_choice)
       VALUES
-      ('${questions.company.office_location}', ${categoriesByName['company'].id}, 'office_location'),
-      ('${questions.company.interview_count}', ${categoriesByName['company'].id}, 'interview_count'),
-      ('${questions.company.company_project_count}', ${categoriesByName['company'].id}, 'company_project_count'),
-      ('${questions.company.salary_currency}', ${categoriesByName['company'].id}, 'salary_currency')
+      ('${questions.company.office_location}', ${categoriesByName['company'].id}, 'office_location', default),
+      ('${questions.company.interview_count}', ${categoriesByName['company'].id}, 'interview_count', default),
+      ('${questions.company.company_project_count}', ${categoriesByName['company'].id}, 'company_project_count', default),
+      ('${questions.company.salary_currency}', ${categoriesByName['company'].id}, 'salary_currency', true)
       
     `);
   },

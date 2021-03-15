@@ -47,4 +47,8 @@ export class Question extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @Default(false)
+  @Column
+  is_multi_choice: boolean;
 }
