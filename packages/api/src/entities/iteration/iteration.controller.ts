@@ -1,6 +1,17 @@
-import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { IterationService } from './iteration.service';
 import { Iteration } from './iteration.model';
+import { CreateIterationDto } from './dto/create-iteration.dto';
 
 @Controller('iterations')
 export class IterationController {
@@ -11,6 +22,55 @@ export class IterationController {
     try {
       return await this.iterationService.findAll();
     } catch (e) {
+      console.error(e);
+
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Post('/')
+  async createIteration(
+    @Body() createIterationDto: CreateIterationDto,
+  ): Promise<Iteration> {
+    try {
+      return await this.iterationService.create(createIterationDto);
+    } catch (e) {
+      console.error(e);
+
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Patch('/:id')
+  async updateIteration(
+    @Param() { id },
+    @Body() createIterationDto: CreateIterationDto,
+  ): Promise<Iteration> {
+    try {
+      return await this.iterationService.update(id, createIterationDto);
+    } catch (e) {
+      console.error(e);
+
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Delete('/:id')
+  async deleteIteration(@Param() { id }): Promise<void> {
+    try {
+      return await this.iterationService.delete(id);
+    } catch (e) {
+      console.error(e);
+
       throw new HttpException(
         'Internal server error',
         HttpStatus.INTERNAL_SERVER_ERROR,

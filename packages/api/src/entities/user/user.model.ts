@@ -23,6 +23,9 @@ export class User extends Model {
   email: string;
 
   @Column
+  password: string;
+
+  @Column
   prevRefreshToken: string;
 
   @Column
