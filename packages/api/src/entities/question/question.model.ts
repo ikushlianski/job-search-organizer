@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { QuestionCategory } from '../question-category/question-category.model';
 
-@Table
+@Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
   @PrimaryKey
   @AutoIncrement

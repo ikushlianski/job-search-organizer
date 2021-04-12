@@ -3,7 +3,7 @@ import { Question } from '../question/question.model';
 import { Answer } from '../answer/answer.model';
 import { Opportunity } from '../opportunity/opportunity.model';
 
-@Table
+@Table({ timestamps: false, tableName: 'jso_opportunity_answer' })
 export class OpportunityAnswer extends Model {
   @Column
   @ForeignKey(() => Opportunity)

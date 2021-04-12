@@ -11,7 +11,7 @@ import { Iteration } from '../iteration/iteration.model';
 import { Company } from '../company/company.model';
 import { Project } from '../project/project.model';
 
-@Table({ timestamps: false })
+@Table({ timestamps: true, tableName: 'jso_opportunity' })
 export class Opportunity extends Model {
   @PrimaryKey
   @AutoIncrement

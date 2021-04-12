@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Project } from '../project/project.model';
 
-@Table
+@Table({ timestamps: false, tableName: 'jso_company' })
 export class Company extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -20,4 +20,7 @@ export class Company extends Model {
 
   @HasMany(() => Project)
   projects: Project[];
+
+  // @HasMany(() => Benefit)
+  // benefits: Benefit[]
 }

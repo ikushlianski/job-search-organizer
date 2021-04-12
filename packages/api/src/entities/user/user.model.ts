@@ -1,10 +1,21 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  HasMany,
+  PrimaryKey,
+  AutoIncrement,
+} from 'sequelize-typescript';
 import { Iteration } from '../iteration/iteration.model';
 import { Opportunity } from '../opportunity/opportunity.model';
-import { QuestionSet } from '../question-set/question-set.model';
 
-@Table({ timestamps: false, tableName: 'user' })
+@Table({ timestamps: true, tableName: 'jso_user' })
 export class User extends Model<User> {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
+
   @HasMany(() => Iteration)
   @Column
   iterations: Iteration[];
@@ -12,10 +23,6 @@ export class User extends Model<User> {
   @HasMany(() => Opportunity)
   @Column
   opportunities: Opportunity[];
-
-  @HasMany(() => QuestionSet)
-  @Column
-  questionSets: QuestionSet[];
 
   @Column
   name: string;
