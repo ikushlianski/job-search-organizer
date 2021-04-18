@@ -12,6 +12,7 @@ import {
 import { IterationService } from './iteration.service';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
+import { respondWith } from '../../responses';
 
 @Controller('iterations')
 export class IterationController {
@@ -24,10 +25,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      respondWith(500);
     }
   }
 
@@ -40,10 +38,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      respondWith(500);
     }
   }
 
@@ -57,10 +52,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      respondWith(500);
     }
   }
 
@@ -71,10 +63,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      respondWith(500);
     }
   }
 }
