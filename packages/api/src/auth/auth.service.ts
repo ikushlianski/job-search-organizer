@@ -11,9 +11,40 @@ import { respondWith } from '../responses';
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-  login(payload: AuthenticateUserRequestDto): LoggedInUserDto {
+  async login({
+    email,
+    password,
+  }: AuthenticateUserRequestDto): Promise<LoggedInUserDto> {
+    const existingUser = await User.findOne({
+      where: { email },
+      attributes: [
+        'id',
+        'email',
+        'password',
+        'prevAccessToken',
+        'currentAccessToken',
+      ],
+    });
+
+    console.log('existingUser', existingUser);
+
+    if (!existingUser) respondWith(HttpStatus.UNAUTHORIZED);
+
+    const isPasswordValid = await this.isValidPassword(
+      password,
+      existingUser.password,
+    );
+
+    if (!isPasswordValid) respondWith(HttpStatus.UNAUTHORIZED);
+
+    const newAccessToken = this.jwtService.sign({ email });
+
+    existingUser.prevAccessToken = existingUser.currentAccessToken;
+    existingUser.currentAccessToken = newAccessToken;
+    await existingUser.save();
+
     return {
-      accessToken: this.jwtService.sign(payload),
+      accessToken: newAccessToken,
     };
   }
 
@@ -51,5 +82,12 @@ export class AuthService {
 
   private getAccessToken(email: string) {
     return this.jwtService.sign({ email });
+  }
+
+  private async isValidPassword(
+    suppliedPassword: string,
+    existingPassword: string,
+  ): Promise<boolean> {
+    return bcrypt.compare(suppliedPassword, existingPassword);
   }
 }

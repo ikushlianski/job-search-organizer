@@ -6,6 +6,21 @@ export const respondWith = (httpCode: number, message?: string) => {
       throw new HttpException(message || 'Bad request', HttpStatus.BAD_REQUEST);
     }
 
+    case 401: {
+      throw new HttpException(
+        message || 'Unauthorized',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
+
+    case 403: {
+      throw new HttpException(message || 'Forbidden', HttpStatus.FORBIDDEN);
+    }
+
+    case 404: {
+      throw new HttpException(message || 'Not Found', HttpStatus.NOT_FOUND);
+    }
+
     case 409: {
       throw new HttpException(message || 'Conflict', HttpStatus.CONFLICT);
     }
