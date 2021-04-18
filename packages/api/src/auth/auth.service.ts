@@ -1,9 +1,4 @@
-import {
-  HttpCode,
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -11,12 +6,16 @@ import { CreateUserDto } from '../entities/user/dto/create-user.dto';
 import { RegisterUserRequestDto } from './dto/register-user-request.dto';
 import { RegisteredUser } from './dto/registered-user.dto';
 import { User } from '../entities/user/user.model';
-import { jwtConstants } from './constants';
 import { LoggedInUserDto } from './dto/logged-in-user.dto';
+import { respondWith } from '../responses';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private configService: ConfigService,
+  ) {}
 
   login({ email, password }: CreateUserDto): LoggedInUserDto {
     const payload = { email, password };
@@ -30,25 +29,21 @@ export class AuthService {
     email,
     password,
   }: RegisterUserRequestDto): Promise<RegisteredUser> {
-    const emailHash = await this.hash(email);
-    const userFound = await User.findOne({ where: { email: emailHash } });
+    const userFound = await User.findOne({ where: { email } });
 
     if (userFound) {
-      throw new HttpException(
-        'Please try different credentials',
-        HttpStatus.BAD_REQUEST,
-      );
+      return respondWith(HttpStatus.CONFLICT, 'Wrong credentials');
     }
 
     const passwordHash = await this.hash(password);
+    const accessToken = this.getAccessToken(email);
     const newUser = new User({
-      email: emailHash,
+      email,
       password: passwordHash,
+      currentAccessToken: accessToken,
     });
 
     await newUser.save();
-
-    const accessToken = this.getAccessToken(email);
 
     return {
       email,
@@ -57,17 +52,12 @@ export class AuthService {
   }
 
   async hash(value: string): Promise<string> {
-    const saltOrRounds = 2;
+    const saltOrRounds = 0;
 
-    return await bcrypt.hash(value, saltOrRounds);
+    return bcrypt.hashSync(value, saltOrRounds);
   }
 
   private getAccessToken(email: string) {
-    return this.jwtService.sign(
-      { email },
-      {
-        secret: jwtConstants.secret,
-      },
-    );
+    return this.jwtService.sign({ email });
   }
 }

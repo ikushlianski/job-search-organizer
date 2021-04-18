@@ -40,7 +40,8 @@ export const databaseProviders = [
         Question,
         QuestionCategory,
         User,
-      ] as ModelCtor[]);
+      ]);
+      // todo remove when schema stabilizes, move to migrations
       await sequelize.sync({ force: false });
 
       return sequelize;

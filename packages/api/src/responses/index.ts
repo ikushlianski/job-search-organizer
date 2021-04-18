@@ -1,20 +1,20 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export const respondWith = (httpCode: number) => {
+export const respondWith = (httpCode: number, message?: string) => {
   switch (httpCode) {
     case 400: {
-      throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
+      throw new HttpException(message || 'Bad request', HttpStatus.BAD_REQUEST);
+    }
 
-      break;
+    case 409: {
+      throw new HttpException(message || 'Conflict', HttpStatus.CONFLICT);
     }
 
     case 500: {
       throw new HttpException(
-        'Internal server error',
+        message || 'Internal server error',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
-
-      break;
     }
 
     default: {

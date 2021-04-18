@@ -25,7 +25,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      respondWith(500);
+      respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -38,7 +38,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      respondWith(500);
+      respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -52,7 +52,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      respondWith(500);
+      respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -63,7 +63,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      respondWith(500);
+      respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

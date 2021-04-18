@@ -21,7 +21,7 @@ export class AuthController {
     } catch (e) {
       console.error(e);
 
-      respondWith(e.code);
+      respondWith(e.status, e.response);
     }
   }
 }
