@@ -3,17 +3,19 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
   HttpStatus,
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { IterationService } from './iteration.service';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
 import { respondWith } from '../../responses';
+import { AuthGuard } from '../../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('iterations')
 export class IterationController {
   constructor(private iterationService: IterationService) {}

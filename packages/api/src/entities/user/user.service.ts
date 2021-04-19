@@ -4,10 +4,17 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor() {}
+  async findByEmail(email: string, attributes?: string[]): Promise<User> {
+    return User.findOne({
+      where: { email },
+      attributes: attributes ? attributes : { exclude: [] },
+    });
+  }
 
-  async findAll(): Promise<User[]> {
-    return User.findAll();
+  async findByAccessToken(token: string) {
+    return User.findOne({
+      where: { currentAccessToken: token },
+    });
   }
 
   async create(userDto: CreateUserDto): Promise<User> {
