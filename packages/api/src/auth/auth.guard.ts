@@ -14,12 +14,14 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const accessToken = AuthGuard.getTokenFromRequest(request);
 
+    if (!accessToken) return false;
+
     return await this.authService.hasValidAccessToken(accessToken);
   }
 
   private static getTokenFromRequest(request: Request) {
     const { authorization } = request.headers;
 
-    return authorization.split('Bearer ')[1];
+    return authorization?.split('Bearer ')[1];
   }
 }

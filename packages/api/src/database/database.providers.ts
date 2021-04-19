@@ -17,12 +17,12 @@ export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async (): Promise<Sequelize> => {
-      const port = parseInt(process.env.DB_PORT, 10);
+      const port = parseInt(String(process.env.DB_PORT), 10);
 
       const sequelize = new Sequelize(
-        process.env.POSTGRES_DB,
-        process.env.POSTGRES_USER,
-        process.env.POSTGRES_PASSWORD,
+        String(process.env.POSTGRES_DB),
+        String(process.env.POSTGRES_USER),
+        String(process.env.POSTGRES_PASSWORD),
         { dialect: 'postgres', host: process.env.DB_HOST, port },
       );
 

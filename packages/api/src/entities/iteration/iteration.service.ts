@@ -1,7 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { ITERATION_REPO } from './iteration.constants';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
+import { respondWith } from '../../responses';
 
 @Injectable()
 export class IterationService {
@@ -39,9 +40,11 @@ export class IterationService {
   ): Promise<Iteration> {
     const iteration = await this.iterationRepository.findByPk(id);
 
-    Object.entries(createIterationDto).forEach(([key, value]) => {
-      iteration[key] = value;
-    });
+    if (!iteration) {
+      return respondWith(HttpStatus.NOT_FOUND);
+    }
+
+    IterationService.updateIterationFields(iteration, createIterationDto);
 
     return iteration.save();
   }
@@ -49,6 +52,22 @@ export class IterationService {
   async delete(id: number): Promise<void> {
     const iteration = await this.iterationRepository.findByPk(id);
 
+    if (!iteration) {
+      return respondWith(HttpStatus.NOT_FOUND);
+    }
+
     return iteration.destroy();
+  }
+
+  private static updateIterationFields(
+    iteration: Iteration,
+    dto: CreateIterationDto,
+  ) {
+    const { name, start_date, final_date, user_id } = dto;
+
+    if (name) iteration.name = name;
+    if (start_date) iteration.start_date = start_date;
+    if (final_date) iteration.final_date = final_date;
+    if (user_id) iteration.user_id = user_id;
   }
 }

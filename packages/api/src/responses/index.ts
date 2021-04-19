@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export const respondWith = (httpCode: number, message?: string) => {
+export const respondWith = (httpCode: number, message?: string): never => {
   switch (httpCode) {
     case 400: {
       throw new HttpException(message || 'Bad request', HttpStatus.BAD_REQUEST);

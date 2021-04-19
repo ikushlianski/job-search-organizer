@@ -27,7 +27,7 @@ export class AuthService {
       'currentAccessToken',
     ]);
 
-    if (!existingUser) respondWith(HttpStatus.UNAUTHORIZED);
+    if (!existingUser) return respondWith(HttpStatus.UNAUTHORIZED);
 
     const isPasswordValid = await this.isValidPassword(
       password,

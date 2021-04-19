@@ -4,7 +4,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-  async findByEmail(email: string, attributes?: string[]): Promise<User> {
+  async findByEmail(
+    email: string,
+    attributes?: string[],
+  ): Promise<User | null> {
     return User.findOne({
       where: { email },
       attributes: attributes ? attributes : { exclude: [] },

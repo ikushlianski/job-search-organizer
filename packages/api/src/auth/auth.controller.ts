@@ -18,7 +18,7 @@ export class AuthController {
     } catch (e) {
       console.error(e);
 
-      respondWith(e.status, e.response);
+      return respondWith(e.status, e.response);
     }
   }
 
@@ -31,7 +31,7 @@ export class AuthController {
     } catch (e) {
       console.error(e);
 
-      respondWith(e.status, e.response);
+      return respondWith(e.status, e.response);
     }
   }
 }
