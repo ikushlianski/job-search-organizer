@@ -6,8 +6,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
@@ -19,4 +17,5 @@
       ]
     }
   },
+  "extends": "../../tsconfig.json"
 }
