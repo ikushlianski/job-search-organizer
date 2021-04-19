@@ -15,6 +15,7 @@ import { CreateIterationDto } from './dto/create-iteration.dto';
 import { respondWith } from '../../responses';
 import { AuthGuard } from '../../auth/auth.guard';
 import { IterationParam } from './iteration.interface';
+import { GetToken } from '../../auth/decorators/get-token.decorator';
 
 @UseGuards(AuthGuard)
 @Controller('iterations')
@@ -35,9 +36,13 @@ export class IterationController {
   @Post('/')
   async createIteration(
     @Body() createIterationDto: CreateIterationDto,
+    @GetToken() accessToken: string,
   ): Promise<Iteration> {
     try {
-      return await this.iterationService.create(createIterationDto);
+      return await this.iterationService.create(
+        createIterationDto,
+        accessToken,
+      );
     } catch (e) {
       console.error(e);
 
