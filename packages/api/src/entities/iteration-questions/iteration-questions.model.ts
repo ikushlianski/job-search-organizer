@@ -9,7 +9,7 @@ import { Iteration } from '../iteration/iteration.model';
 import { Question } from '../question/question.model';
 
 @Table({ timestamps: false, tableName: 'jso_iteration_question' })
-export class IterationQuestions extends Model {
+export class IterationQuestion extends Model {
   @Column
   @ForeignKey(() => Iteration)
   iteration_id: number;

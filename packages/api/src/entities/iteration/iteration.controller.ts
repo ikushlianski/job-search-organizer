@@ -37,7 +37,7 @@ export class IterationController {
   async createIteration(
     @Body() createIterationDto: CreateIterationDto,
     @GetToken() accessToken: string,
-  ): Promise<Iteration> {
+  ): Promise<Iteration | void> {
     try {
       return await this.iterationService.create(
         createIterationDto,
@@ -46,7 +46,11 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
+      // todo refactor this and in other places!
+      return respondWith(
+        e.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        e.response || 'Internal Server Error',
+      );
     }
   }
 

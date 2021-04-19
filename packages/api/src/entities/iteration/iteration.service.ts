@@ -1,15 +1,19 @@
-import { Injectable, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { ITERATION_REPO } from './iteration.constants';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
 import { respondWith } from '../../responses';
 import { UserService } from '../user/user.service';
+import { IterationQuestionsService } from '../iteration-questions/iteration-questions.service';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class IterationService {
   constructor(
     @Inject(ITERATION_REPO) private iterationRepository: typeof Iteration,
+    private iterationQuestionsService: IterationQuestionsService,
     private userService: UserService,
+    @Inject('SEQUELIZE') private sequelize: Sequelize,
   ) {}
 
   async findAll(): Promise<Iteration[]> {
@@ -17,9 +21,14 @@ export class IterationService {
   }
 
   async create(
-    { start_date, final_date, name }: CreateIterationDto,
+    {
+      start_date,
+      final_date,
+      name,
+      iterationQuestions = [],
+    }: CreateIterationDto,
     accessToken: string,
-  ): Promise<Iteration> {
+  ): Promise<Iteration | void> {
     // TODO add validation
     // start date < end date
     // no nulls in dates
@@ -30,6 +39,13 @@ export class IterationService {
       return respondWith(HttpStatus.UNAUTHORIZED);
     }
 
+    if (!iterationQuestions?.length) {
+      return respondWith(
+        HttpStatus.BAD_REQUEST,
+        'Iteration must contain questions',
+      );
+    }
+
     const iteration = new Iteration({
       start_date,
       final_date,
@@ -37,7 +53,21 @@ export class IterationService {
       user_id: user.id,
     });
 
-    return iteration.save();
+    const t = await this.sequelize.transaction();
+
+    try {
+      const { id } = await iteration.save({ transaction: t });
+
+      await this.iterationQuestionsService.create(id, iterationQuestions, t);
+
+      await t.commit();
+
+      return iteration;
+    } catch (e) {
+      console.error(e);
+
+      await t.rollback();
+    }
   }
 
   async update(

@@ -7,6 +7,7 @@ import { UserModule } from './entities/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { IterationQuestionsModule } from './entities/iteration-questions/iteration-questions.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot(),
     DatabaseModule,
     IterationModule,
+    IterationQuestionsModule,
     OpportunityModule,
     UserModule,
   ],

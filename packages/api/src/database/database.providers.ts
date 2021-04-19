@@ -1,4 +1,4 @@
-import { ModelCtor, Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize-typescript';
 import { Iteration } from '../entities/iteration/iteration.model';
 import { Opportunity } from '../entities/opportunity/opportunity.model';
 import { Company } from '../entities/company/company.model';
@@ -8,7 +8,7 @@ import { QuestionCategory } from '../entities/question-category/question-categor
 import { IterationSettings } from '../entities/iteration-settings/iteration-settings.model';
 import { Answer } from '../entities/answer/answer.model';
 import { OpportunityAnswer } from '../entities/opportunity-answer/opportunity-answer.model';
-import { IterationQuestions } from '../entities/iteration-questions/iteration-questions.model';
+import { IterationQuestion } from '../entities/iteration-questions/iteration-questions.model';
 import { User } from '../entities/user/user.model';
 import { Interview } from '../entities/interview/interview.model';
 import { ContactPerson } from '../entities/contact-person/contact-person.model';
@@ -32,7 +32,7 @@ export const databaseProviders = [
         ContactPerson,
         Interview,
         Iteration,
-        IterationQuestions,
+        IterationQuestion,
         IterationSettings,
         Opportunity,
         OpportunityAnswer,
