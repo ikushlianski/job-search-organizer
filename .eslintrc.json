@@ -23,7 +23,8 @@
         "prettier/prettier": "warn",
         "newline-before-return": "warn",
         "max-lines": "warn",
-        "newline-after-var": "warn"
+        "newline-after-var": "warn",
+        "@typescript-eslint/no-unused-vars": "warn"
     },
     "overrides": [
         {

@@ -1,4 +1,4 @@
-import { Injectable, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { IterationQuestion } from './iteration-questions.model';
 import { CreateIterationQuestionsDto } from './dto/create-iteration-questions.dto';
 import { Transaction } from 'sequelize';

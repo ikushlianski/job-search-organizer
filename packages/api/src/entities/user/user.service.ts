@@ -14,7 +14,7 @@ export class UserService {
     });
   }
 
-  async findByAccessToken(token: string) {
+  async findByAccessToken(token: string): Promise<User | null> {
     return User.findOne({
       where: { currentAccessToken: token },
     });

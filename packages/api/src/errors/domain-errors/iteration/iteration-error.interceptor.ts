@@ -12,7 +12,7 @@ import { NoIterationQuestionsError } from './iteration.error';
 
 @Injectable()
 export class IterationErrorInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<void> {
     return next.handle().pipe(
       catchError((error) => {
         if (error instanceof NoIterationQuestionsError) {

@@ -12,7 +12,7 @@ import { EntityNotFoundError } from './entity.error';
 
 @Injectable()
 export class EntityErrorInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<void> {
     return next.handle().pipe(
       catchError((error) => {
         if (error instanceof EntityNotFoundError) {
