@@ -1,8 +1,8 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { respondWith } from '../../responses';
 import { IterationQuestion } from './iteration-questions.model';
 import { CreateIterationQuestionsDto } from './dto/create-iteration-questions.dto';
 import { Transaction } from 'sequelize';
+import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 
 @Injectable()
 export class IterationQuestionsService {
@@ -33,7 +33,7 @@ export class IterationQuestionsService {
     );
 
     if (!iterationQuestion) {
-      return respondWith(HttpStatus.NOT_FOUND);
+      throw new EntityNotFoundError('Iteration question');
     }
 
     iterationQuestion.hr_visible = hr_visible;
@@ -50,7 +50,7 @@ export class IterationQuestionsService {
     );
 
     if (!iterationQuestion) {
-      return respondWith(HttpStatus.NOT_FOUND);
+      throw new EntityNotFoundError('Iteration question');
     }
 
     return iterationQuestion.destroy();

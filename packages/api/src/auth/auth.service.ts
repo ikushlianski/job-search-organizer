@@ -1,12 +1,16 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { AuthenticateUserRequestDto } from './dto/authenticate-user-request.dto';
 import { AuthenticatedUser } from './dto/registered-user.dto';
 import { User } from '../entities/user/user.model';
 import { LoggedInUserDto } from './dto/logged-in-user.dto';
-import { respondWith } from '../responses';
 import { UserService } from '../entities/user/user.service';
+import {
+  UnauthorizedError,
+  UserExistsError,
+} from '../errors/domain-errors/user/user.error';
+import { EntityNotFoundError } from '../errors/domain-errors/abstract-entity/entity.error';
 
 @Injectable()
 export class AuthService {
@@ -27,14 +31,14 @@ export class AuthService {
       'currentAccessToken',
     ]);
 
-    if (!existingUser) return respondWith(HttpStatus.UNAUTHORIZED);
+    if (!existingUser) throw new EntityNotFoundError('User');
 
     const isPasswordValid = await this.isValidPassword(
       password,
       existingUser.password,
     );
 
-    if (!isPasswordValid) respondWith(HttpStatus.UNAUTHORIZED);
+    if (!isPasswordValid) throw new UnauthorizedError();
 
     const newAccessToken = this.jwtService.sign({ email });
 
@@ -55,7 +59,7 @@ export class AuthService {
     const userFound = await this.userService.findByEmail(email);
 
     if (userFound) {
-      return respondWith(HttpStatus.CONFLICT, 'Wrong credentials');
+      throw new UserExistsError('Wrong credentials');
     }
 
     const passwordHash = await AuthService.hash(password);

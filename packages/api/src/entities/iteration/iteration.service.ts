@@ -2,10 +2,11 @@ import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { ITERATION_REPO } from './iteration.constants';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
-import { respondWith } from '../../responses';
 import { UserService } from '../user/user.service';
 import { IterationQuestionsService } from '../iteration-questions/iteration-questions.service';
 import { Sequelize } from 'sequelize-typescript';
+import { NoIterationQuestionsError } from '../../errors/domain-errors/iteration/iteration.error';
+import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 
 @Injectable()
 export class IterationService {
@@ -36,14 +37,11 @@ export class IterationService {
     const user = await this.userService.findByAccessToken(accessToken);
 
     if (!user) {
-      return respondWith(HttpStatus.UNAUTHORIZED);
+      throw new EntityNotFoundError('User');
     }
 
     if (!iterationQuestions?.length) {
-      return respondWith(
-        HttpStatus.BAD_REQUEST,
-        'Iteration must contain questions',
-      );
+      throw new NoIterationQuestionsError();
     }
 
     const iteration = new Iteration({
@@ -77,7 +75,7 @@ export class IterationService {
     const iteration = await this.iterationRepository.findByPk(id);
 
     if (!iteration) {
-      return respondWith(HttpStatus.NOT_FOUND);
+      throw new EntityNotFoundError('Iteration');
     }
 
     IterationService.updateIterationFields(iteration, createIterationDto);
@@ -89,7 +87,7 @@ export class IterationService {
     const iteration = await this.iterationRepository.findByPk(id);
 
     if (!iteration) {
-      return respondWith(HttpStatus.NOT_FOUND);
+      throw new EntityNotFoundError('Iteration');
     }
 
     return iteration.destroy();

@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Patch,
   Post,
@@ -12,7 +11,6 @@ import {
 import { IterationService } from './iteration.service';
 import { Iteration } from './iteration.model';
 import { CreateIterationDto } from './dto/create-iteration.dto';
-import { respondWith } from '../../responses';
 import { AuthGuard } from '../../auth/auth.guard';
 import { IterationParam } from './iteration.interface';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
@@ -29,7 +27,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
+      throw e;
     }
   }
 
@@ -46,11 +44,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      // todo refactor this and in other places!
-      return respondWith(
-        e.status || HttpStatus.INTERNAL_SERVER_ERROR,
-        e.response || 'Internal Server Error',
-      );
+      throw e;
     }
   }
 
@@ -64,7 +58,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
+      throw e;
     }
   }
 
@@ -75,7 +69,7 @@ export class IterationController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(HttpStatus.INTERNAL_SERVER_ERROR);
+      throw e;
     }
   }
 }

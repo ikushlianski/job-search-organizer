@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticatedUser } from './dto/registered-user.dto';
-import { respondWith } from '../responses';
 import { AuthenticateUserRequestDto } from './dto/authenticate-user-request.dto';
 import { LoggedInUserDto } from './dto/logged-in-user.dto';
 
@@ -18,7 +17,7 @@ export class AuthController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(e.status, e.response);
+      throw e;
     }
   }
 
@@ -31,7 +30,7 @@ export class AuthController {
     } catch (e) {
       console.error(e);
 
-      return respondWith(e.status, e.response);
+      throw e;
     }
   }
 }
