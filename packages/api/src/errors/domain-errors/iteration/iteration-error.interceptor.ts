@@ -3,7 +3,6 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  InternalServerErrorException,
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
@@ -18,7 +17,7 @@ export class IterationErrorInterceptor implements NestInterceptor {
         if (error instanceof NoIterationQuestionsError) {
           throw new BadRequestException(error.message);
         } else {
-          throw new InternalServerErrorException();
+          throw error;
         }
       }),
     );

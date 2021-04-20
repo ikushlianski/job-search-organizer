@@ -3,7 +3,6 @@ import {
   ConflictException,
   ExecutionContext,
   Injectable,
-  InternalServerErrorException,
   NestInterceptor,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -21,7 +20,7 @@ export class UserErrorInterceptor implements NestInterceptor {
         } else if (error instanceof UnauthorizedError) {
           throw new UnauthorizedException(error.message);
         } else {
-          throw new InternalServerErrorException();
+          throw error;
         }
       }),
     );

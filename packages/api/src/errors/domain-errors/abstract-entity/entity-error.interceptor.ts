@@ -2,7 +2,6 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  InternalServerErrorException,
   NestInterceptor,
   NotFoundException,
 } from '@nestjs/common';
@@ -18,7 +17,7 @@ export class EntityErrorInterceptor implements NestInterceptor {
         if (error instanceof EntityNotFoundError) {
           throw new NotFoundException(error.message);
         } else {
-          throw new InternalServerErrorException();
+          throw error;
         }
       }),
     );

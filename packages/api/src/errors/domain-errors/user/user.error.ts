@@ -8,6 +8,6 @@ export class UnauthorizedError extends Error {
 export class UserExistsError extends Error {
   constructor(message?: string) {
     super();
-    this.message = message || 'User already exists';
+    this.message = message || 'Wrong credentials';
   }
 }

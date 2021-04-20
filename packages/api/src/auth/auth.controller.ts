@@ -12,13 +12,7 @@ export class AuthController {
   async register(
     @Body() registrationPayload: AuthenticateUserRequestDto,
   ): Promise<AuthenticatedUser> {
-    try {
-      return await this.authService.register(registrationPayload);
-    } catch (e) {
-      console.error(e);
-
-      throw e;
-    }
+    return await this.authService.register(registrationPayload);
   }
 
   @Post('/login')

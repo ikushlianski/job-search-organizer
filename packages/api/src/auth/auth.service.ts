@@ -59,7 +59,7 @@ export class AuthService {
     const userFound = await this.userService.findByEmail(email);
 
     if (userFound) {
-      throw new UserExistsError('Wrong credentials');
+      throw new UserExistsError();
     }
 
     const passwordHash = await AuthService.hash(password);

@@ -12,7 +12,7 @@ import {
 import { QuestionCategory } from '../question-category/question-category.model';
 import { User } from '../user/user.model';
 import { Answer } from '../answer/answer.model';
-import { DEFAULT_USER_ID } from '../../app.constant';
+import { DEFAULT_USER_ID } from '../../app/app.constant';
 
 @Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
