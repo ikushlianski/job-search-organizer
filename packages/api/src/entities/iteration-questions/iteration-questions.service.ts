@@ -33,7 +33,7 @@ export class IterationQuestionsService {
     );
 
     if (!iterationQuestion) {
-      throw new EntityNotFoundError('Iteration question');
+      throw new EntityNotFoundError(`Iteration question with id ${questionId}`);
     }
 
     iterationQuestion.hr_visible = hr_visible;

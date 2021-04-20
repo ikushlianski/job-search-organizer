@@ -7,7 +7,10 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { NoIterationQuestionsError } from './iteration.error';
+import {
+  NoIterationAnswersError,
+  NoIterationQuestionsError,
+} from './iteration.error';
 
 @Injectable()
 export class IterationErrorInterceptor implements NestInterceptor {
@@ -15,6 +18,8 @@ export class IterationErrorInterceptor implements NestInterceptor {
     return next.handle().pipe(
       catchError((error) => {
         if (error instanceof NoIterationQuestionsError) {
+          throw new BadRequestException(error.message);
+        } else if (error instanceof NoIterationAnswersError) {
           throw new BadRequestException(error.message);
         } else {
           throw error;

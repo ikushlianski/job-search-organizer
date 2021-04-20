@@ -7,12 +7,14 @@ import { IterationQuestionsService } from '../iteration-questions/iteration-ques
 import { Sequelize } from 'sequelize-typescript';
 import { NoIterationQuestionsError } from '../../errors/domain-errors/iteration/iteration.error';
 import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
+import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
 
 @Injectable()
 export class IterationService {
   constructor(
     @Inject(ITERATION_REPO) private iterationRepository: typeof Iteration,
     private iterationQuestionsService: IterationQuestionsService,
+    private iterationSettingsService: IterationSettingsService,
     private userService: UserService,
     @Inject('SEQUELIZE') private sequelize: Sequelize,
   ) {}
@@ -51,20 +53,31 @@ export class IterationService {
       user_id: user.id,
     });
 
-    const t = await this.sequelize.transaction();
+    const transaction = await this.sequelize.transaction();
 
     try {
-      const { id } = await iteration.save({ transaction: t });
+      const { id } = await iteration.save({ transaction: transaction });
 
-      await this.iterationQuestionsService.create(id, iterationQuestions, t);
+      await this.iterationQuestionsService.create(
+        id,
+        iterationQuestions,
+        transaction,
+      );
+      await this.iterationSettingsService.create(
+        id,
+        iterationQuestions,
+        transaction,
+      );
 
-      await t.commit();
+      await transaction.commit();
 
       return iteration;
     } catch (e) {
       console.error(e);
 
-      await t.rollback();
+      await transaction.rollback();
+
+      throw e;
     }
   }
 
@@ -79,6 +92,9 @@ export class IterationService {
     }
 
     IterationService.updateIterationFields(iteration, createIterationDto);
+
+    // todo update iteration questions
+    // todo update iteration settings (answers)
 
     return iteration.save();
   }

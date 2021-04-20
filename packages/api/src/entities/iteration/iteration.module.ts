@@ -6,6 +6,7 @@ import { IterationController } from './iteration.controller';
 import { AuthModule } from '../../auth/auth.module';
 import { UserService } from '../user/user.service';
 import { IterationQuestionsService } from '../iteration-questions/iteration-questions.service';
+import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
 
 @Module({
   imports: [DatabaseModule, AuthModule],
@@ -15,6 +16,7 @@ import { IterationQuestionsService } from '../iteration-questions/iteration-ques
     ...iterationProviders,
     UserService,
     IterationQuestionsService,
+    IterationSettingsService,
   ],
 })
 export class IterationModule {}
