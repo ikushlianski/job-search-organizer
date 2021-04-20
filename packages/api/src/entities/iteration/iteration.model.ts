@@ -10,6 +10,8 @@ import {
 } from 'sequelize-typescript';
 import { Opportunity } from '../opportunity/opportunity.model';
 import { User } from '../user/user.model';
+import { IterationSettings } from '../iteration-settings/iteration-settings.model';
+import { IterationQuestion } from '../iteration-questions/iteration-questions.model';
 
 @Table({ timestamps: false, tableName: 'jso_iteration' })
 export class Iteration extends Model {
@@ -29,6 +31,12 @@ export class Iteration extends Model {
 
   @HasMany(() => Opportunity)
   opportunities: Opportunity[];
+
+  @HasMany(() => IterationQuestion)
+  iterationQuestions: IterationQuestion[];
+
+  @HasMany(() => IterationSettings)
+  iterationSettings: IterationSettings[];
 
   @BelongsTo(() => User)
   user: User;
