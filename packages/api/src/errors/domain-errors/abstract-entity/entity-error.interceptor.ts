@@ -1,5 +1,6 @@
 import {
   CallHandler,
+  ConflictException,
   ExecutionContext,
   Injectable,
   NestInterceptor,
@@ -7,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { EntityNotFoundError } from './entity.error';
+import { EntityExistsError, EntityNotFoundError } from './entity.error';
 
 @Injectable()
 export class EntityErrorInterceptor implements NestInterceptor {
@@ -16,6 +17,8 @@ export class EntityErrorInterceptor implements NestInterceptor {
       catchError((error) => {
         if (error instanceof EntityNotFoundError) {
           throw new NotFoundException(error.message);
+        } else if (error instanceof EntityExistsError) {
+          throw new ConflictException(error.message);
         } else {
           throw error;
         }

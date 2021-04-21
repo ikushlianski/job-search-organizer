@@ -6,8 +6,10 @@ import {
   AutoIncrement,
   BelongsTo,
   ForeignKey,
+  HasMany,
 } from 'sequelize-typescript';
 import { Company } from '../company/company.model';
+import { Opportunity } from '../opportunity/opportunity.model';
 
 @Table({ timestamps: false, tableName: 'jso_project' })
 export class Project extends Model {
@@ -31,4 +33,7 @@ export class Project extends Model {
 
   @BelongsTo(() => Company)
   company: Company;
+
+  @HasMany(() => Opportunity)
+  opportunities: Opportunity[];
 }

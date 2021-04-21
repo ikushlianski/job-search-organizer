@@ -15,8 +15,9 @@ import { IterationSettingsService } from '../iteration-settings/iteration-settin
     IterationService,
     ...iterationProviders,
     UserService,
-    IterationQuestionsService,
     IterationSettingsService,
+    IterationQuestionsService,
   ],
+  exports: [IterationService],
 })
 export class IterationModule {}

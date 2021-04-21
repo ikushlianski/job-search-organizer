@@ -21,11 +21,11 @@ export class IterationController {
   constructor(private iterationService: IterationService) {}
 
   @Get('/')
-  async findAll(): Promise<Iteration[]> {
+  async findAll(@GetToken() accessToken: string): Promise<Iteration[]> {
     try {
-      return await this.iterationService.findAll();
+      return await this.iterationService.findAllUserIterations(accessToken);
     } catch (e) {
-      console.error(e);
+      console.error('IterationController -> findAll', e);
 
       throw e;
     }
@@ -42,7 +42,7 @@ export class IterationController {
         accessToken,
       );
     } catch (e) {
-      console.error(e);
+      console.error('IterationController -> createIteration', e);
 
       throw e;
     }
@@ -56,7 +56,7 @@ export class IterationController {
     try {
       return await this.iterationService.update(id, createIterationDto);
     } catch (e) {
-      console.error(e);
+      console.error('IterationController -> updateIteration', e);
 
       throw e;
     }
@@ -67,7 +67,7 @@ export class IterationController {
     try {
       return await this.iterationService.delete(id);
     } catch (e) {
-      console.error(e);
+      console.error('IterationController -> deleteIteration', e);
 
       throw e;
     }

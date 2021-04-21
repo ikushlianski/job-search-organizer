@@ -22,7 +22,7 @@ export class AuthController {
     try {
       return await this.authService.login(loginPayload);
     } catch (e) {
-      console.error(e);
+      console.error('AuthController -> login', e);
 
       throw e;
     }

@@ -8,6 +8,8 @@ import { Sequelize } from 'sequelize-typescript';
 import { NoIterationQuestionsError } from '../../errors/domain-errors/iteration/iteration.error';
 import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
+import { Op } from 'sequelize';
+import { SEQUELIZE } from '../../database/database.constant';
 
 @Injectable()
 export class IterationService {
@@ -16,11 +18,23 @@ export class IterationService {
     private iterationQuestionsService: IterationQuestionsService,
     private iterationSettingsService: IterationSettingsService,
     private userService: UserService,
-    @Inject('SEQUELIZE') private sequelize: Sequelize,
+    @Inject(SEQUELIZE) private sequelize: Sequelize,
   ) {}
 
-  async findAll(): Promise<Iteration[]> {
-    return this.iterationRepository.findAll<Iteration>();
+  async findAllUserIterations(accessToken: string): Promise<Iteration[]> {
+    const user = await this.userService.verifyUserExists(accessToken);
+
+    return this.iterationRepository.findAll<Iteration>({
+      where: { user_id: user.id },
+    });
+  }
+
+  async findActiveUserIterations(accessToken: string): Promise<Iteration[]> {
+    const user = await this.userService.verifyUserExists(accessToken);
+
+    return this.iterationRepository.findAll<Iteration>({
+      where: { user_id: user.id, final_date: { [Op.lte]: Date.now() } },
+    });
   }
 
   async create(
@@ -31,11 +45,7 @@ export class IterationService {
       iterationQuestions = [],
     }: CreateIterationDto,
     accessToken: string,
-  ): Promise<Iteration | void> {
-    // TODO add validation
-    // start date < end date
-    // no nulls in dates
-
+  ): Promise<Iteration | never> {
     const user = await this.userService.findByAccessToken(accessToken);
 
     if (!user) {
@@ -73,7 +83,7 @@ export class IterationService {
 
       return iteration;
     } catch (e) {
-      console.error(e);
+      console.error('Iteration -> create', e);
 
       await transaction.rollback();
 
@@ -107,6 +117,16 @@ export class IterationService {
     }
 
     return iteration.destroy();
+  }
+
+  async verifyIterationExists(iterationId: number): Promise<Iteration | never> {
+    const iteration = await Iteration.findByPk(iterationId);
+
+    if (!iteration) {
+      throw new EntityNotFoundError('Iteration');
+    }
+
+    return iteration;
   }
 
   private static updateIterationFields(

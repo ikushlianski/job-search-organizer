@@ -38,6 +38,11 @@
           "blankLine": "always",
           "prev": ["const", "let", "var"],
           "next": "multiline-const"
+        },
+        {
+          "blankLine": "always",
+          "prev": "multiline-const",
+          "next": ["const", "let", "var"]
         }
       ]
     },

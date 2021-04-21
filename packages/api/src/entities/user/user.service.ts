@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { CreateUserDto } from './dto/create-user.dto';
+import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 
 @Injectable()
 export class UserService {
@@ -24,5 +25,15 @@ export class UserService {
     const newUser = new User(userDto);
 
     return newUser.save();
+  }
+
+  async verifyUserExists(accessToken: string): Promise<User | never> {
+    const user = await this.findByAccessToken(accessToken);
+
+    if (!user) {
+      throw new EntityNotFoundError('User');
+    }
+
+    return user;
   }
 }

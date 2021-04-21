@@ -13,6 +13,7 @@ import { Company } from '../company/company.model';
 import { Project } from '../project/project.model';
 import { User } from '../user/user.model';
 import { Interview } from '../interview/interview.model';
+import { ContactPerson } from '../contact-person/contact-person.model';
 
 @Table({ timestamps: false, tableName: 'jso_opportunity' })
 export class Opportunity extends Model {
@@ -60,4 +61,7 @@ export class Opportunity extends Model {
 
   @HasMany(() => Interview)
   interviews: Interview[];
+
+  @HasMany(() => ContactPerson)
+  contact_people: ContactPerson[];
 }

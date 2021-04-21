@@ -8,6 +8,7 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import { Company } from '../company/company.model';
+import { Opportunity } from '../opportunity/opportunity.model';
 
 @Table({ timestamps: false, tableName: 'jso_contact_person' })
 export class ContactPerson extends Model {
@@ -31,4 +32,11 @@ export class ContactPerson extends Model {
   @ForeignKey(() => Company)
   @Column
   company_id: number;
+
+  @BelongsTo(() => Opportunity)
+  opportunity: Opportunity;
+
+  @ForeignKey(() => Opportunity)
+  @Column
+  opportunity_id: number;
 }

@@ -25,6 +25,12 @@ export class Company extends Model {
   @HasMany(() => ContactPerson)
   contact_persons: ContactPerson[];
 
+  @Column
+  address_1: string;
+
+  @Column
+  address_2: string;
+
   // @HasMany(() => Benefit)
   // benefits: Benefit[]
 }

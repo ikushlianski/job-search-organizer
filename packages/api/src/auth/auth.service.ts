@@ -64,6 +64,7 @@ export class AuthService {
 
     const passwordHash = await AuthService.hash(password);
     const accessToken = this.getAccessToken(email);
+
     const newUser = new User({
       email,
       password: passwordHash,

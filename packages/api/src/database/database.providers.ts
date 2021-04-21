@@ -12,10 +12,11 @@ import { IterationQuestion } from '../entities/iteration-questions/iteration-que
 import { User } from '../entities/user/user.model';
 import { Interview } from '../entities/interview/interview.model';
 import { ContactPerson } from '../entities/contact-person/contact-person.model';
+import { SEQUELIZE } from './database.constant';
 
 export const databaseProviders = [
   {
-    provide: 'SEQUELIZE',
+    provide: SEQUELIZE,
     useFactory: async (): Promise<Sequelize> => {
       const port = parseInt(String(process.env.DB_PORT), 10);
 
@@ -42,7 +43,7 @@ export const databaseProviders = [
         User,
       ]);
       // todo remove when schema stabilizes, move to migrations
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ force: false });
 
       return sequelize;
     },
