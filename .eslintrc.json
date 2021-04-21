@@ -24,7 +24,22 @@
         "newline-before-return": "warn",
         "max-lines": "warn",
         "newline-after-var": "warn",
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/no-unused-vars": "warn",
+      "padding-line-between-statements": [
+        "warn",
+        { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+        { "blankLine": "always", "prev": "*", "next": ["const", "let", "var"] },
+        {
+          "blankLine": "never",
+          "prev": ["const", "let", "var"],
+          "next": ["const", "let", "var"]
+        },
+        {
+          "blankLine": "always",
+          "prev": ["const", "let", "var"],
+          "next": "multiline-const"
+        }
+      ]
     },
     "overrides": [
         {
