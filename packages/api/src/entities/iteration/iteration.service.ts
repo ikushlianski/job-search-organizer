@@ -46,11 +46,7 @@ export class IterationService {
     }: CreateIterationDto,
     accessToken: string,
   ): Promise<Iteration | never> {
-    const user = await this.userService.findByAccessToken(accessToken);
-
-    if (!user) {
-      throw new EntityNotFoundError('User');
-    }
+    const user = await this.userService.verifyUserExists(accessToken);
 
     if (!iterationQuestions?.length) {
       throw new NoIterationQuestionsError();

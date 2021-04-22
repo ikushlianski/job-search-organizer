@@ -43,7 +43,7 @@ export const databaseProviders = [
         User,
       ]);
       // todo remove when schema stabilizes, move to migrations
-      await sequelize.sync({ force: false });
+      await sequelize.sync({ force: true });
 
       return sequelize;
     },

@@ -12,11 +12,13 @@ import { InterviewModule } from '../entities/interview/interview.module';
 import { CompanyModule } from '../entities/company/company.module';
 import { ProjectModule } from '../entities/project/project.module';
 import { IterationSettingsModule } from '../entities/iteration-settings/iteration-settings.module';
+import { ContactPersonModule } from '../entities/contact-person/contact-person.module';
 
 @Module({
   imports: [
     AuthModule,
     CompanyModule,
+    ContactPersonModule,
     ConfigModule.forRoot(),
     DatabaseModule,
     InterviewModule,
