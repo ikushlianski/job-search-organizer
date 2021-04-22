@@ -8,15 +8,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from '../auth/auth.module';
 import { IterationQuestionsModule } from '../entities/iteration-questions/iteration-questions.module';
+import { InterviewModule } from '../entities/interview/interview.module';
+import { CompanyModule } from '../entities/company/company.module';
+import { ProjectModule } from '../entities/project/project.module';
+import { IterationSettingsModule } from '../entities/iteration-settings/iteration-settings.module';
 
 @Module({
   imports: [
     AuthModule,
+    CompanyModule,
     ConfigModule.forRoot(),
     DatabaseModule,
+    InterviewModule,
     IterationModule,
     IterationQuestionsModule,
+    IterationSettingsModule,
     OpportunityModule,
+    ProjectModule,
     UserModule,
   ],
   controllers: [AppController],

@@ -4,20 +4,20 @@ import { IterationService } from './iteration.service';
 import { iterationProviders } from './iteration.providers';
 import { IterationController } from './iteration.controller';
 import { AuthModule } from '../../auth/auth.module';
-import { UserService } from '../user/user.service';
-import { IterationQuestionsService } from '../iteration-questions/iteration-questions.service';
-import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
+import { UserModule } from '../user/user.module';
+import { IterationSettingsModule } from '../iteration-settings/iteration-settings.module';
+import { IterationQuestionsModule } from '../iteration-questions/iteration-questions.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule],
-  controllers: [IterationController],
-  providers: [
-    IterationService,
-    ...iterationProviders,
-    UserService,
-    IterationSettingsService,
-    IterationQuestionsService,
+  imports: [
+    DatabaseModule,
+    AuthModule,
+    UserModule,
+    IterationSettingsModule,
+    IterationQuestionsModule,
   ],
-  exports: [IterationService],
+  controllers: [IterationController],
+  providers: [IterationService, ...iterationProviders],
+  exports: [IterationService, ...iterationProviders],
 })
 export class IterationModule {}

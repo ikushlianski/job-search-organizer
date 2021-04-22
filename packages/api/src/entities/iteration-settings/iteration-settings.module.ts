@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database/database.module';
-import { databaseProviders } from '../../database/database.providers';
+import { IterationSettingsService } from './iteration-settings.service';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [],
-  providers: [...databaseProviders],
+  providers: [IterationSettingsService],
+  exports: [IterationSettingsService],
 })
 export class IterationSettingsModule {}

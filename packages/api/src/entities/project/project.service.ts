@@ -48,6 +48,27 @@ export class ProjectService {
     }
   }
 
+  async editProject(
+    projectId: number,
+    projectData: CreateProjectDto,
+  ): Promise<Project> {
+    const project = await this.findProjectById(projectId);
+
+    if (!project) {
+      throw new EntityNotFoundError(`Project with id ${projectId}`);
+    }
+
+    if (projectData.name) project.name = projectData.name;
+    if (projectData.start_date) project.start_date = projectData.start_date;
+    if (projectData.end_date) project.end_date = projectData.end_date;
+
+    return project.save();
+  }
+
+  async findProjectById(projectId: number): Promise<Project | null> {
+    return Project.findByPk(projectId);
+  }
+
   async ensureProjectNotExists(name: string): Promise<void> {
     const foundProject = await Project.findOne({ where: { name } });
 

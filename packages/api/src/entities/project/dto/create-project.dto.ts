@@ -5,9 +5,9 @@ export class CreateProjectDto {
   @IsString()
   name: string;
 
-  start_date?: string;
+  start_date?: Date;
 
-  end_date?: string;
+  end_date?: Date;
 
   company_id?: number;
 

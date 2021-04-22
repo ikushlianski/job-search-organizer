@@ -1,12 +1,22 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database/database.module';
-import { UserService } from '../user/user.service';
-import { OpportunityService } from '../opportunity/opportunity.service';
 import { CompanyController } from './company.controller';
+import { UserModule } from '../user/user.module';
+import { CompanyService } from './company.service';
+import { InterviewModule } from '../interview/interview.module';
+import { IterationModule } from '../iteration/iteration.module';
+import { AuthModule } from '../../auth/auth.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    AuthModule,
+    DatabaseModule,
+    InterviewModule,
+    IterationModule,
+    UserModule,
+  ],
   controllers: [CompanyController],
-  providers: [OpportunityService, UserService],
+  providers: [CompanyService],
+  exports: [CompanyService],
 })
 export class CompanyModule {}

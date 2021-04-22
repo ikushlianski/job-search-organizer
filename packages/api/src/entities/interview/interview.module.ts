@@ -1,25 +1,25 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database/database.module';
-import { UserService } from '../user/user.service';
 import { InterviewService } from './interview.service';
 import { OpportunityInterviewController } from './opportunity-interview.controller';
-import { IterationService } from '../iteration/iteration.service';
 import { IterationInterviewController } from './iteration-interview.controller';
-import { iterationProviders } from '../iteration/iteration.providers';
-import { IterationQuestionsService } from '../iteration-questions/iteration-questions.service';
-import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
 import { AuthModule } from '../../auth/auth.module';
+import { UserModule } from '../user/user.module';
+import { IterationQuestionsModule } from '../iteration-questions/iteration-questions.module';
+import { IterationSettingsModule } from '../iteration-settings/iteration-settings.module';
+import { IterationModule } from '../iteration/iteration.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule],
-  controllers: [OpportunityInterviewController, IterationInterviewController],
-  providers: [
-    InterviewService,
-    UserService,
-    IterationService,
-    ...iterationProviders,
-    IterationQuestionsService,
-    IterationSettingsService,
+  imports: [
+    DatabaseModule,
+    AuthModule,
+    UserModule,
+    IterationModule,
+    IterationQuestionsModule,
+    IterationSettingsModule,
   ],
+  controllers: [OpportunityInterviewController, IterationInterviewController],
+  providers: [InterviewService],
+  exports: [InterviewService],
 })
 export class InterviewModule {}
