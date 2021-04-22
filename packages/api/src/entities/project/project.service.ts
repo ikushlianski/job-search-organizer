@@ -17,6 +17,10 @@ export class ProjectService {
     private companyService: CompanyService,
   ) {}
 
+  async findProjectById(projectId: number): Promise<Project | null> {
+    return Project.findByPk(projectId);
+  }
+
   async create({
     name,
     company,
@@ -63,10 +67,6 @@ export class ProjectService {
     if (projectData.end_date) project.end_date = projectData.end_date;
 
     return project.save();
-  }
-
-  async findProjectById(projectId: number): Promise<Project | null> {
-    return Project.findByPk(projectId);
   }
 
   async ensureProjectNotExists(name: string): Promise<void> {

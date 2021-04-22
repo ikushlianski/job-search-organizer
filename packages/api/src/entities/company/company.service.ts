@@ -8,10 +8,15 @@ import {
   EntityNotFoundError,
 } from '../../errors/domain-errors/abstract-entity/entity.error';
 import { Transaction } from 'sequelize';
+import { EditCompanyDto } from './dto/edit-company.dto';
 
 @Injectable()
 export class CompanyService {
   constructor(@Inject(SEQUELIZE) private sequelize: Sequelize) {}
+
+  async findCompanyById(companyId: number): Promise<Company | null> {
+    return Company.findByPk(companyId);
+  }
 
   async create(
     { name, address_1, address_2 }: CreateCompanyDto,
@@ -22,6 +27,23 @@ export class CompanyService {
     const newCompany = new Company({ name, address_1, address_2 });
 
     return newCompany.save({ transaction });
+  }
+
+  async editCompany(
+    companyId: number,
+    companyData: EditCompanyDto,
+  ): Promise<Company> {
+    const company = await this.findCompanyById(companyId);
+
+    if (!company) {
+      throw new EntityNotFoundError(`Company with id ${companyId}`);
+    }
+
+    if (companyData.name) company.name = companyData.name;
+    if (companyData.address_1) company.address_1 = companyData.address_1;
+    if (companyData.address_2) company.address_2 = companyData.address_2;
+
+    return company.save();
   }
 
   async checkCompanyNotExists(name: string): Promise<void> {

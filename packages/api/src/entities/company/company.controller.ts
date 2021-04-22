@@ -1,4 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '../../auth/auth.guard';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { Company } from './company.model';
@@ -17,6 +24,20 @@ export class CompanyController {
       return await this.companyService.create(createCompanyDto);
     } catch (e) {
       console.error('CompanyController -> createCompany', e);
+
+      throw e;
+    }
+  }
+
+  @Patch('/:id')
+  async editCompany(
+    @Body() createCompanyDto: CreateCompanyDto,
+    @Param() { id: companyId }: { id: number },
+  ): Promise<Company | void> {
+    try {
+      return await this.companyService.editCompany(companyId, createCompanyDto);
+    } catch (e) {
+      console.error('CompanyController -> editCompany', e);
 
       throw e;
     }
