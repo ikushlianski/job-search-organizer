@@ -13,6 +13,7 @@ import { CompanyModule } from '../entities/company/company.module';
 import { ProjectModule } from '../entities/project/project.module';
 import { IterationSettingsModule } from '../entities/iteration-settings/iteration-settings.module';
 import { ContactPersonModule } from '../entities/contact-person/contact-person.module';
+import { OpportunityAnswerModule } from '../entities/opportunity-answer/opportunity-answer.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ContactPersonModule } from '../entities/contact-person/contact-person.m
     IterationQuestionsModule,
     IterationSettingsModule,
     OpportunityModule,
+    OpportunityAnswerModule,
     ProjectModule,
     UserModule,
   ],

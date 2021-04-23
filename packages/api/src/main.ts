@@ -18,6 +18,7 @@ async function bootstrap() {
     .useGlobalPipes(
       new ValidationPipe({
         disableErrorMessages: process.env.NODE_ENV === 'production',
+        forbidUnknownValues: true,
       }),
     );
   await app.listen(port);
