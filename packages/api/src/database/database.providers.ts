@@ -13,6 +13,7 @@ import { User } from '../entities/user/user.model';
 import { Interview } from '../entities/interview/interview.model';
 import { ContactPerson } from '../entities/contact-person/contact-person.model';
 import { SEQUELIZE } from './database.constant';
+import { UserOpportunityScore } from '../entities/user-opportunity-score/user-opportunity-score.model';
 
 export const databaseProviders = [
   {
@@ -41,9 +42,10 @@ export const databaseProviders = [
         Question,
         QuestionCategory,
         User,
+        UserOpportunityScore,
       ]);
       // todo remove when schema stabilizes, move to migrations
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ force: false });
 
       return sequelize;
     },

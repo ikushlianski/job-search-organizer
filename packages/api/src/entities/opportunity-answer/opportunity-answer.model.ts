@@ -48,10 +48,4 @@ export class OpportunityAnswer extends Model {
     comment: 'Some comment to the answer if HR wants to be more specific',
   })
   answer_string: string;
-
-  @Column({
-    comment:
-      "Points that this answer deserved (1-3) multiplied by the question's weight. Set either automatically, if can be measured, or by the user themselves, after reviewing HR's answer string",
-  })
-  points: number;
 }
