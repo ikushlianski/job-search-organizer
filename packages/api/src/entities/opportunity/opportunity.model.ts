@@ -7,6 +7,7 @@ import {
   BelongsTo,
   AutoIncrement,
   HasMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { Iteration } from '../iteration/iteration.model';
 import { Company } from '../company/company.model';
@@ -14,6 +15,7 @@ import { Project } from '../project/project.model';
 import { User } from '../user/user.model';
 import { Interview } from '../interview/interview.model';
 import { ContactPerson } from '../contact-person/contact-person.model';
+import { UserOpportunityScore } from '../user-opportunity-score/user-opportunity-score.model';
 
 @Table({ timestamps: false, tableName: 'jso_opportunity' })
 export class Opportunity extends Model {
@@ -64,4 +66,7 @@ export class Opportunity extends Model {
 
   @HasMany(() => ContactPerson)
   contact_people: ContactPerson[];
+
+  @HasOne(() => UserOpportunityScore)
+  userOpportunityScore: UserOpportunityScore;
 }

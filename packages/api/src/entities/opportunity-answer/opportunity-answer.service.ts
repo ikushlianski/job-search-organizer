@@ -2,9 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { OpportunityAnswer } from './opportunity-answer.model';
 import { CreateOpportunityAnswerDto } from './dto/create-opportunity-answer.dto';
 import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto';
+import { IterationService } from '../iteration/iteration.service';
+import { OpportunityService } from '../opportunity/opportunity.service';
+import { UserOpportunityScoreService } from '../user-opportunity-score/user-opportunity-score.service';
 
 @Injectable()
 export class OpportunityAnswerService {
+  constructor(
+    private iterationService: IterationService,
+    private opportunityService: OpportunityService,
+    private userOppScoreService: UserOpportunityScoreService,
+  ) {}
+
   async findAllOpportunityAnswers(
     opportunityId: number,
   ): Promise<OpportunityAnswer[]> {
@@ -23,9 +32,13 @@ export class OpportunityAnswerService {
   }
 
   async create(
+    iterationId: number,
     opportunityId: number,
     opportunityAnswerData: CreateOpportunityAnswerDto[],
   ): Promise<OpportunityAnswer[] | never> {
+    await this.iterationService.verifyIterationExists(iterationId);
+    await this.opportunityService.verifyOpportunityExists(opportunityId);
+
     const incomingOppAnswers = opportunityAnswerData.map(
       (answerData) => new OpportunityAnswer(answerData),
     );
@@ -34,13 +47,29 @@ export class OpportunityAnswerService {
       answer.save(),
     );
 
-    return await Promise.all(saveAnswerPromises);
+    const opportunityAnswers = await Promise.all(saveAnswerPromises);
+
+    const userId = await this.opportunityService.getUserIdByOpportunity(
+      opportunityId,
+    );
+
+    await this.userOppScoreService.calculateOpportunityScore(
+      iterationId,
+      opportunityId,
+      userId,
+    );
+
+    return opportunityAnswers;
   }
 
   async update(
+    iterationId: number,
     opportunityId: number,
     opportunityAnswerData: UpdateOpportunityAnswerDto[],
   ): Promise<OpportunityAnswer[] | never> {
+    await this.iterationService.verifyIterationExists(iterationId);
+    await this.opportunityService.verifyOpportunityExists(opportunityId);
+
     const oppAnswerIds = opportunityAnswerData.map((answer) => answer.id);
 
     const existingOppAnswers = await this.findAllOpportunityAnswersByIds(
@@ -66,7 +95,19 @@ export class OpportunityAnswerService {
       [],
     );
 
-    return await Promise.all(saveAnswerPromises);
+    const opportunityAnswers = await Promise.all(saveAnswerPromises);
+
+    const userId = await this.opportunityService.getUserIdByOpportunity(
+      opportunityId,
+    );
+
+    await this.userOppScoreService.calculateOpportunityScore(
+      iterationId,
+      opportunityId,
+      userId,
+    );
+
+    return opportunityAnswers;
   }
 
   private filterOutExisting(

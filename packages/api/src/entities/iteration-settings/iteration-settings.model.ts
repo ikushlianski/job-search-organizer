@@ -47,6 +47,6 @@ export class IterationSettings extends Model {
   @Column
   string_answer: string;
 
-  @Column
-  weight: number; // 1-3
+  @Column('float')
+  weight: number; // from -1 to +1, with a 0.5 increment
 }

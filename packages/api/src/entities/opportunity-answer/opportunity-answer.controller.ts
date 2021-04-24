@@ -37,13 +37,17 @@ export class OpportunityAnswerController {
   @Post('/')
   async createOpportunityAnswers(
     @Param()
-    { opportunityId }: { opportunityId: number },
+    {
+      iterationId,
+      opportunityId,
+    }: { iterationId: number; opportunityId: number },
     @Body() opportunityAnswerData: CreateOpportunityAnswerDto[],
   ): Promise<OpportunityAnswer[]> {
     try {
       await this.opportunityService.verifyOpportunityExists(opportunityId);
 
       return await this.opportunityAnswerService.create(
+        iterationId,
         opportunityId,
         opportunityAnswerData,
       );
@@ -61,13 +65,17 @@ export class OpportunityAnswerController {
   @Patch('/')
   async updateOpportunityAnswers(
     @Param()
-    { opportunityId }: { opportunityId: number },
+    {
+      iterationId,
+      opportunityId,
+    }: { iterationId: number; opportunityId: number },
     @Body() opportunityAnswerData: UpdateOpportunityAnswerDto[],
   ): Promise<OpportunityAnswer[]> {
     try {
       await this.opportunityService.verifyOpportunityExists(opportunityId);
 
       return await this.opportunityAnswerService.update(
+        iterationId,
         opportunityId,
         opportunityAnswerData,
       );

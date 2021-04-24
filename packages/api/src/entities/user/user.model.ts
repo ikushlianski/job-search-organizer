@@ -5,9 +5,11 @@ import {
   HasMany,
   PrimaryKey,
   AutoIncrement,
+  HasOne,
 } from 'sequelize-typescript';
 import { Iteration } from '../iteration/iteration.model';
 import { Opportunity } from '../opportunity/opportunity.model';
+import { UserOpportunityScore } from '../user-opportunity-score/user-opportunity-score.model';
 
 @Table({ timestamps: true, tableName: 'jso_user' })
 export class User extends Model {
@@ -42,4 +44,7 @@ export class User extends Model {
 
   @HasMany(() => Opportunity)
   opportunities: Opportunity[];
+
+  @HasOne(() => UserOpportunityScore)
+  userOpportunityScore: UserOpportunityScore;
 }

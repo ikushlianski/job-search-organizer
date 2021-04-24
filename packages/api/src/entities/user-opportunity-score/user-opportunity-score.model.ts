@@ -34,6 +34,7 @@ export class UserOpportunityScore extends Model {
   @Column({
     comment:
       "Points that this answer deserved (1-3) multiplied by the question's weight. Set either automatically, if can be measured, or by the user themselves, after reviewing HR's answer string",
+    type: 'float',
   })
   score: number;
 }

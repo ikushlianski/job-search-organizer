@@ -130,4 +130,14 @@ export class OpportunityService {
 
     return opportunity;
   }
+
+  async getUserIdByOpportunity(opportunityId: number): Promise<number> {
+    const opportunity = await this.findById(opportunityId);
+
+    if (!opportunity) {
+      throw new EntityNotFoundError('Opportunity');
+    }
+
+    return opportunity.user_id;
+  }
 }

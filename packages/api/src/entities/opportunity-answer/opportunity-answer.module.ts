@@ -8,16 +8,20 @@ import { UserModule } from '../user/user.module';
 import { IterationQuestionsModule } from '../iteration-questions/iteration-questions.module';
 import { IterationSettingsModule } from '../iteration-settings/iteration-settings.module';
 import { OpportunityModule } from '../opportunity/opportunity.module';
+import { IterationModule } from '../iteration/iteration.module';
+import { UserOpportunityScoreModule } from '../user-opportunity-score/user-opportunity-score.module';
 
 @Module({
   imports: [
     CompanyModule,
     DatabaseModule,
     InterviewModule,
+    IterationModule,
     IterationQuestionsModule,
     IterationSettingsModule,
     OpportunityModule,
     UserModule,
+    UserOpportunityScoreModule,
   ],
   controllers: [OpportunityAnswerController],
   providers: [OpportunityAnswerService],
