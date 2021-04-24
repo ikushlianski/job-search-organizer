@@ -6,9 +6,11 @@ module.exports = {
       insert into public.jso_iteration_settings 
       (iteration_id, question_id, answer_id, boolean_answer, numeric_answer, string_answer, weight)
       VALUES
-      (1, 1, null, true, null, null, 3),
-      (1, 2, null, null, 3500, null, 3),
-      (1, 3, null, null, 3000, null, 2)
+      (1, 1, 1, true, null, null, 1),
+      (1, 1, 2, true, null, null, 0.5),
+      (1, 5, null, null, 3500, null, null),
+      (1, 6, null, null, 3000, null, null),
+      (1, 9, 12, null, null, null, 1)
     `);
   },
 
