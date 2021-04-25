@@ -4,6 +4,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/packages/api/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/frontend/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/frontend/.cache" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/frontend/.parcel-cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
