@@ -16,7 +16,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "start": "parcel src/public/index.html",
-    "build": "parcel build src/public/index.html"
+    "build": "parcel build src/public/index.html",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0"
   },
   "bugs": {
     "url": "https://github.com/ikushlianski/job-search-organizer/issues"
@@ -31,7 +32,9 @@
     "@typescript-eslint/parser": "4.5.0",
     "eslint": "7.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "husky": "4.3.8",
     "lerna": "^3.22.1",
+    "lint-staged": "^10.5.4",
     "parcel": "^2.0.0-beta.2",
     "prettier": "^2.1.2",
     "ts-node": "^9.0.0"
@@ -44,5 +47,14 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "typescript": "^4.0.3"
+  },
+  "lint-staged": {
+    "packages/frontend/**/*.{ts,tsx}": "tsc --noEmit && npm run lint",
+    "packages/frontend/**/*": "npm run test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
