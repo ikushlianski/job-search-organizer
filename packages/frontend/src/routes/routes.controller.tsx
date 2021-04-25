@@ -1,0 +1,59 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import { Routing } from './routing.enum';
+import { IterationPage } from '../entities/iteration/iteration.page';
+import { OpportunityPage } from '../entities/opportunity/opportunity.page';
+import { SignUpPage } from '../auth/signup.page';
+import { DashboardPage } from '../entities/dashboard/dashboard.page';
+import { SignInPage } from '../auth/signin.page';
+import { NotFoundPage } from '../common/not-found.page';
+
+interface Props {
+  signedIn: boolean;
+}
+
+export const Routes: React.FC<Props> = ({ signedIn }) => {
+  return (
+    <Router>
+      {signedIn ? (
+        <Switch>
+          <Route exact path={Routing.home}>
+            <DashboardPage />
+          </Route>
+          <Route path={Routing.iterations}>
+            <IterationPage />
+          </Route>
+          <Route path={Routing.opportunities}>
+            <OpportunityPage />
+          </Route>
+          <Route exact path={Routing.signUp}>
+            <Redirect to={Routing.home} />
+          </Route>
+          <Route exact path={Routing.signIn}>
+            <Redirect to={Routing.home} />
+          </Route>
+          <Route path={Routing.catchAll}>
+            <NotFoundPage />
+          </Route>
+        </Switch>
+      ) : (
+        <Switch>
+          <Route exact path={Routing.signUp}>
+            <SignUpPage />
+          </Route>
+          <Route exact path={Routing.signIn}>
+            <SignInPage />
+          </Route>
+          <Route path={Routing.catchAll}>
+            <Redirect to={Routing.signIn} />
+          </Route>
+        </Switch>
+      )}
+    </Router>
+  );
+};
