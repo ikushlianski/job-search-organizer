@@ -49,7 +49,7 @@
         ]
       },
       {
-        "blankLine": "never",
+        "blankLine": "any",
         "prev": [
           "const",
           "let",
