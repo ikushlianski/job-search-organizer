@@ -49,14 +49,9 @@ export class OpportunityAnswerService {
 
     const opportunityAnswers = await Promise.all(saveAnswerPromises);
 
-    const userId = await this.opportunityService.getUserIdByOpportunity(
-      opportunityId,
-    );
-
     await this.userOppScoreService.calculateOpportunityScore(
       iterationId,
       opportunityId,
-      userId,
     );
 
     return opportunityAnswers;
@@ -97,14 +92,9 @@ export class OpportunityAnswerService {
 
     const opportunityAnswers = await Promise.all(saveAnswerPromises);
 
-    const userId = await this.opportunityService.getUserIdByOpportunity(
-      opportunityId,
-    );
-
     await this.userOppScoreService.calculateOpportunityScore(
       iterationId,
       opportunityId,
-      userId,
     );
 
     return opportunityAnswers;
