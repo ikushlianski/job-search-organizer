@@ -80,8 +80,8 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "packages/api/**/*.ts": "tsc --noEmit && npm run lint",
-    "packages/api/**/*": "npm run test"
+    "./**/*.ts": ["tsc --noEmit", "npm run lint"],
+    "./**/*": "npm run test"
   },
   "husky": {
     "hooks": {

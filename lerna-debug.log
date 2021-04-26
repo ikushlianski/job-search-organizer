@@ -1,14 +1,13 @@
 0 silly argv {
 0 silly argv   _: [ 'add' ],
-0 silly argv   scope: '@job-search-organizer/api',
-0 silly argv   dev: true,
-0 silly argv   D: true,
+0 silly argv   scope: '@job-search-organizer/frontend',
 0 silly argv   globs: [],
 0 silly argv   lernaVersion: '3.22.1',
-0 silly argv   '$0': '/home/ikushlianski/webdata/job-search-organizer/node_modules/.bin/lerna',
-0 silly argv   pkg: '@types/typeorm'
+0 silly argv   '$0': 'lerna',
+0 silly argv   pkg: 'redux'
 0 silly argv }
 1 notice cli v3.22.1
 2 verbose rootPath /home/ikushlianski/webdata/job-search-organizer
-3 error Error: 404 Not Found - GET https://registry.npmjs.org/@types%2ftypeorm - Not found
-3 error     at /home/ikushlianski/webdata/job-search-organizer/node_modules/@evocateur/npm-registry-fetch/check-response.js:104:15
+3 error JSONError: Unexpected token } in JSON at position 408 while parsing near '...eteer": "^9.0.0",  },  "devDependencie...' in packages/scrapper/package.json
+3 error     at module.exports (/home/ikushlianski/webdata/job-search-organizer/node_modules/parse-json/index.js:26:19)
+3 error     at parse (/home/ikushlianski/webdata/job-search-organizer/node_modules/load-json-file/index.js:15:9)

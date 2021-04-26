@@ -37,22 +37,26 @@
     "lint-staged": "^10.5.4",
     "parcel": "^2.0.0-beta.2",
     "prettier": "^2.1.2",
-    "ts-node": "^9.0.0"
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "@job-search-organizer/shared": "^0.1.0",
+    "@reduxjs/toolkit": "^1.5.1",
     "eslint-config-prettier": "^6.14.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.1.0",
     "redux-saga": "^1.1.3",
-    "reselect": "^4.0.0",
-    "typescript": "^4.0.3"
+    "reselect": "^4.0.0"
   },
   "lint-staged": {
-    "packages/frontend/**/*.{ts,tsx}": "tsc --noEmit && npm run lint",
-    "packages/frontend/**/*": "npm run test"
+    "./**/*.{ts,tsx}": [
+      "tsc --noEmit",
+      "npm run lint"
+    ]
   },
   "husky": {
     "hooks": {

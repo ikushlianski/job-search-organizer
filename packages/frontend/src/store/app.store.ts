@@ -1,6 +1,8 @@
-import { createStore } from 'redux';
-import { initialState } from './initial-state.store';
-import { rootReducer } from './root-reducer.store';
+import { configureStore } from '@reduxjs/toolkit';
+import { userReducer } from '../entities/user/user.slice';
 
-// redux sagas is a middleware that we apply to the store
-export const store = createStore(rootReducer, initialState);
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+});
