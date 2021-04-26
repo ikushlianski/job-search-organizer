@@ -11,7 +11,8 @@ import { OpportunityPage } from '../entities/opportunity/opportunity.page';
 import { SignUpPage } from '../auth/signup.page';
 import { DashboardPage } from '../entities/dashboard/dashboard.page';
 import { SignInPage } from '../auth/signin.page';
-import { NotFoundPage } from '../common/not-found.page';
+import { NotFoundPage } from '../common/pages/not-found.page';
+import { SuggestPage } from '../entities/suggest/suggest.page';
 
 interface Props {
   signedIn: boolean;
@@ -49,8 +50,11 @@ export const Routes: React.FC<Props> = ({ signedIn }) => {
           <Route exact path={Routing.signIn}>
             <SignInPage />
           </Route>
+          <Route exact path={Routing.suggest}>
+            <SuggestPage />
+          </Route>
           <Route path={Routing.catchAll}>
-            <Redirect to={Routing.signIn} />
+            <NotFoundPage />
           </Route>
         </Switch>
       )}

@@ -1,9 +1,10 @@
 export enum Routing {
   catchAll = '*',
   dashboard = '/dashboard',
-  iterations = '/my-iterations',
   home = '/',
+  iterations = '/my-iterations',
   opportunities = '/my-opportunities',
   signIn = '/sign-in',
   signUp = '/sign-up',
+  suggest = '/suggest',
 }
