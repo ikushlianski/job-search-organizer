@@ -1,14 +1,12 @@
 {
-  "name": "api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "name": "@job-search-organizer/api",
+  "version": "0.1.0",
+  "description": "> TODO: description",
+  "author": "Ilya Kushlianski <kushliansky@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

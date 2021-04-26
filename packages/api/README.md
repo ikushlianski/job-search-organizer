@@ -1,10 +1,11 @@
-# Job Search Organizer API
+# `@job-search-organizer/api`
 
-## Generate seed data
+> TODO: description
 
-This will generate a file with test data for development:
-`npx sequelize-cli seed:generate --name your-seed-name`
+## Usage
 
-The seeds are located in `src/database/seeders-<env>` folder. Seed order is important for foreign keys to resolve correctly!
+```
+const api = require('@job-search-organizer/api');
 
-The seed folder location is set up in `.sequelizerc`
+// TODO: DEMONSTRATE API
+```
