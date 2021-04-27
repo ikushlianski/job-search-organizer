@@ -1,9 +1,17 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Header,
+  HttpCode,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticatedUser } from './dto/registered-user.dto';
 import { AuthenticateUserRequestDto } from './dto/authenticate-user-request.dto';
 import { LoggedInUserDto } from './dto/logged-in-user.dto';
 import { AuthGuard } from './auth.guard';
+import { GetToken } from './decorators/get-token.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -16,6 +24,7 @@ export class AuthController {
     return await this.authService.register(registrationPayload);
   }
 
+  @HttpCode(200)
   @Post('/login')
   async login(
     @Body() loginPayload: AuthenticateUserRequestDto,
@@ -31,7 +40,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('/token')
-  async token(@Body() { accessToken }: LoggedInUserDto): Promise<void> {
+  @HttpCode(200)
+  async token(@GetToken() accessToken: string): Promise<void> {
     try {
       const authorized = await this.authService.hasValidAccessToken(
         accessToken,
