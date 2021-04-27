@@ -8,6 +8,7 @@ import { EntityErrorInterceptor } from './errors/domain-errors/abstract-entity/e
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = parseInt(process.env.SERVER_PORT as string, 10);
+  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',');
 
   app
     .useGlobalInterceptors(
@@ -20,7 +21,10 @@ async function bootstrap() {
         disableErrorMessages: process.env.NODE_ENV === 'production',
         forbidUnknownValues: true,
       }),
-    );
+    )
+    .enableCors({
+      origin: allowedOrigins,
+    });
   await app.listen(port);
 }
 
