@@ -16,7 +16,7 @@ export const client = async function (
   const onSuccess = function (response: AxiosResponse) {
     console.debug('Request Successful!', response);
 
-    return response.data;
+    return response;
   };
 
   const onError = function (error: AxiosError) {
@@ -38,6 +38,8 @@ export const client = async function (
 
   try {
     const response = await axiosClient(options);
+
+    console.log('response in client onSuccess', response);
 
     return onSuccess(response);
   } catch (error) {

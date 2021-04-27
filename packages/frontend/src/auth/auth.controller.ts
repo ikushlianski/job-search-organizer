@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAppLoading } from '../app/app.reducer';
-import { checkIsLoggedIn } from './auth.action';
+import { setAppLoading } from '../app/store/app.reducer';
+import { checkIsLoggedIn } from './store/auth.action';
 import { authService } from './auth.service';
-import { isSignedIn } from './auth.selector';
+import { isSignedIn } from './store/auth.selector';
+import { setAuthenticated } from './store/auth.reducer';
 
 interface Props {
   render: (signedIn: boolean) => JSX.Element;
@@ -16,7 +17,11 @@ export const AuthController: React.FC<Props> = ({ render }) => {
   React.useEffect(() => {
     const accessToken = authService.getToken();
 
-    console.log('accessToken in LS', accessToken);
+    if (!accessToken) {
+      dispatch(setAuthenticated(false));
+
+      return;
+    }
 
     dispatch(setAppLoading(true));
 

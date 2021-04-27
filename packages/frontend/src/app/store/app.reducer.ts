@@ -1,5 +1,5 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
-import { App } from './app.interface';
+import { App } from '../app.interface';
 
 export const appSlice = createSlice<App, SliceCaseReducers<App>>({
   name: 'app',
