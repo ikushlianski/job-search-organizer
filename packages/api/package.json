@@ -87,8 +87,8 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "./**/*.ts": [
-      "tsc --noEmit",
+    "*.ts": [
+      "bash -c 'tsc --noEmit'",
       "npm run lint"
     ],
     "./**/*": "npm run test"
