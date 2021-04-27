@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from '../entities/user/user.slice';
+import { appReducer } from '../app/app.reducer';
+import { authReducer } from '../auth/auth.slice';
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    auth: authReducer,
+    app: appReducer,
   },
 });
+
+export type ApplicationState = ReturnType<typeof store.getState>;

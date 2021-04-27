@@ -8,9 +8,9 @@ import {
 import { Routing } from './routing.enum';
 import { IterationPage } from '../entities/iteration/iteration.page';
 import { OpportunityPage } from '../entities/opportunity/opportunity.page';
-import { SignUpPage } from '../auth/signup.page';
+import { SignUpPage } from '../auth/pages/signup.page';
 import { DashboardPage } from '../entities/dashboard/dashboard.page';
-import { SignInPage } from '../auth/signin.page';
+import { SignInPage } from '../auth/pages/signin.page';
 import { NotFoundPage } from '../common/pages/not-found.page';
 import { SuggestPage } from '../entities/suggest/suggest.page';
 
@@ -54,7 +54,7 @@ export const Routes: React.FC<Props> = ({ signedIn }) => {
             <SuggestPage />
           </Route>
           <Route path={Routing.catchAll}>
-            <NotFoundPage />
+            <Redirect to={Routing.signIn} />
           </Route>
         </Switch>
       )}
