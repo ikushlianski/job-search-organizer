@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Routing } from './routing.enum';
-import { IterationPage } from '../entities/iteration/iteration.page';
+import { IterationPage } from '../entities/iteration/ui/iteration.page';
 import { OpportunityPage } from '../entities/opportunity/opportunity.page';
 import { SignUpPage } from '../auth/ui/pages/signup.page';
 import { DashboardPage } from '../entities/dashboard/dashboard.page';
