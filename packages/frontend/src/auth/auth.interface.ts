@@ -4,8 +4,10 @@ export interface User {
 }
 
 export interface Auth {
+  email: string | null;
+  accessToken: string | null;
   authenticated: boolean;
-  accessToken: string;
+  authenticationMessage?: string | null;
 }
 
 export interface SignInParams {
