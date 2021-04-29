@@ -34,13 +34,19 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('/token')
   @HttpCode(200)
-  async token(@GetToken() accessToken: string): Promise<void> {
+  async token(
+    @GetToken() accessToken: string,
+  ): Promise<{ accessToken: string } | void> {
     try {
       const authorized = await this.authService.hasValidAccessToken(
         accessToken,
       );
 
-      if (authorized) return;
+      if (authorized) {
+        return {
+          accessToken,
+        };
+      }
     } catch (e) {
       console.error('AuthController -> token', e);
 
