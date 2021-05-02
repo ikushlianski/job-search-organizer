@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database/database.module';
-import { OpportunityController } from './opportunity.controller';
+import {
+  CurrentOpportunityController,
+  OpportunityController,
+} from './opportunity.controller';
 import { OpportunityService } from './opportunity.service';
 import { opportunityProviders } from './opportunity.providers';
 import { InterviewModule } from '../interview/interview.module';
@@ -22,7 +25,7 @@ import { IterationSettingsModule } from '../iteration-settings/iteration-setting
     ProjectModule,
     UserModule,
   ],
-  controllers: [OpportunityController],
+  controllers: [OpportunityController, CurrentOpportunityController],
   providers: [OpportunityService, ...opportunityProviders],
   exports: [OpportunityService, ...opportunityProviders],
 })

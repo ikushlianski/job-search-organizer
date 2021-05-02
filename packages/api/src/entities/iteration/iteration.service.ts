@@ -10,6 +10,7 @@ import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/
 import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
 import { Op } from 'sequelize';
 import { SEQUELIZE } from '../../database/database.constant';
+import { Opportunity } from '../opportunity/opportunity.model';
 
 @Injectable()
 export class IterationService {
@@ -32,8 +33,8 @@ export class IterationService {
   async findActiveUserIterations(accessToken: string): Promise<Iteration[]> {
     const user = await this.userService.verifyUserExists(accessToken);
 
-    return this.iterationRepository.findAll<Iteration>({
-      where: { user_id: user.id, final_date: { [Op.lte]: Date.now() } },
+    return Iteration.findAll<Iteration>({
+      where: { user_id: user.id, final_date: { [Op.gte]: new Date() } },
     });
   }
 

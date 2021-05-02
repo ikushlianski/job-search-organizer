@@ -4,6 +4,7 @@ import { Opportunity } from './opportunity.model';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
 import { CreateOpportunityDto } from './dto/create-opportunity.dto';
 import { IterationService } from '../iteration/iteration.service';
+import { UserService } from '../user/user.service';
 
 @Controller('iterations/:iterationId/opportunities')
 export class OpportunityController {
@@ -49,6 +50,30 @@ export class OpportunityController {
       );
     } catch (e) {
       console.error('OpportunityController -> createOpportunity', e);
+
+      // to be handled by error interceptor
+      throw e;
+    }
+  }
+}
+
+@Controller('current-opportunities')
+export class CurrentOpportunityController {
+  constructor(private opportunityService: OpportunityService) {}
+
+  @Get('/')
+  async findAllCurrentOpportunities(
+    @GetToken() accessToken: string,
+  ): Promise<Opportunity[]> {
+    try {
+      return await this.opportunityService.findAllCurrentOpportsByUserToken(
+        accessToken,
+      );
+    } catch (e) {
+      console.error(
+        'CurrentOpportunityController -> findAllCurrentOpportsByUserToken',
+        e,
+      );
 
       // to be handled by error interceptor
       throw e;

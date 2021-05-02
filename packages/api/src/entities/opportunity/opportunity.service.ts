@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { OPPORTUNITY_REPO } from './opportunity.constants';
 import { Opportunity } from './opportunity.model';
 import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
@@ -14,6 +14,8 @@ import { Project } from '../project/project.model';
 import { CompanyService } from '../company/company.service';
 import { ProjectService } from '../project/project.service';
 import { IterationService } from '../iteration/iteration.service';
+import { User } from '../user/user.model';
+import { UserOpportunityScore } from '../user-opportunity-score/user-opportunity-score.model';
 
 @Injectable()
 export class OpportunityService {
@@ -139,5 +141,29 @@ export class OpportunityService {
     }
 
     return opportunity.user_id;
+  }
+
+  async findAllCurrentOpportsByUserToken(
+    accessToken: string,
+  ): Promise<Opportunity[]> {
+    const currentIterations = await this.iterationService.findActiveUserIterations(
+      accessToken,
+    );
+
+    const iterationIds = currentIterations.map((it) => it.id);
+
+    const iterations = await Iteration.findAll({
+      where: {
+        id: iterationIds,
+      },
+      include: [
+        {
+          model: Opportunity,
+          include: [Company, Project, UserOpportunityScore],
+        },
+      ],
+    });
+
+    return iterations.flatMap((iteration) => iteration.opportunities);
   }
 }
