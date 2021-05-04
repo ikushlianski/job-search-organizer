@@ -13,8 +13,6 @@ export const CurrentOppsController: React.FC<Props> = ({ render }) => {
   const dispatch = useDispatch();
   const accessToken = useSelector(getUserToken);
 
-  console.log('accessToken', accessToken);
-
   const opportunitiesState = useSelector(selectMyCurrentOpportunities);
 
   React.useEffect(() => {

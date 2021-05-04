@@ -41,9 +41,10 @@ export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
             <Route exact path={Routing.currentOpportunities}>
               <CurrentOpportunitiesPage />
             </Route>
-            {/*<Route exact path={Routing.singleOpportunityDetails}>*/}
-            {/*  <SingleOpportunityDetailsPage />*/}
-            {/*</Route>*/}
+            <Route exact path={Routing.singleOpportunityDetails}>
+              {/*<SingleOpportunityDetailsPage />*/}
+              <div>HEEEEEEEE</div>
+            </Route>
             {/*<Route exact path={Routing.interviews}>*/}
             {/*  <InterviewsPage />*/}
             {/*</Route>*/}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { OpportunityItemState } from '../../opportunity.interface';
 import { Table } from 'evergreen-ui';
 
@@ -7,6 +8,16 @@ interface Props {
 }
 
 export const OpportunitiesTable: React.FC<Props> = ({ opportunities }) => {
+  const sortedOpportunities = [...opportunities].sort((opp1, opp2) => {
+    if (opp2.userOpportunityScore?.score && opp1.userOpportunityScore?.score) {
+      return (
+        opp2.userOpportunityScore?.score - opp1.userOpportunityScore?.score
+      );
+    }
+
+    return 1;
+  });
+
   return (
     <Table>
       <Table.Head>
@@ -18,9 +29,13 @@ export const OpportunitiesTable: React.FC<Props> = ({ opportunities }) => {
       </Table.Head>
 
       <Table.Body height={240}>
-        {opportunities.map((opportunity) => (
-          <Table.Row key={opportunity.id} isSelectable>
-            <Table.TextCell>{opportunity.name}</Table.TextCell>
+        {sortedOpportunities.map((opportunity) => (
+          <Table.Row key={opportunity.id}>
+            <Table.TextCell>
+              <Link to={`/opportunities/id/${opportunity.id}`}>
+                {opportunity.name}{' '}
+              </Link>
+            </Table.TextCell>
             <Table.TextCell>{opportunity.date}</Table.TextCell>
             <Table.TextCell>{opportunity.final_date}</Table.TextCell>
             <Table.TextCell>
