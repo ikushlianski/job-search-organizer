@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IterationState } from '../iteration.interface';
+import { IterationListState } from '../iteration.interface';
 import { iterationApiService } from '../../../api-client/services/iteration-api.service';
 
-export const getMyIterations = createAsyncThunk<
-  IterationState,
+export const getMyIterationsAction = createAsyncThunk<
+  IterationListState,
   string, // token
   {
-    rejectValue: IterationState;
+    rejectValue: IterationListState;
   }
 >(
   'iteration/getMine',

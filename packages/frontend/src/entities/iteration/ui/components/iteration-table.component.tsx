@@ -1,9 +1,9 @@
 import { Table } from 'evergreen-ui';
 import React from 'react';
-import { Iteration } from '../iteration.interface';
+import { IterationItemState } from '../../iteration.interface';
 
 interface Props {
-  iterations: Iteration[];
+  iterations: IterationItemState[];
 }
 
 export const IterationTable: React.FC<Props> = ({ iterations }) => {

@@ -5,4 +5,7 @@ export const authService = {
   setToken(token: string): void {
     return localStorage.setItem('accessToken', token);
   },
+  removeTokenFromLS(): void {
+    localStorage.removeItem('accessToken');
+  },
 };

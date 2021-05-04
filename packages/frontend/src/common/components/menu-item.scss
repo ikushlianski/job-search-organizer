@@ -1,9 +1,18 @@
 @import '../../variables';
 
 .MenuItem {
-  padding: 0 1rem;
-
-  a {
+  > a {
+    display: block;
+    padding: 0 1rem;
     color: whitesmoke;
+    text-decoration: none;
+    height: 3rem;
+    line-height: 3rem;
+
+      &.active {
+        box-shadow: inset 0px -5px 0 #2196f3;
+      }
   }
+
+
 }

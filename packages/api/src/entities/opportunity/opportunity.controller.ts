@@ -4,7 +4,6 @@ import { Opportunity } from './opportunity.model';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
 import { CreateOpportunityDto } from './dto/create-opportunity.dto';
 import { IterationService } from '../iteration/iteration.service';
-import { UserService } from '../user/user.service';
 
 @Controller('iterations/:iterationId/opportunities')
 export class OpportunityController {

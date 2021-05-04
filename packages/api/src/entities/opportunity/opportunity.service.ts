@@ -14,7 +14,6 @@ import { Project } from '../project/project.model';
 import { CompanyService } from '../company/company.service';
 import { ProjectService } from '../project/project.service';
 import { IterationService } from '../iteration/iteration.service';
-import { User } from '../user/user.model';
 import { UserOpportunityScore } from '../user-opportunity-score/user-opportunity-score.model';
 
 @Injectable()

@@ -49,5 +49,8 @@ else
   echo "${GREEN} ✔ Tests are fine"
 fi
 
+# end colored output
+echo "${NC}"
+
 git add -f $all_ts_files $all_tsx_files
 exit 0

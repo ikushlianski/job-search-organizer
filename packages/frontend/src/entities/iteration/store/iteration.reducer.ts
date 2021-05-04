@@ -1,10 +1,10 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
-import { IterationState } from '../iteration.interface';
-import { getMyIterations } from './iteration.action';
+import { IterationListState } from '../iteration.interface';
+import { getMyIterationsAction } from './iteration.action';
 
 export const iterationSlice = createSlice<
-  IterationState,
-  SliceCaseReducers<IterationState>
+  IterationListState,
+  SliceCaseReducers<IterationListState>
 >({
   name: 'iteration',
   initialState: {
@@ -17,24 +17,18 @@ export const iterationSlice = createSlice<
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMyIterations.pending, (state) => {
+      .addCase(getMyIterationsAction.pending, (state) => {
         state.loaded = false;
         state.loading = true;
       })
-      .addCase(
-        getMyIterations.fulfilled,
-        (
-          state,
-          { payload: { iterations, loaded, message, loading, hasError } },
-        ) => {
-          state.iterations = iterations;
-          state.loaded = loaded;
-          state.message = message;
-          state.loading = loading;
-          state.hasError = hasError;
-        },
-      )
-      .addCase(getMyIterations.rejected, (state, action) => {
+      .addCase(getMyIterationsAction.fulfilled, (state, { payload }) => {
+        state.iterations = payload.iterations;
+        state.loaded = payload.loaded;
+        state.message = payload.message;
+        state.loading = payload.loading;
+        state.hasError = payload.hasError;
+      })
+      .addCase(getMyIterationsAction.rejected, (state, action) => {
         state.iterations = [];
         state.loaded = true;
         state.message = action.payload?.message;

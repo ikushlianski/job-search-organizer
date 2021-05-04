@@ -10,7 +10,6 @@ import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/
 import { IterationSettingsService } from '../iteration-settings/iteration-settings.service';
 import { Op } from 'sequelize';
 import { SEQUELIZE } from '../../database/database.constant';
-import { Opportunity } from '../opportunity/opportunity.model';
 
 @Injectable()
 export class IterationService {

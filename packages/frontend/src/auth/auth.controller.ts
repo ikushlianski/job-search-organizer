@@ -5,14 +5,19 @@ import { checkIsLoggedIn } from './store/auth.action';
 import { authService } from './auth.service';
 import { isSignedIn } from './store/auth.selector';
 import { setAuthenticated } from './store/auth.reducer';
+import { AuthProps } from '../common/types/auth-props.interface';
 
 interface Props {
-  render: (signedIn: boolean) => JSX.Element;
+  render: (authProps: AuthProps) => React.ReactElement;
 }
 
 export const AuthController: React.FC<Props> = ({ render }) => {
   const signedIn = useSelector(isSignedIn);
   const dispatch = useDispatch();
+
+  const onSignOut = () => {
+    authService.removeTokenFromLS();
+  };
 
   React.useEffect(() => {
     const accessToken = authService.getToken();
@@ -30,5 +35,5 @@ export const AuthController: React.FC<Props> = ({ render }) => {
     }
   }, []);
 
-  return render(signedIn);
+  return render({ signedIn, onSignOut });
 };
