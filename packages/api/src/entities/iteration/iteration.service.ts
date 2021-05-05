@@ -29,6 +29,17 @@ export class IterationService {
     });
   }
 
+  async findIterationById(
+    accessToken: string,
+    iterationId: number,
+  ): Promise<Iteration | null> {
+    const user = await this.userService.verifyUserExists(accessToken);
+
+    return this.iterationRepository.findOne<Iteration>({
+      where: { user_id: user.id, id: iterationId },
+    });
+  }
+
   async findActiveUserIterations(accessToken: string): Promise<Iteration[]> {
     const user = await this.userService.verifyUserExists(accessToken);
 

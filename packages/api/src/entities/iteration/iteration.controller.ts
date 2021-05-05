@@ -31,6 +31,23 @@ export class IterationController {
     }
   }
 
+  @Get('/:iterationId')
+  async findIterationById(
+    @GetToken() accessToken: string,
+    @Param() { iterationId }: { iterationId: number },
+  ): Promise<Iteration | null> {
+    try {
+      return await this.iterationService.findIterationById(
+        accessToken,
+        iterationId,
+      );
+    } catch (e) {
+      console.error('IterationController -> findIterationById', e);
+
+      throw e;
+    }
+  }
+
   @Post('/')
   async createIteration(
     @Body() createIterationDto: CreateIterationDto,
