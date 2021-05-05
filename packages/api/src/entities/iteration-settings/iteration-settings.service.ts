@@ -5,6 +5,13 @@ import { CreateIterationSettingsDto } from './dto/create-iteration-settings.dto'
 import { IterationSettings } from './iteration-settings.model';
 import { CreateIterationQuestionsDto } from '../iteration-questions/dto/create-iteration-questions.dto';
 import { NoIterationAnswersError } from '../../errors/domain-errors/iteration/iteration.error';
+import { Iteration } from '../iteration/iteration.model';
+import { Question } from '../question/question.model';
+import { Answer } from '../answer/answer.model';
+import {
+  AnswersByQuestionId,
+  DetailedIterationSettingsDto,
+} from './dto/detailed-iter-settings.dto';
 
 @Injectable()
 export class IterationSettingsService {
@@ -30,27 +37,6 @@ export class IterationSettingsService {
     }
   }
 
-  // async update(
-  //   iterationId: number,
-  //   questionId: number,
-  //   { hr_visible }: CreateIterationQuestionsDto,
-  // ): Promise<IterationQuestion> {
-  //   const iterationQuestion = await IterationQuestionsService.findQuestionByIterId(
-  //     iterationId,
-  //     questionId,
-  //   );
-  //
-  //   if (!iterationQuestion) {
-  //     throw new EntityNotFoundError(`Iteration question with id ${questionId}`);
-  //   }
-  //
-  //   iterationQuestion.hr_visible = hr_visible;
-  //
-  //   await iterationQuestion.save();
-  //
-  //   return iterationQuestion;
-  // }
-
   async delete(
     iterationId: number,
     questionId: number,
@@ -67,6 +53,22 @@ export class IterationSettingsService {
     }
 
     return iterationSetting.destroy();
+  }
+
+  async getDetailedIterationSettings(
+    iterationId: number,
+  ): Promise<DetailedIterationSettingsDto> {
+    const iterationDetails = await IterationSettings.findAll({
+      where: { iteration_id: iterationId },
+      include: [Iteration, Question, Answer],
+    });
+
+    const allAnswerOptions = await Answer.findAll();
+
+    return IterationSettingsService.attachAllPossibleAnswers(
+      iterationDetails,
+      allAnswerOptions,
+    );
   }
 
   private static toIterationQuestions = (
@@ -102,5 +104,35 @@ export class IterationSettingsService {
         answer_id: answerId,
       },
     });
+  }
+
+  private static attachAllPossibleAnswers(
+    iterSettings: IterationSettings[],
+    answers: Answer[],
+  ) {
+    const allPossibleAnswersByQuestion = answers.reduce(
+      (acc: AnswersByQuestionId, answer: Answer) => {
+        const partialAnswer = {
+          id: answer.id,
+          answer_text: answer.answer_text,
+        };
+
+        if (!acc[answer.question_id]) {
+          acc[answer.question_id] = [partialAnswer];
+
+          return acc;
+        }
+
+        acc[answer.question_id].push(partialAnswer);
+
+        return acc;
+      },
+      {},
+    );
+
+    return {
+      iterationSettings: iterSettings,
+      answersByQuestion: allPossibleAnswersByQuestion,
+    };
   }
 }

@@ -5,13 +5,15 @@ import { OpportunityService } from '../opportunity/opportunity.service';
 import { CreateOpportunityAnswerDto } from './dto/create-opportunity-answer.dto';
 import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto';
 
-@Controller('iterations/:iterationId/opportunities/:opportunityId/answers')
+@Controller('opportunities/:opportunityId/qa')
 export class OpportunityAnswerController {
   constructor(
     private opportunityService: OpportunityService,
     private opportunityAnswerService: OpportunityAnswerService,
   ) {}
 
+  // todo return:
+  //  and opportunity-answers, including comment text from hr
   @Get('/')
   async getAllOpportunityAnswers(
     @Param()
