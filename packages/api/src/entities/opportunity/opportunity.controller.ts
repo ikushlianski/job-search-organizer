@@ -35,6 +35,31 @@ export class OpportunityController {
     }
   }
 
+  @Get('/:opportunityId')
+  async findOpportunityById(
+    @Param()
+    {
+      iterationId,
+      opportunityId,
+    }: {
+      iterationId: number;
+      opportunityId: number;
+    },
+  ): Promise<Opportunity> {
+    try {
+      await this.iterationService.verifyIterationExists(iterationId);
+
+      return await this.opportunityService.verifyOpportunityExists(
+        opportunityId,
+      );
+    } catch (e) {
+      console.error('OpportunityController -> findOpportunityById', e);
+
+      // to be handled by error interceptor
+      throw e;
+    }
+  }
+
   @Post('/')
   async createOpportunity(
     @Param() { iterationId }: { iterationId: number },
