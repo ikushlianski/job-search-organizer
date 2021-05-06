@@ -33,7 +33,7 @@ export const AuthController: React.FC<Props> = ({ render }) => {
     if (accessToken) {
       dispatch(checkIsLoggedIn(accessToken));
     }
-  }, []);
+  }, [dispatch]);
 
   return render({ signedIn, onSignOut });
 };

@@ -35,6 +35,7 @@
     "eslint": "7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "lerna": "^3.22.1",
     "lint-staged": "10.2.11",
     "parcel": "^2.0.0-beta.2",
