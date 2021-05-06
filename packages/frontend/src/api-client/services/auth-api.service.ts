@@ -5,7 +5,7 @@ export const authApiService = {
   checkIsLoggedIn: async function (
     accessToken: string,
   ): Promise<{ accessToken: string }> {
-    const result = await client({
+    const result = await client<{ accessToken: string }>({
       url: '/auth/token',
       method: 'post',
       headers: {
@@ -21,7 +21,7 @@ export const authApiService = {
   signIn: async function (
     credentials: SignInParams,
   ): Promise<{ accessToken: string }> {
-    const result = await client({
+    const result = await client<{ accessToken: string }>({
       url: '/auth/login',
       method: 'post',
       data: credentials,
@@ -34,12 +34,12 @@ export const authApiService = {
     credentials: SignInParams,
   ): Promise<{
     accessToken: string;
-    authenticationMessage: string;
+    authenticationMessage?: string;
     hasError: boolean;
     authenticated: boolean;
   }> {
     try {
-      const result = await client({
+      const result = await client<{ accessToken: string }>({
         url: '/auth/register',
         method: 'post',
         data: credentials,

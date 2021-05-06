@@ -1,10 +1,16 @@
 import { client } from '../http-client';
-import { IterationListState } from '../../entities/iteration/iteration.interface';
+import {
+  IterationItemState,
+  IterationListState,
+  IterationSetting,
+  IterationSettingsWithAnswers,
+} from '../../entities/iteration/iteration.interface';
+import { findActiveIterationId } from '../../entities/iteration/iteration.service';
 
 export const iterationApiService = {
   getMine: async function (accessToken: string): Promise<IterationListState> {
     try {
-      const result = await client({
+      const result = await client<IterationItemState[]>({
         url: '/iterations',
         method: 'get',
         headers: {
@@ -12,12 +18,15 @@ export const iterationApiService = {
         },
       });
 
+      const activeIterationId = findActiveIterationId(result.data);
+
       return {
         loaded: true,
         loading: false,
         message: '',
         iterations: result.data,
         hasError: false,
+        activeIterationId,
       };
     } catch (e) {
       return {
@@ -29,13 +38,14 @@ export const iterationApiService = {
       };
     }
   },
-  getIterationById: async function (
+
+  getIterationSettings: async function (
     accessToken: string,
     iterationId: number,
   ): Promise<IterationListState> {
     try {
-      const result = await client({
-        url: `/iterations/${iterationId}`,
+      const result = await client<IterationSettingsWithAnswers>({
+        url: `/iterations/${iterationId}/settings`,
         method: 'get',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -46,14 +56,15 @@ export const iterationApiService = {
         loaded: true,
         loading: false,
         message: '',
-        iterations: result.data,
+        iterations: [],
         hasError: false,
+        activeIterationSettings: result.data,
       };
     } catch (e) {
       return {
         loaded: true,
         loading: false,
-        message: `Could not fetch iteration with id ${iterationId}`,
+        message: `Could not fetch iteration settings`,
         iterations: [],
         hasError: true,
       };

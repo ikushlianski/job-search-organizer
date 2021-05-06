@@ -10,9 +10,9 @@ const axiosClient = axios.create({
 /**
  * Request Wrapper with default success/error actions
  */
-export const client = async function (
+export const client = async function <T>(
   options: AxiosRequestConfig,
-): Promise<AxiosResponse> {
+): Promise<AxiosResponse<T>> {
   const onSuccess = function (response: AxiosResponse) {
     console.debug('Request Successful!', response);
 
