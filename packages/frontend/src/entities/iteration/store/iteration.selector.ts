@@ -1,5 +1,13 @@
-import { IterationItemState } from '../iteration.interface';
+import {
+  IterationItemState,
+  IterationListState,
+  IterationSettingsWithAnswers,
+} from '../iteration.interface';
 import { ApplicationState } from '../../../store/app.store';
+
+export const selectUserIterationState = (
+  state: ApplicationState,
+): IterationListState => state.iteration;
 
 export const selectUserIterations = (
   state: ApplicationState,
@@ -13,4 +21,16 @@ export const selectUserIterationById = (iterationId: number) => (
   state: ApplicationState,
 ): IterationItemState | undefined => {
   return state.iteration.iterations.find((it) => it.id === iterationId);
+};
+
+export const selectActiveIterationId = (
+  state: ApplicationState,
+): number | undefined => {
+  return state.iteration.activeIterationId;
+};
+
+export const selectIterationSettings = (
+  state: ApplicationState,
+): IterationSettingsWithAnswers | undefined => {
+  return state.iteration.activeIterationSettings;
 };

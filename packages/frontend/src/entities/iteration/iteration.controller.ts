@@ -2,7 +2,7 @@ import React from 'react';
 import { IterationItemState } from './iteration.interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserToken } from '../../auth/store/auth.selector';
-import { getMyIterationsAction } from './store/iteration.action';
+import { fetchMyIterations } from './store/iteration.action';
 import { selectUserIterations } from './store/iteration.selector';
 
 interface Props {
@@ -28,8 +28,8 @@ export const IterationController: React.FC<Props> = ({ render }) => {
   const iterations = useSelector(selectUserIterations);
 
   React.useEffect(() => {
-    if (accessToken) dispatch(getMyIterationsAction(accessToken));
-  }, [accessToken]);
+    if (accessToken) dispatch(fetchMyIterations(accessToken));
+  }, [accessToken, dispatch]);
 
   return render({ iterations, onIterationStart });
 };

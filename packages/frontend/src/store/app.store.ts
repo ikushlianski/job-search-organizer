@@ -9,7 +9,7 @@ export const store = configureStore({
     auth: authReducer,
     app: appReducer,
     iteration: iterationReducer,
-    opportunityCurrent: currentOppsReducer,
+    currentOpportunities: currentOppsReducer,
   },
 });
 

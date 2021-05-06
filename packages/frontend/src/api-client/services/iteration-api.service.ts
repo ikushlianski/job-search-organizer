@@ -2,7 +2,6 @@ import { client } from '../http-client';
 import {
   IterationItemState,
   IterationListState,
-  IterationSetting,
   IterationSettingsWithAnswers,
 } from '../../entities/iteration/iteration.interface';
 import { findActiveIterationId } from '../../entities/iteration/iteration.service';
@@ -19,6 +18,8 @@ export const iterationApiService = {
       });
 
       const activeIterationId = findActiveIterationId(result.data);
+
+      console.log('--------> activeIterationId', activeIterationId);
 
       return {
         loaded: true,

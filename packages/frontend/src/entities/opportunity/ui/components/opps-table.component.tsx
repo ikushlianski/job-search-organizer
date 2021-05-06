@@ -33,7 +33,7 @@ export const OpportunitiesTable: React.FC<Props> = ({ opportunities }) => {
           <Table.Row key={opportunity.id}>
             <Table.TextCell>
               <Link to={`/opportunities/id/${opportunity.id}`}>
-                {opportunity.name}{' '}
+                {opportunity.name || opportunity.project?.name || 'N/A'}{' '}
               </Link>
             </Table.TextCell>
             <Table.TextCell>{opportunity.date}</Table.TextCell>

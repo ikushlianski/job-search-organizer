@@ -37,11 +37,12 @@ export const opportunityApiService = {
   },
   async getOpportunityDetails(
     accessToken: string,
+    iterationId: number,
     opportunityId: number,
   ): Promise<OpportunityItemState | LoadingProps> {
     try {
       const result = await client<OpportunityItemState>({
-        url: `/opportunity/${opportunityId}`,
+        url: `/iterations/${iterationId}/opportunities/${opportunityId}`,
         method: 'get',
         headers: {
           Authorization: `Bearer ${accessToken}`,

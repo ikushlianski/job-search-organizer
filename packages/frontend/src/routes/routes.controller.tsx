@@ -8,12 +8,12 @@ import {
 import { Routing } from './routing.enum';
 import { IterationsPage } from '../entities/iteration/ui/pages/iterations.page';
 import { SignUpPage } from '../auth/ui/pages/signup.page';
-import { DashboardPage } from '../entities/dashboard/dashboard.page';
 import { SignInPage } from '../auth/ui/pages/signin.page';
 import { NotFoundPage } from '../common/pages/not-found.page';
 import { SuggestPage } from '../entities/suggest/suggest.page';
 import { CurrentOpportunitiesPage } from '../entities/opportunity/ui/pages/current-opps.page';
 import { Layout } from '../common/components/layout.component';
+import { SingleOpportunityDetailsPage } from '../entities/opportunity/ui/pages/single-opp.page';
 
 interface Props {
   signedIn: boolean;
@@ -27,7 +27,8 @@ export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
         {signedIn ? (
           <Switch>
             <Route exact path={Routing.home}>
-              <DashboardPage />
+              {/*<DashboardPage />*/}
+              <CurrentOpportunitiesPage />
             </Route>
             <Route exact path={Routing.iterations}>
               <IterationsPage />
@@ -42,8 +43,7 @@ export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
               <CurrentOpportunitiesPage />
             </Route>
             <Route exact path={Routing.singleOpportunityDetails}>
-              {/*<SingleOpportunityDetailsPage />*/}
-              <div>HEEEEEEEE</div>
+              <SingleOpportunityDetailsPage />
             </Route>
             {/*<Route exact path={Routing.interviews}>*/}
             {/*  <InterviewsPage />*/}

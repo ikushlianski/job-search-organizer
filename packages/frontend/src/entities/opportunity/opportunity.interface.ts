@@ -15,4 +15,13 @@ export interface OpportunityItemState extends LoadingProps {
   company?: Company;
   userOpportunityScore?: UserOpportunityScore;
   project?: Project;
+  answers: OpportunityAnswer[];
+}
+
+export interface OpportunityAnswer {
+  question: string;
+  questionId: number;
+  answer: string[];
+  answerIds: number[];
+  comment: string;
 }
