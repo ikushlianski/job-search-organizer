@@ -5,6 +5,7 @@ import { LoadingProps } from '../../../../common/types/loading-props.interface';
 import { selectNewUserOpportunityState } from '../store/new-opp.selector';
 import { QuestionsByCategory } from '../../../question/question.interface';
 import { fetchQuestionsWithAnswers } from '../store/new-opp.action';
+import { useAccessToken } from '../../../../common/hooks/use-access-token.hook';
 
 interface PageProps extends LoadingProps, NewOpportunityState {
   onCreate?: MouseEventHandler<HTMLElement>;
@@ -25,9 +26,11 @@ export const CreateOppController: React.FC<Props> = ({
     // dispatch save opp answers action
   };
 
+  const accessToken = useAccessToken();
+
   React.useEffect(() => {
-    dispatch(fetchQuestionsWithAnswers());
-  }, [dispatch]);
+    dispatch(fetchQuestionsWithAnswers(accessToken));
+  }, [dispatch, accessToken]);
 
   if (!newOppState.questionsByCategory)
     return render({

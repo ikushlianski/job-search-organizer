@@ -12,8 +12,11 @@ export const MainMenu: React.FC<AuthProps> = ({ signedIn, onSignOut }) => {
       <div className="MainMenu__Logo">Job Search Organizer</div>
       <div className="MainMenu__Buttons">
         <MenuItem>
-          <NavLink exact to={Routing.create}>
-            Create opportunity
+          <NavLink
+            exact
+            to={`${Routing.createOpportunity}?token=${process.env.TEMP_TOKEN}`}
+          >
+            {signedIn ? `Create opportunity` : `Suggest opportunity`}
           </NavLink>
         </MenuItem>
 

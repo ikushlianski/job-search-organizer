@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .Layout {
     display: flex;
     min-height: 100vh;
@@ -5,8 +7,16 @@
 }
 
 .Layout__Footer {
-    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
     text-align: center;
-    background: dimgrey;
+    background: $project-grey;
+    color: white;
+}
+
+.Footer__Author, .Footer__Link {
     color: white;
 }

@@ -63,10 +63,13 @@ export const opportunityApiService = {
       answers: result.data.answers,
     };
   },
-  async getAllQuestions(): Promise<QuestionsByCategory> {
+  async getAllQuestions(accessToken: string): Promise<QuestionsByCategory> {
     const result = await client<QuestionsByCategory>({
       url: `/questions?byCategory=true&answers=true`,
       method: 'get',
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
     });
 
     return result.data;

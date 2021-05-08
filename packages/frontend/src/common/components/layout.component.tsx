@@ -17,7 +17,18 @@ export const Layout: React.FC<Props> = ({ children, onSignOut, signedIn }) => {
     <div className="Layout">
       {!loading && <MainMenu onSignOut={onSignOut} signedIn={signedIn} />}
       {children}
-      <div className="Layout__Footer">This is a footer</div>
+      <div className="Layout__Footer">
+        <p className="Footer__Author">By Ilya Kushlianski</p>
+        <div className="Footer__Links">
+          <a className="Footer__Link" href="https://ilya.online">
+            ilya.online
+          </a>
+          {'  '}
+          <a className="Footer__Link" href="https://github.com/ikushlianski">
+            GitHub
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ export const ThankYouAnyway: React.FC<Props> = ({
         Thank you anyway for your time! Hope you will have something for me in
         the future.
         <p>
-          If you have, please use this link to suggest a new opportunity:
+          If you have, please use this link to suggest a new opportunity:{' '}
           <a href={link}>{link}</a>.
         </p>
         I will be notified via email

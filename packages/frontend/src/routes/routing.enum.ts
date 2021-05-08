@@ -7,5 +7,5 @@ export enum Routing {
   currentOpportunities = '/opportunities/current',
   signIn = '/sign-in',
   signUp = '/sign-up',
-  create = '/opportunities/create',
+  createOpportunity = '/opportunities/create',
 }

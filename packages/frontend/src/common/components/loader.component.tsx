@@ -3,7 +3,7 @@ import { Spinner } from 'evergreen-ui';
 
 export const Loader = (): React.ReactElement => {
   const centeredStyle = {
-    position: 'fixed',
+    position: 'absolute',
     display: 'flex',
     top: 0,
     left: 0,

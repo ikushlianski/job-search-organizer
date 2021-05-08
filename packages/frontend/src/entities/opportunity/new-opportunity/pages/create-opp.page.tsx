@@ -1,12 +1,11 @@
 import React from 'react';
-import { Loader } from '../../../../common/components/loader.component';
+import { Button, Pane } from 'evergreen-ui';
 import { CreateOppController } from '../controller/new-opp.controller';
 import { QuestionBlock } from '../components/question-block.component';
-import { Button, Pane } from 'evergreen-ui';
-
-import '../../../../common/pages/page.scss';
 import { PreFillSteps } from '../components/pre-fill-steps.component';
 import { ThankYouAnyway } from '../components/thanks-anyway.component';
+import { Loader } from '../../../../common/components/loader.component';
+import '../../../../common/pages/page.scss';
 
 export const CreateOpportunityPage: React.FC = () => {
   const suggestOpportunityLink =
@@ -15,7 +14,7 @@ export const CreateOpportunityPage: React.FC = () => {
   const [prefillStepsDone, setPrefillStepsDone] = React.useState<
     boolean | null
   >(null);
-  // todo if signed in, get accessToken and load personal iteration settings, which will decorate this opportunity with -1 and +1 icons (or green/red flags)
+  // todo if signed in, get accessToken and load personal iteration settings, which will show HR my reaction to each particular point they pick
 
   const onPrefillStepsDone = (status: boolean) => {
     if (status) {
@@ -78,7 +77,11 @@ export const CreateOpportunityPage: React.FC = () => {
                     >
                       Save
                     </Button>
-                    {hasError && message}
+                    {hasError && (
+                      <div className="CreateOpportunityPage__ErrorMessage">
+                        {message}
+                      </div>
+                    )}
                   </form>
                 )}
               </>

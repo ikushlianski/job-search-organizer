@@ -5,13 +5,15 @@ import { NewOpportunityState } from '../new-opp.interface';
 
 export const fetchQuestionsWithAnswers = createAsyncThunk<
   NewOpportunityState,
-  undefined,
+  string,
   {
     rejectValue: LoadingProps;
   }
->('opportunity/getAllQuestions', async (payload, { rejectWithValue }) => {
+>('opportunity/getAllQuestions', async (accessToken, { rejectWithValue }) => {
   try {
-    const allQuestions = await opportunityApiService.getAllQuestions();
+    const allQuestions = await opportunityApiService.getAllQuestions(
+      accessToken,
+    );
 
     return {
       loading: false,

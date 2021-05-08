@@ -29,34 +29,24 @@ export const Routes: React.FC<Props> = ({ onSignOut }) => {
         {signedIn ? (
           <Switch>
             <Route exact path={Routing.home}>
-              {/*<DashboardPage />*/}
               <CurrentOpportunitiesPage />
             </Route>
             <Route exact path={Routing.iterations}>
               <IterationsPage />
             </Route>
-            {/*<Route exact path={Routing.iterationDetails}>*/}
-            {/*  <IterationDetailsPage />*/}
-            {/*</Route>*/}
-            {/*<Route exact path={Routing.opportunitiesByIteration}>*/}
-            {/*  <OpportunitiesByIterationPage />*/}
-            {/*</Route>*/}
             <Route exact path={Routing.currentOpportunities}>
               <CurrentOpportunitiesPage />
             </Route>
             <Route exact path={Routing.singleOpportunityDetails}>
               <SingleOpportunityDetailsPage />
             </Route>
-            {/*<Route exact path={Routing.interviews}>*/}
-            {/*  <InterviewsPage />*/}
-            {/*</Route>*/}
             <Route exact path={Routing.signUp}>
               <Redirect to={Routing.home} />
             </Route>
             <Route exact path={Routing.signIn}>
               <Redirect to={Routing.home} />
             </Route>
-            <Route exact path={Routing.create}>
+            <Route exact path={Routing.createOpportunity}>
               <CreateOpportunityPage />
             </Route>
             <Route path={Routing.catchAll}>
@@ -74,7 +64,7 @@ export const Routes: React.FC<Props> = ({ onSignOut }) => {
             <Route exact path={Routing.singleOpportunityDetails}>
               <SingleOpportunityDetailsPage />
             </Route>
-            <Route exact path={Routing.create}>
+            <Route exact path={Routing.createOpportunity}>
               <CreateOpportunityPage />
             </Route>
             <Route path={Routing.catchAll}>

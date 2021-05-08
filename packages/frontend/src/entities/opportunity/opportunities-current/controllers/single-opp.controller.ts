@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserToken } from '../../../../auth/store/auth.selector';
 import { OpportunityId } from '../../../../routes/routes.interface';
 import { OpportunityItemState } from '../current-opps.interface';
 import { getOpportunityDetails } from '../store/current-opps.action';
@@ -13,6 +12,7 @@ import {
 } from '../../../iteration/store/iteration.action';
 import { LoadingProps } from '../../../../common/types/loading-props.interface';
 import { IterationSettingsWithAnswers } from '../../../iteration/iteration.interface';
+import { useAccessToken } from '../../../../common/hooks/use-access-token.hook';
 
 interface Props {
   render: (pageData: SingleOpptyPageData) => JSX.Element;
@@ -28,7 +28,7 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
   const { opportunityId } = useParams<OpportunityId>();
 
   const dispatch = useDispatch();
-  const accessToken = useSelector(getUserToken);
+  const accessToken = useAccessToken();
 
   const {
     loaded,
@@ -43,7 +43,7 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
   );
 
   React.useEffect(() => {
-    if (!activeIterationId && accessToken) {
+    if (!activeIterationId) {
       // get iteration list and activeIterationId
       dispatch(fetchMyIterations(accessToken));
 
@@ -53,7 +53,6 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
     console.log('activeIterationId', activeIterationId);
 
     if (!activeIterationSettings && accessToken && activeIterationId) {
-      console.log('use effect 22222222222');
       console.log('activeIterationSettings', activeIterationSettings);
       console.log('activeIterationId', activeIterationId);
 
