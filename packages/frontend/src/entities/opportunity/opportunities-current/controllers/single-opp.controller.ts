@@ -1,18 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserToken } from '../../../auth/store/auth.selector';
-import { OpportunityId } from '../../../routes/routes.interface';
-import { OpportunityItemState } from '../opportunity.interface';
+import { getUserToken } from '../../../../auth/store/auth.selector';
+import { OpportunityId } from '../../../../routes/routes.interface';
+import { OpportunityItemState } from '../current-opps.interface';
 import { getOpportunityDetails } from '../store/current-opps.action';
 import { selectOpportunityDetails } from '../store/current-opps.selector';
-import { selectUserIterationState } from '../../iteration/store/iteration.selector';
+import { selectUserIterationState } from '../../../iteration/store/iteration.selector';
 import {
   fetchMyCurrentIterationSettings,
   fetchMyIterations,
-} from '../../iteration/store/iteration.action';
-import { LoadingProps } from '../../../common/types/loading-props.interface';
-import { IterationSettingsWithAnswers } from '../../iteration/iteration.interface';
+} from '../../../iteration/store/iteration.action';
+import { LoadingProps } from '../../../../common/types/loading-props.interface';
+import { IterationSettingsWithAnswers } from '../../../iteration/iteration.interface';
 
 interface Props {
   render: (pageData: SingleOpptyPageData) => JSX.Element;
@@ -44,8 +44,7 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
 
   React.useEffect(() => {
     if (!activeIterationId && accessToken) {
-      console.log('use effect 1');
-
+      // get iteration list and activeIterationId
       dispatch(fetchMyIterations(accessToken));
 
       return;
@@ -54,7 +53,7 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
     console.log('activeIterationId', activeIterationId);
 
     if (!activeIterationSettings && accessToken && activeIterationId) {
-      console.log('use effect 2');
+      console.log('use effect 22222222222');
       console.log('activeIterationSettings', activeIterationSettings);
       console.log('activeIterationId', activeIterationId);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserToken } from '../../../auth/store/auth.selector';
-import { OpportunityListState } from '../opportunity.interface';
+import { getUserToken } from '../../../../auth/store/auth.selector';
+import { OpportunityListState } from '../current-opps.interface';
 import { selectMyCurrentOpportunities } from '../store/current-opps.selector';
 import { getMyCurrentOpportunities } from '../store/current-opps.action';
 

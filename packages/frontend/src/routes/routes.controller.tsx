@@ -10,11 +10,11 @@ import { IterationsPage } from '../entities/iteration/ui/pages/iterations.page';
 import { SignUpPage } from '../auth/ui/pages/signup.page';
 import { SignInPage } from '../auth/ui/pages/signin.page';
 import { NotFoundPage } from '../common/pages/not-found.page';
-import { CurrentOpportunitiesPage } from '../entities/opportunity/ui/pages/current-opps.page';
+import { CurrentOpportunitiesPage } from '../entities/opportunity/opportunities-current/pages/current-opps.page';
 import { Layout } from '../common/components/layout.component';
-import { SingleOpportunityDetailsPage } from '../entities/opportunity/ui/pages/single-opp.page';
+import { SingleOpportunityDetailsPage } from '../entities/opportunity/opportunities-current/pages/single-opp.page';
 import { AuthContext } from '../auth/auth.context';
-import { CreateOpportunityPage } from '../entities/opportunity/ui/pages/create-opp.page';
+import { CreateOpportunityPage } from '../entities/opportunity/new-opportunity/pages/create-opp.page';
 
 interface Props {
   onSignOut: () => void;

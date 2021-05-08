@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { OpportunityItemState } from '../../opportunity.interface';
+import { OpportunityItemState } from '../current-opps.interface';
 import { Table } from 'evergreen-ui';
 
 interface Props {

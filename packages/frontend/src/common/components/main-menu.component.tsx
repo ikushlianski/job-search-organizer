@@ -7,21 +7,17 @@ import { AuthProps } from '../types/auth-props.interface';
 import './main-menu.scss';
 
 export const MainMenu: React.FC<AuthProps> = ({ signedIn, onSignOut }) => {
-  if (!signedIn) return null;
-
   return (
     <div className="MainMenu">
+      <MenuItem>
+        <NavLink exact to={Routing.create}>
+          Create opportunity
+        </NavLink>
+      </MenuItem>
+
       {signedIn && (
         <MenuItem>
           <NavLink exact to={Routing.home}>
-            Dashboard
-          </NavLink>
-        </MenuItem>
-      )}
-
-      {signedIn && (
-        <MenuItem>
-          <NavLink exact to={Routing.currentOpportunities}>
             My opportunities
           </NavLink>
         </MenuItem>
@@ -44,7 +40,7 @@ export const MainMenu: React.FC<AuthProps> = ({ signedIn, onSignOut }) => {
       ) : (
         <MenuItem>
           <NavLink exact to={Routing.signIn}>
-            Sign In
+            Sign In/Sign Up
           </NavLink>
         </MenuItem>
       )}

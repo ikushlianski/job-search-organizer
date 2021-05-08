@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { opportunityApiService } from '../../../api-client/services/opportunity-api.service';
+import { opportunityApiService } from '../../../../api-client/services/opportunity-api.service';
 import {
   OpportunityItemState,
   OpportunityListState,
-} from '../opportunity.interface';
-import { LoadingProps } from '../../../common/types/loading-props.interface';
+} from '../current-opps.interface';
+import { LoadingProps } from '../../../../common/types/loading-props.interface';
+import { QuestionsByCategory } from '../../../question/question.interface';
 
 export const getMyCurrentOpportunities = createAsyncThunk<
   OpportunityListState,
@@ -31,21 +32,21 @@ export const getMyCurrentOpportunities = createAsyncThunk<
 });
 
 export const getOpportunityDetails = createAsyncThunk<
-  OpportunityItemState | LoadingProps,
-  { accessToken: string; opportunityId: number; iterationId: number }, // token
+  OpportunityItemState,
+  { accessToken: string; opportunityId: number; iterationId: number },
   {
-    rejectValue: OpportunityItemState | LoadingProps;
+    rejectValue: LoadingProps;
   }
 >(
   'opportunity/getOne',
   async ({ accessToken, opportunityId, iterationId }, { rejectWithValue }) => {
-    const currentOppsState = await opportunityApiService.getOpportunityDetails(
-      accessToken,
-      iterationId,
-      opportunityId,
-    );
-
-    if (currentOppsState.hasError) {
+    try {
+      return await opportunityApiService.getOpportunityDetails(
+        accessToken,
+        iterationId,
+        opportunityId,
+      );
+    } catch (e) {
       return rejectWithValue({
         loaded: true,
         loading: false,
@@ -53,7 +54,5 @@ export const getOpportunityDetails = createAsyncThunk<
         hasError: true,
       });
     }
-
-    return currentOppsState;
   },
 );

@@ -1,14 +1,14 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
-import { getMyCurrentOpportunities } from './current-opps.action';
-import { OpportunityListState } from '../opportunity.interface';
+
+import { NewOpportunityState } from '../new-opp.interface';
+import { fetchQuestionsWithAnswers } from './new-opp.action';
 
 export const currentOpportunitiesSlice = createSlice<
-  OpportunityListState,
-  SliceCaseReducers<OpportunityListState>
+  NewOpportunityState,
+  SliceCaseReducers<NewOpportunityState>
 >({
-  name: 'currentOpportunities',
+  name: 'newOpportunity',
   initialState: {
-    opportunities: [],
     loading: false,
     loaded: false,
     hasError: false,
@@ -17,19 +17,15 @@ export const currentOpportunitiesSlice = createSlice<
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMyCurrentOpportunities.pending, (state) => {
-        state.loaded = false;
-        state.loading = true;
-      })
-      .addCase(getMyCurrentOpportunities.fulfilled, (state, { payload }) => {
-        state.opportunities = payload.opportunities;
+      .addCase(fetchQuestionsWithAnswers.fulfilled, (state, { payload }) => {
+        state.questionsByCategory = payload.questionsByCategory;
+
         state.loaded = payload.loaded;
         state.loading = payload.loading;
         state.message = payload.message;
         state.hasError = payload.hasError;
       })
-      .addCase(getMyCurrentOpportunities.rejected, (state, action) => {
-        state.opportunities = [];
+      .addCase(fetchQuestionsWithAnswers.rejected, (state, action) => {
         state.loaded = true;
         state.message = action.payload?.message;
         state.loading = false;
@@ -41,4 +37,4 @@ export const currentOpportunitiesSlice = createSlice<
 // Action creators are generated for each case reducer function
 // export const {} = currentOpportunitiesSlice.actions;
 
-export const currentOppsReducer = currentOpportunitiesSlice.reducer;
+export const newOpportunityReducer = currentOpportunitiesSlice.reducer;

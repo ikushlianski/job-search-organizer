@@ -2,8 +2,8 @@ import {
   OpportunityAnswer,
   OpportunityItemState,
   OpportunityListState,
-} from '../opportunity.interface';
-import { ApplicationState } from '../../../store/app.store';
+} from '../current-opps.interface';
+import { ApplicationState } from '../../../../store/app.store';
 
 export const selectMyCurrentOpportunities = (
   state: ApplicationState,

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Loader } from '../../../../common/components/loader.component';
 import { AuthContext } from '../../../../auth/auth.context';
-import { CreateOppController } from '../../controllers/new-opp.controller';
+import { CreateOppController } from '../controller/new-opp.controller';
 import { QuestionBlock } from '../components/question-block.component';
 import { Button } from 'evergreen-ui';
+
+import '../../../../common/pages/page.scss';
 
 export const CreateOpportunityPage: React.FC = () => {
   const signedIn = React.useContext(AuthContext);
@@ -15,12 +17,11 @@ export const CreateOpportunityPage: React.FC = () => {
       render={({
         questionsByCategory,
         loading,
-        loaded,
         hasError,
         onCreate,
         message,
       }) => {
-        const questionnaire = Object.entries(questionsByCategory).map(
+        const questionnaire = Object.entries(questionsByCategory || []).map(
           ([categoryName, categoryQuestions]) => {
             return (
               <QuestionBlock
@@ -31,20 +32,22 @@ export const CreateOpportunityPage: React.FC = () => {
           },
         );
 
-        return loading ? (
-          <Loader />
-        ) : (
-          <div className="CreateOpportunity">
-            <form className="CreateOpportunity__Form">
-              {questionnaire}
-              <Button
-                className="CreateOpportunity__FormSubmit"
-                onClick={onCreate}
-              >
-                Save
-              </Button>
-              {hasError && message}
-            </form>
+        return (
+          <div className="Page CreateOpportunityPage">
+            {loading ? (
+              <Loader />
+            ) : (
+              <form className="CreateOpportunity__Form">
+                {questionnaire}
+                <Button
+                  className="CreateOpportunity__FormSubmit"
+                  onClick={onCreate}
+                >
+                  Save
+                </Button>
+                {hasError && message}
+              </form>
+            )}
           </div>
         );
       }}

@@ -4,6 +4,8 @@ import { Routes } from '../../../routes/routes.controller';
 import { AuthController } from '../../../auth/auth.controller';
 import { isLoading } from '../../store/app.selector';
 import { Loader } from '../../../common/components/loader.component';
+import { AuthContext } from '../../../auth/auth.context';
+
 import './app.scss';
 
 export const App = (): React.ReactElement => {
@@ -13,7 +15,9 @@ export const App = (): React.ReactElement => {
     <>
       <AuthController
         render={({ signedIn, onSignOut }) => (
-          <Routes signedIn={signedIn} onSignOut={onSignOut} />
+          <AuthContext.Provider value={signedIn}>
+            <Routes onSignOut={onSignOut} />
+          </AuthContext.Provider>
         )}
       />
       {loading && <Loader />}

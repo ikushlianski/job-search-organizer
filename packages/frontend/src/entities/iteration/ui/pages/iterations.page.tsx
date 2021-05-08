@@ -11,7 +11,7 @@ export const IterationsPage: React.FC = () => {
     <IterationController
       render={({ iterations, onIterationStart }) => {
         return (
-          <div className="IterationsPage">
+          <div className="Page IterationsPage">
             {iterations.length > 0 ? (
               <IterationTable iterations={iterations} />
             ) : (

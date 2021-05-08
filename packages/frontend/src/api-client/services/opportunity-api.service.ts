@@ -2,8 +2,8 @@ import { client } from '../http-client';
 import {
   OpportunityItemState,
   OpportunityListState,
-} from '../../entities/opportunity/opportunity.interface';
-import { LoadingProps } from '../../common/types/loading-props.interface';
+} from '../../entities/opportunity/opportunities-current/current-opps.interface';
+import { QuestionsByCategory } from '../../entities/question/question.interface';
 
 export const opportunityApiService = {
   async getCurrentOpportunities(
@@ -39,37 +39,36 @@ export const opportunityApiService = {
     accessToken: string,
     iterationId: number,
     opportunityId: number,
-  ): Promise<OpportunityItemState | LoadingProps> {
-    try {
-      const result = await client<OpportunityItemState>({
-        url: `/iterations/${iterationId}/opportunities/${opportunityId}`,
-        method: 'get',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+  ): Promise<OpportunityItemState> {
+    const result = await client<OpportunityItemState>({
+      url: `/iterations/${iterationId}/opportunities/${opportunityId}`,
+      method: 'get',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-      return {
-        loaded: true,
-        loading: false,
-        message: '',
-        hasError: false,
-        id: result.data.id,
-        name: result.data.name,
-        date: result.data.date,
-        final_date: result.data.final_date,
-        company: result.data.company,
-        userOpportunityScore: result.data.userOpportunityScore,
-        project: result.data.project,
-        answers: result.data.answers,
-      };
-    } catch (e) {
-      return {
-        loaded: true,
-        loading: false,
-        message: `Could not fetch opportunity details for opportunity with id ${opportunityId}`,
-        hasError: true,
-      };
-    }
+    return {
+      loaded: true,
+      loading: false,
+      message: '',
+      hasError: false,
+      id: result.data.id,
+      name: result.data.name,
+      date: result.data.date,
+      final_date: result.data.final_date,
+      company: result.data.company,
+      userOpportunityScore: result.data.userOpportunityScore,
+      project: result.data.project,
+      answers: result.data.answers,
+    };
+  },
+  async getAllQuestions(): Promise<QuestionsByCategory> {
+    const result = await client<QuestionsByCategory>({
+      url: `/questions?byCategory=true&answers=true`,
+      method: 'get',
+    });
+
+    return result.data;
   },
 };
