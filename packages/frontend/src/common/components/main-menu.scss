@@ -3,5 +3,17 @@
 .MainMenu {
   background: $color-main-blue;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MainMenu__Logo {
+  color: white;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.MainMenu__Buttons {
+  display: flex;
 }

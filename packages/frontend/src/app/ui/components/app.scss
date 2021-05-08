@@ -2,12 +2,14 @@
 
 html {
     min-height: 100vh;
+    margin-left: calc(100vw - 100%);
 }
 
 body {
     min-height: 100vh;
     max-width: $default-desktop-width;
     margin: 0 auto;
+    font-family: 'Arial', serif;
 }
 
 #root {

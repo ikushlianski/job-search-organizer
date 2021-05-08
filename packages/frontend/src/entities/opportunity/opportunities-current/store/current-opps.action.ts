@@ -5,7 +5,6 @@ import {
   OpportunityListState,
 } from '../current-opps.interface';
 import { LoadingProps } from '../../../../common/types/loading-props.interface';
-import { QuestionsByCategory } from '../../../question/question.interface';
 
 export const getMyCurrentOpportunities = createAsyncThunk<
   OpportunityListState,

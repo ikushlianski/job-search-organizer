@@ -9,41 +9,44 @@ import './main-menu.scss';
 export const MainMenu: React.FC<AuthProps> = ({ signedIn, onSignOut }) => {
   return (
     <div className="MainMenu">
-      <MenuItem>
-        <NavLink exact to={Routing.create}>
-          Create opportunity
-        </NavLink>
-      </MenuItem>
-
-      {signedIn && (
+      <div className="MainMenu__Logo">Job Search Organizer</div>
+      <div className="MainMenu__Buttons">
         <MenuItem>
-          <NavLink exact to={Routing.home}>
-            My opportunities
+          <NavLink exact to={Routing.create}>
+            Create opportunity
           </NavLink>
         </MenuItem>
-      )}
 
-      {signedIn && (
-        <MenuItem>
-          <NavLink exact to={Routing.iterations}>
-            Iterations
-          </NavLink>
-        </MenuItem>
-      )}
+        {signedIn && (
+          <MenuItem>
+            <NavLink exact to={Routing.home}>
+              My opportunities
+            </NavLink>
+          </MenuItem>
+        )}
 
-      {signedIn ? (
-        <MenuItem>
-          <a href="" onClick={onSignOut}>
-            Sign Out
-          </a>
-        </MenuItem>
-      ) : (
-        <MenuItem>
-          <NavLink exact to={Routing.signIn}>
-            Sign In/Sign Up
-          </NavLink>
-        </MenuItem>
-      )}
+        {signedIn && (
+          <MenuItem>
+            <NavLink exact to={Routing.iterations}>
+              Iterations
+            </NavLink>
+          </MenuItem>
+        )}
+
+        {signedIn ? (
+          <MenuItem>
+            <a href="" onClick={onSignOut}>
+              Sign Out
+            </a>
+          </MenuItem>
+        ) : (
+          <MenuItem>
+            <NavLink exact to={Routing.signIn}>
+              Sign In/Sign Up
+            </NavLink>
+          </MenuItem>
+        )}
+      </div>
     </div>
   );
 };

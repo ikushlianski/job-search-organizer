@@ -46,12 +46,9 @@ export const iterationSlice = createSlice<
       .addCase(
         fetchMyCurrentIterationSettings.fulfilled,
         (state, { payload }) => {
-          state.loaded = payload.loaded;
-          state.message = payload.message;
-          state.loading = payload.loading;
-          state.hasError = payload.hasError;
-          state.activeIterationId = payload.activeIterationId;
-          state.activeIterationSettings = payload.activeIterationSettings;
+          state.loaded = true;
+          state.loading = false;
+          state.activeIterationSettings = payload;
         },
       )
       .addCase(fetchMyCurrentIterationSettings.rejected, (state, action) => {

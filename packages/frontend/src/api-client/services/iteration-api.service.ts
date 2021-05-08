@@ -19,8 +19,6 @@ export const iterationApiService = {
 
       const activeIterationId = findActiveIterationId(result.data);
 
-      console.log('--------> activeIterationId', activeIterationId);
-
       return {
         loaded: true,
         loading: false,
@@ -43,32 +41,15 @@ export const iterationApiService = {
   getIterationSettings: async function (
     accessToken: string,
     iterationId: number,
-  ): Promise<IterationListState> {
-    try {
-      const result = await client<IterationSettingsWithAnswers>({
-        url: `/iterations/${iterationId}/settings`,
-        method: 'get',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+  ): Promise<IterationSettingsWithAnswers> {
+    const result = await client<IterationSettingsWithAnswers>({
+      url: `/iterations/${iterationId}/settings`,
+      method: 'get',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-      return {
-        loaded: true,
-        loading: false,
-        message: '',
-        iterations: [],
-        hasError: false,
-        activeIterationSettings: result.data,
-      };
-    } catch (e) {
-      return {
-        loaded: true,
-        loading: false,
-        message: `Could not fetch iteration settings`,
-        iterations: [],
-        hasError: true,
-      };
-    }
+    return result.data;
   },
 };

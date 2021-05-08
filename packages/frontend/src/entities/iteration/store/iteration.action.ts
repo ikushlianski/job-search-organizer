@@ -1,5 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IterationListState } from '../iteration.interface';
+import {
+  IterationListState,
+  IterationSettingsWithAnswers,
+} from '../iteration.interface';
 import { iterationApiService } from '../../../api-client/services/iteration-api.service';
 
 export const fetchMyIterations = createAsyncThunk<
@@ -25,7 +28,7 @@ export const fetchMyIterations = createAsyncThunk<
 });
 
 export const fetchMyCurrentIterationSettings = createAsyncThunk<
-  IterationListState,
+  IterationSettingsWithAnswers,
   { accessToken: string; iterationId: number },
   {
     rejectValue: IterationListState;
@@ -33,12 +36,14 @@ export const fetchMyCurrentIterationSettings = createAsyncThunk<
 >(
   'iteration/getIterationSettings',
   async ({ accessToken, iterationId }, { rejectWithValue }) => {
-    const iterationSettings = await iterationApiService.getIterationSettings(
-      accessToken,
-      iterationId,
-    );
+    try {
+      const iterationSettings = await iterationApiService.getIterationSettings(
+        accessToken,
+        iterationId,
+      );
 
-    if (iterationSettings.hasError) {
+      return iterationSettings;
+    } catch (e) {
       return rejectWithValue({
         loaded: true,
         loading: false,
@@ -47,7 +52,5 @@ export const fetchMyCurrentIterationSettings = createAsyncThunk<
         hasError: true,
       });
     }
-
-    return iterationSettings;
   },
 );
