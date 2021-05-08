@@ -15,15 +15,21 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const accessToken = AuthGuard.getTokenFromRequest(request);
 
+    // this accessToken may be either a temporary token identifying a user by internal ID, or a usual jwt token
     console.log('AuthGuard: accessToken is', accessToken);
     if (!accessToken) throw new UnauthorizedException();
 
-    const isValidToken = await this.authService.hasValidAccessToken(
+    // first, check if this is a temp token
+    const user = await this.authService.tryGetUserIdFromTmpToken(accessToken);
+
+    if (user) return true;
+
+    const isValidJWTToken = await this.authService.hasValidAccessToken(
       accessToken,
     );
 
-    console.log('AuthGuard: isValidToken is', isValidToken);
-    if (!isValidToken) throw new UnauthorizedException();
+    console.log('AuthGuard: isValidJWTToken is', isValidJWTToken);
+    if (!isValidJWTToken) throw new UnauthorizedException();
 
     return true;
   }

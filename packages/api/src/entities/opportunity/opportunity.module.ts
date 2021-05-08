@@ -13,9 +13,11 @@ import { IterationModule } from '../iteration/iteration.module';
 import { UserModule } from '../user/user.module';
 import { IterationQuestionsModule } from '../iteration-questions/iteration-questions.module';
 import { IterationSettingsModule } from '../iteration-settings/iteration-settings.module';
+import { AuthModule } from '../../auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     CompanyModule,
     DatabaseModule,
     InterviewModule,

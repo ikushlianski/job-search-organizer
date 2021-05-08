@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { OpportunityAnswerService } from './opportunity-answer.service';
 import { OpportunityAnswer } from './opportunity-answer.model';
 import { OpportunityService } from '../opportunity/opportunity.service';
 import { CreateOpportunityAnswerDto } from './dto/create-opportunity-answer.dto';
 import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto';
+import { AuthGuard } from '../../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('opportunities/:opportunityId/qa')
 export class OpportunityAnswerController {
   constructor(

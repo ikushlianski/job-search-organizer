@@ -1,7 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { IterationSettingsService } from './iteration-settings.service';
 import { DetailedIterationSettingsDto } from './dto/detailed-iter-settings.dto';
+import { AuthGuard } from '../../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('iterations/:iterationId/settings')
 export class IterationSettingsController {
   constructor(private iterationSettingsService: IterationSettingsService) {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { AuthenticateUserRequestDto } from './dto/authenticate-user-request.dto';
@@ -16,6 +16,7 @@ import { EntityNotFoundError } from '../errors/domain-errors/abstract-entity/ent
 export class AuthService {
   constructor(
     private jwtService: JwtService,
+    @Inject(forwardRef(() => UserService))
     private userService: UserService,
   ) {}
 
@@ -87,6 +88,34 @@ export class AuthService {
     // todo detect token reuse
 
     return await this.isValidAccessToken(token);
+  }
+
+  public async tryGetUserIdFromTmpToken(
+    token: string,
+  ): Promise<boolean | User> {
+    const secret = process.env.TEMP_TOKEN_SECRET;
+
+    if (!secret) throw new Error('TEMP_TOKEN_SECRET not found');
+
+    try {
+      const { sub: decodedUserId } = await this.jwtService.verifyAsync(token, {
+        secret,
+      });
+
+      console.debug('Decoded user id from temp token:', decodedUserId);
+
+      if (isNaN(+decodedUserId)) return false;
+
+      const user = await this.userService.findById(decodedUserId);
+
+      console.debug('tried fetching user by temp token. User id is', user?.id);
+
+      if (user === null) return false;
+
+      return user;
+    } catch (e) {
+      return false;
+    }
   }
 
   private static async hash(value: string): Promise<string> {

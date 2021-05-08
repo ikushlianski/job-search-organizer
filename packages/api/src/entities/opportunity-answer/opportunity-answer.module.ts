@@ -10,9 +10,11 @@ import { IterationSettingsModule } from '../iteration-settings/iteration-setting
 import { OpportunityModule } from '../opportunity/opportunity.module';
 import { IterationModule } from '../iteration/iteration.module';
 import { UserOpportunityScoreModule } from '../user-opportunity-score/user-opportunity-score.module';
+import { AuthModule } from '../../auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     CompanyModule,
     DatabaseModule,
     InterviewModule,

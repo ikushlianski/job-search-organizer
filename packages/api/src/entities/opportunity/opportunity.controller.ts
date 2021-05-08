@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { OpportunityService } from './opportunity.service';
 import { Opportunity } from './opportunity.model';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
 import { CreateOpportunityDto } from './dto/create-opportunity.dto';
 import { IterationService } from '../iteration/iteration.service';
+import { AuthGuard } from '../../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('iterations/:iterationId/opportunities')
 export class OpportunityController {
   constructor(

@@ -1,11 +1,13 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { Question } from './question.model';
 import {
   QuestionEndpointQueryParams,
   QuestionsWithAnswersByCat,
 } from './question.interface';
 import { QuestionService } from './question.service';
+import { AuthGuard } from '../../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('questions')
 export class QuestionController {
   constructor(private questionService: QuestionService) {}
