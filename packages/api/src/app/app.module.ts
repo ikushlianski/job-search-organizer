@@ -14,6 +14,7 @@ import { ProjectModule } from '../entities/project/project.module';
 import { IterationSettingsModule } from '../entities/iteration-settings/iteration-settings.module';
 import { ContactPersonModule } from '../entities/contact-person/contact-person.module';
 import { OpportunityAnswerModule } from '../entities/opportunity-answer/opportunity-answer.module';
+import { QuestionModule } from '../entities/question/question.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { OpportunityAnswerModule } from '../entities/opportunity-answer/opportun
     OpportunityModule,
     OpportunityAnswerModule,
     ProjectModule,
+    QuestionModule,
     UserModule,
   ],
   controllers: [AppController],
