@@ -15,6 +15,7 @@ import { CompanyService } from '../company/company.service';
 import { ProjectService } from '../project/project.service';
 import { IterationService } from '../iteration/iteration.service';
 import { UserOpportunityScore } from '../user-opportunity-score/user-opportunity-score.model';
+import { User } from '../user/user.model';
 
 @Injectable()
 export class OpportunityService {
@@ -123,7 +124,14 @@ export class OpportunityService {
   }
 
   async verifyOpportunityExists(opportunityId: number): Promise<Opportunity> {
-    const opportunity = await this.findById(opportunityId);
+    const opportunity = await Opportunity.findByPk(opportunityId, {
+      include: [
+        Project,
+        Company,
+        Iteration,
+        { model: User, attributes: ['id'] },
+      ],
+    });
 
     if (!opportunity) {
       throw new EntityNotFoundError('Opportunity');
