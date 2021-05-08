@@ -10,17 +10,19 @@ import { IterationsPage } from '../entities/iteration/ui/pages/iterations.page';
 import { SignUpPage } from '../auth/ui/pages/signup.page';
 import { SignInPage } from '../auth/ui/pages/signin.page';
 import { NotFoundPage } from '../common/pages/not-found.page';
-import { SuggestPage } from '../entities/suggest/suggest.page';
 import { CurrentOpportunitiesPage } from '../entities/opportunity/ui/pages/current-opps.page';
 import { Layout } from '../common/components/layout.component';
 import { SingleOpportunityDetailsPage } from '../entities/opportunity/ui/pages/single-opp.page';
+import { AuthContext } from '../auth/auth.context';
+import { CreateOpportunityPage } from '../entities/opportunity/ui/pages/create-opp.page';
 
 interface Props {
-  signedIn: boolean;
   onSignOut: () => void;
 }
 
-export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
+export const Routes: React.FC<Props> = ({ onSignOut }) => {
+  const signedIn = React.useContext(AuthContext);
+
   return (
     <Router>
       <Layout signedIn={signedIn} onSignOut={onSignOut}>
@@ -54,8 +56,8 @@ export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
             <Route exact path={Routing.signIn}>
               <Redirect to={Routing.home} />
             </Route>
-            <Route exact path={Routing.suggest}>
-              <SuggestPage />
+            <Route exact path={Routing.create}>
+              <CreateOpportunityPage />
             </Route>
             <Route path={Routing.catchAll}>
               <NotFoundPage />
@@ -69,8 +71,11 @@ export const Routes: React.FC<Props> = ({ signedIn, onSignOut }) => {
             <Route exact path={Routing.signIn}>
               <SignInPage />
             </Route>
-            <Route exact path={Routing.suggest}>
-              <SuggestPage />
+            <Route exact path={Routing.singleOpportunityDetails}>
+              <SingleOpportunityDetailsPage />
+            </Route>
+            <Route exact path={Routing.create}>
+              <CreateOpportunityPage />
             </Route>
             <Route path={Routing.catchAll}>
               <Redirect to={Routing.signIn} />
