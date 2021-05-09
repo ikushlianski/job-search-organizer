@@ -16,11 +16,11 @@ module.exports = {
 
     await queryInterface.sequelize.query(`
       insert into public.jso_question
-      (question_text, question_category_id, question_key, is_multi_choice)
+      (question_text, question_category_id, question_key, input_type)
       VALUES
       ('${questions.workplace.is_32_gb}', ${categoriesByName['workplace'].id}, 'is_32_gb', default),
       ('${questions.workplace.is_linux_installed}', ${categoriesByName['workplace'].id}, 'is_linux_installed', default),
-      ('${questions.workplace.licences}', ${categoriesByName['workplace'].id}, 'licences', true)
+      ('${questions.workplace.licences}', ${categoriesByName['workplace'].id}, 'licences', 'checkbox')
     `);
   },
 

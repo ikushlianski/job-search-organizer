@@ -16,9 +16,9 @@ module.exports = {
 
     await queryInterface.sequelize.query(`
       insert into public.jso_question
-      (question_text, question_category_id, question_key, is_multi_choice)
+      (question_text, question_category_id, question_key, input_type)
       VALUES
-      ('${questions.misc.start_date}', ${categoriesByName['misc'].id}, 'start_date', default)
+      ('${questions.misc.start_date}', ${categoriesByName['misc'].id}, 'start_date', 'date')
     `);
   },
 

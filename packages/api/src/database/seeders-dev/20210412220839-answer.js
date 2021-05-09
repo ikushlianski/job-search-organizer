@@ -101,6 +101,21 @@ module.exports = {
       (${questionsByKey['is_remote_work'].id}, 'Remote during COVID, then you will have to work from office'),
       (${questionsByKey['is_remote_work'].id}, 'Work is only from office'),
       
+      (${questionsByKey['responsibilities'].id}, 'Project manager'),
+      (${questionsByKey['responsibilities'].id}, 'Business Analyst'),
+      (${questionsByKey['responsibilities'].id}, 'Team Lead'),
+      (${questionsByKey['responsibilities'].id}, 'Tech Lead'),
+      (${questionsByKey['responsibilities'].id}, 'Solution Architect'),
+      (${questionsByKey['responsibilities'].id}, 'Developer/Software Engineer'),
+      
+      
+      (${questionsByKey['seniority'].id}, 'Trainee'),
+      (${questionsByKey['seniority'].id}, 'Junior'),
+      (${questionsByKey['seniority'].id}, 'Middle'),
+      (${questionsByKey['seniority'].id}, 'Senior'),
+      (${questionsByKey['seniority'].id}, 'Lead'),
+      (${questionsByKey['seniority'].id}, 'Chief/Principal'),
+      
       (${questionsByKey['project_staffing_type'].id}, 'Outsource'),
       (${questionsByKey['project_staffing_type'].id}, 'Outstaffing'),
       (${questionsByKey['project_staffing_type'].id}, 'Mixed outsource and outstaffing'),
@@ -137,6 +152,20 @@ module.exports = {
       (${questionsByKey['project_topic'].id}, 'Cryptocurrencies'),
       (${questionsByKey['project_topic'].id}, 'Other'),
       
+      (${questionsByKey['team_people_count'].id}, '1-2'),
+      (${questionsByKey['team_people_count'].id}, '3-4'),
+      (${questionsByKey['team_people_count'].id}, '5-7'),
+      (${questionsByKey['team_people_count'].id}, '8-12'),
+      (${questionsByKey['team_people_count'].id}, '13-20'),
+      (${questionsByKey['team_people_count'].id}, '21+'),
+
+      (${questionsByKey['project_people_count'].id}, '1-10'),
+      (${questionsByKey['project_people_count'].id}, '11-20'),
+      (${questionsByKey['project_people_count'].id}, '21-30'),
+      (${questionsByKey['project_people_count'].id}, '31-50'),
+      (${questionsByKey['project_people_count'].id}, '51-100'),
+      (${questionsByKey['project_people_count'].id}, '100+'),
+      
       (${questionsByKey['has_ba'].id}, 'Yes, BA is fully responsible for stories'),
       (${questionsByKey['has_ba'].id}, 'Yes, BA is responsible for stories, but developers need to talk to customer as well'),
       (${questionsByKey['has_ba'].id}, 'No dedicated BA, developers need to talk to customer and create tickets'),
@@ -168,10 +197,10 @@ module.exports = {
       (${questionsByKey['story_points'].id}, 'Yes, but we map story points to days or hours'),
       (${questionsByKey['story_points'].id}, 'No, we estimate in days or hours'),
       
-      (${questionsByKey['project_planned_duration'].id}, 'Project is not going to end in the coming years'),
-      (${questionsByKey['project_planned_duration'].id}, 'Project is not going to end in the coming year'),
-      (${questionsByKey['project_planned_duration'].id}, 'Project should finish within a year'),
-      (${questionsByKey['project_planned_duration'].id}, 'Project should finish in a couple of months'),
+      (${questionsByKey['project_planned_duration'].id}, 'Several years at least'),
+      (${questionsByKey['project_planned_duration'].id}, 'One year at least'),
+      (${questionsByKey['project_planned_duration'].id}, 'Up to one year'),
+      (${questionsByKey['project_planned_duration'].id}, 'Finishes in a couple of months'),
       
       (${questionsByKey['why_position_opened'].id}, 'To replace a developer who is about to leave'),
       (${questionsByKey['why_position_opened'].id}, 'Team is expanding'),
@@ -184,6 +213,13 @@ module.exports = {
       (${questionsByKey['overtimes'].id}, 'Happen almost every day, but this is going to end soon'),
       (${questionsByKey['overtimes'].id}, 'Happen almost every day and things are unlikely to change'),
       
+      (${questionsByKey['task_tracker'].id}, 'Jira'),
+      (${questionsByKey['task_tracker'].id}, 'YouTrack'),
+      (${questionsByKey['task_tracker'].id}, 'Pivotal Tracker'),
+      (${questionsByKey['task_tracker'].id}, 'Trello'),
+      (${questionsByKey['task_tracker'].id}, 'Asana'),
+      (${questionsByKey['task_tracker'].id}, 'Other'),
+      
       -- WORKPLACE --
       (${questionsByKey['is_32_gb'].id}, 'No, our laptops are 16GB by default, cannot be changed'),
       (${questionsByKey['is_32_gb'].id}, 'No, our laptops are 16GB by default, 32GB can be requested per project need'),
@@ -195,9 +231,9 @@ module.exports = {
       (${questionsByKey['is_linux_installed'].id}, 'We only use Windows machines, custom Linux installation is impossible'),
       (${questionsByKey['is_linux_installed'].id}, 'We only use MacOS'),
       
-      (${questionsByKey['licences'].id}, 'Yes, Webstorm licence can be given'),
-      (${questionsByKey['licences'].id}, 'No, but you can use your own Webstorm licence'),
-      (${questionsByKey['licences'].id}, 'No, and you cannot use Webstorm')      
+      (${questionsByKey['licences'].id}, 'Yes, software licences can be given'),
+      (${questionsByKey['licences'].id}, 'No, but you can use your own licenced software'),
+      (${questionsByKey['licences'].id}, 'No')      
     `);
   },
 

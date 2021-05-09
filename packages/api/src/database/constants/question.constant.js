@@ -25,8 +25,12 @@ const questions = {
     tech_stack: 'What is the tech stack used on the project?',
     position_type: 'Is the project purely frontend, backend or full-stack?',
     is_remote_work: 'Is remote work possible?',
-    team_people_count: 'How many people are in the team?',
-    project_people_count: 'How many people are on the project?',
+    team_people_count:
+      'How many developers are in the team (not on the entire project)?',
+    project_people_count: 'How many developers are on the entire project?',
+    responsibilities:
+      'What team role will a candidate perform on this project?',
+    seniority: 'What seniority level are you targeting?',
     dev_ops_work_required:
       'Do developers have to manage project infrastructure?',
     has_ba: 'Does the project have BAs?',
@@ -42,6 +46,7 @@ const questions = {
     overtimes: 'How often do overtimes happen on this project?',
     customer_business_size: 'What is the size of customer we are working with?',
     project_business_model: 'What is the business model of the project?',
+    task_tracker: 'What is the business model of the project?',
   },
   [categories['workplace']]: {
     is_32_gb: 'Is the PC going to have 32GB RAM on it?',
