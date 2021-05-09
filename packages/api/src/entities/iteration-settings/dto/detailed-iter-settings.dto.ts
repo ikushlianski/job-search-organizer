@@ -1,13 +1,13 @@
 import { Answer } from '../../answer/answer.model';
-import { IterationSettings } from '../iteration-settings.model';
+import { IterationSettingsByCat } from '../iteration-settings.interface';
 
 // detailed iteration settings
 // with all possible answers
 export interface DetailedIterationSettingsDto {
-  iterationSettings: IterationSettings[];
+  iterationSettings: IterationSettingsByCat;
   answersByQuestion: AnswersByQuestionId;
 }
 
 export interface AnswersByQuestionId {
-  [key: number]: Pick<Answer, 'id' | 'answer_text'>[];
+  [key: number]: Answer[];
 }

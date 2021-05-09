@@ -2,7 +2,7 @@ import { client } from '../http-client';
 import {
   OpportunityItemState,
   OpportunityListState,
-} from '../../entities/opportunity/opportunities-current/current-opps.interface';
+} from '../../entities/opportunity/current-opps.interface';
 import { QuestionsByCategory } from '../../entities/question/question.interface';
 
 export const opportunityApiService = {
@@ -67,6 +67,17 @@ export const opportunityApiService = {
     const result = await client<QuestionsByCategory>({
       url: `/questions?byCategory=true&answers=true`,
       method: 'get',
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return result.data;
+  },
+  async createNew(accessToken: string): Promise<number> {
+    const result = await client<number>({
+      url: `/opportunities`,
+      method: 'post',
       headers: {
         authorization: `Bearer ${accessToken}`,
       },

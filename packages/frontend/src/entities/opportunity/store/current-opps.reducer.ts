@@ -1,7 +1,7 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
 import {
   getMyCurrentOpportunities,
-  getOpportunityDetails,
+  fetchOpportunityDetails,
 } from './current-opps.action';
 import { OpportunityListState } from '../current-opps.interface';
 
@@ -38,7 +38,7 @@ export const currentOpportunitiesSlice = createSlice<
         state.loading = false;
         state.hasError = true;
       })
-      .addCase(getOpportunityDetails.fulfilled, (state, { payload }) => {
+      .addCase(fetchOpportunityDetails.fulfilled, (state, { payload }) => {
         const opportunityId = state.opportunities.findIndex(
           (opp) => opp.id === payload.id,
         );
@@ -54,7 +54,7 @@ export const currentOpportunitiesSlice = createSlice<
         state.message = payload.message;
         state.hasError = payload.hasError;
       })
-      .addCase(getOpportunityDetails.rejected, (state, action) => {
+      .addCase(fetchOpportunityDetails.rejected, (state, action) => {
         state.opportunities = [];
         state.loaded = true;
         state.message = action.payload?.message;

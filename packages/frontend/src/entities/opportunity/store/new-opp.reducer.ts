@@ -1,7 +1,7 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
 
 import { NewOpportunityState } from '../new-opp.interface';
-import { fetchQuestionsWithAnswers } from './new-opp.action';
+import { createNewOpportunity } from './new-opp.action';
 
 export const currentOpportunitiesSlice = createSlice<
   NewOpportunityState,
@@ -13,28 +13,36 @@ export const currentOpportunitiesSlice = createSlice<
     loaded: false,
     hasError: false,
     message: '',
+    created: false,
   },
-  reducers: {},
+  reducers: {
+    resetCreatedOppty(state) {
+      state.created = false;
+      state.opportunity_id = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchQuestionsWithAnswers.fulfilled, (state, { payload }) => {
-        state.questionsByCategory = payload.questionsByCategory;
-
-        state.loaded = payload.loaded;
-        state.loading = payload.loading;
-        state.message = payload.message;
-        state.hasError = payload.hasError;
+      .addCase(createNewOpportunity.fulfilled, (state, { payload }) => {
+        state.created = true;
+        state.opportunity_id = payload;
+        state.loaded = true;
+        state.loading = false;
+        state.message = '';
+        state.hasError = false;
       })
-      .addCase(fetchQuestionsWithAnswers.rejected, (state, action) => {
+      .addCase(createNewOpportunity.rejected, (state, action) => {
         state.loaded = true;
         state.message = action.payload?.message;
         state.loading = false;
         state.hasError = true;
+        state.opportunity_id = undefined;
+        state.created = false;
       });
   },
 });
 
 // Action creators are generated for each case reducer function
-// export const {} = currentOpportunitiesSlice.actions;
+export const { resetCreatedOppty } = currentOpportunitiesSlice.actions;
 
 export const newOpportunityReducer = currentOpportunitiesSlice.reducer;

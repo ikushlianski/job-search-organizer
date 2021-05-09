@@ -40,10 +40,9 @@ export const iterationApiService = {
 
   getIterationSettings: async function (
     accessToken: string,
-    iterationId: number,
   ): Promise<IterationSettingsWithAnswers> {
     const result = await client<IterationSettingsWithAnswers>({
-      url: `/iterations/${iterationId}/settings`,
+      url: `/iteration-settings/active`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${accessToken}`,

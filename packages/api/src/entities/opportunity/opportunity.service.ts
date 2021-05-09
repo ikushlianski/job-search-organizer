@@ -153,15 +153,17 @@ export class OpportunityService {
   async findAllCurrentOpportsByUserToken(
     accessToken: string,
   ): Promise<Opportunity[]> {
-    const currentIterations = await this.iterationService.findActiveUserIterations(
+    const currentIteration = await this.iterationService.findActiveUserIteration(
       accessToken,
     );
 
-    const iterationIds = currentIterations.map((it) => it.id);
+    if (!currentIteration?.id) {
+      throw new EntityNotFoundError('No current iterations found');
+    }
 
     const iterations = await Iteration.findAll({
       where: {
-        id: iterationIds,
+        id: currentIteration.id,
       },
       include: [
         {

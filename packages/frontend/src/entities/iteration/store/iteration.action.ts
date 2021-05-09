@@ -29,28 +29,20 @@ export const fetchMyIterations = createAsyncThunk<
 
 export const fetchMyCurrentIterationSettings = createAsyncThunk<
   IterationSettingsWithAnswers,
-  { accessToken: string; iterationId: number },
+  string, // token
   {
     rejectValue: IterationListState;
   }
->(
-  'iteration/getIterationSettings',
-  async ({ accessToken, iterationId }, { rejectWithValue }) => {
-    try {
-      const iterationSettings = await iterationApiService.getIterationSettings(
-        accessToken,
-        iterationId,
-      );
-
-      return iterationSettings;
-    } catch (e) {
-      return rejectWithValue({
-        loaded: true,
-        loading: false,
-        message: 'Could not fetch iteration settings',
-        iterations: [],
-        hasError: true,
-      });
-    }
-  },
-);
+>('iteration/getActiveSettings', async (accessToken, { rejectWithValue }) => {
+  try {
+    return await iterationApiService.getIterationSettings(accessToken);
+  } catch (e) {
+    return rejectWithValue({
+      loaded: true,
+      loading: false,
+      message: 'Could not fetch iteration settings',
+      iterations: [],
+      hasError: true,
+    });
+  }
+});

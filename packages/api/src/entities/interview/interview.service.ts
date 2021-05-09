@@ -32,15 +32,17 @@ export class InterviewService {
   ): Promise<Interview[]> {
     await this.userService.verifyUserExists(accessToken);
 
-    const iterations = await this.iterationService.findActiveUserIterations(
+    const iteration = await this.iterationService.findActiveUserIteration(
       accessToken,
     );
 
-    const opportunities = iterations.flatMap(
-      (iteration) => iteration.opportunities,
-    );
+    if (!iteration?.opportunities) {
+      return [];
+    }
 
-    return opportunities.flatMap((opportunity) => opportunity.interviews);
+    return iteration.opportunities.flatMap(
+      (opportunity) => opportunity.interviews,
+    );
   }
 
   async create(

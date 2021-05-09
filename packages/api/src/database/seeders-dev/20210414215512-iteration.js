@@ -6,7 +6,7 @@ module.exports = {
       insert into public.jso_iteration 
       (start_date, final_date, name, user_id) 
       VALUES
-      ('2021-01-01', '2021-02-01', 'test-iteration', 1)
+      ('2021-01-01', '2021-08-31', 'test-iteration', 1)
     `);
   },
 

@@ -1,12 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./packages/frontend/src",
+    "baseUrl": "./src",
     "paths": {
       "./": [
         "./*"
       ],
-      "~*": ["./*"]
+      "~*": ["./*"],
+      "i18n/*": ["./i18n/*"]
     },
     "jsx": "react",
     "outDir": "./dist"

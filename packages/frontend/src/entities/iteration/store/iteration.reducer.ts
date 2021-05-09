@@ -1,5 +1,8 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit';
-import { IterationListState } from '../iteration.interface';
+import {
+  IterationListState,
+  IterationSettingsWithAnswers,
+} from '../iteration.interface';
 import {
   fetchMyCurrentIterationSettings,
   fetchMyIterations,
@@ -49,6 +52,8 @@ export const iterationSlice = createSlice<
           state.loaded = true;
           state.loading = false;
           state.activeIterationSettings = payload;
+          state.hasError = Object.keys(payload.iterationSettings).length > 0;
+          state.message = getIterationSettingsError(state, payload);
         },
       )
       .addCase(fetchMyCurrentIterationSettings.rejected, (state, action) => {
@@ -64,3 +69,14 @@ export const iterationSlice = createSlice<
 // export const {} = iterationSlice.actions;
 
 export const iterationReducer = iterationSlice.reducer;
+
+function getIterationSettingsError(
+  state: IterationListState,
+  payload: IterationSettingsWithAnswers,
+): string | undefined {
+  if (Object.keys(payload.iterationSettings).length === 0) {
+    return 'User has not set any job preferences. This might indicate they are not open now';
+  }
+
+  return;
+}

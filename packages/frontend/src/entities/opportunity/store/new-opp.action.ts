@@ -1,0 +1,22 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { LoadingProps } from '../../../common/types/loading-props.interface';
+import { opportunityApiService } from '../../../api-client/services/opportunity-api.service';
+
+export const createNewOpportunity = createAsyncThunk<
+  number, // id of created opportunity
+  string, // accessToken
+  {
+    rejectValue: LoadingProps;
+  }
+>('opportunity/createNew', async (accessToken, { rejectWithValue }) => {
+  try {
+    return await opportunityApiService.createNew(accessToken);
+  } catch (e) {
+    return rejectWithValue({
+      loaded: true,
+      loading: false,
+      message: `Could not create new opportunity`,
+      hasError: true,
+    });
+  }
+});

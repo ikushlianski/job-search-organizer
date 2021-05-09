@@ -15,12 +15,13 @@ export const ThankYouAnyway: React.FC<Props> = ({
       <h2>
         Thank you anyway for your time! Hope you will have something for me in
         the future.
-        <p>
-          If you have, please use this link to suggest a new opportunity:{' '}
-          <a href={link}>{link}</a>.
-        </p>
-        I will be notified via email
       </h2>
+
+      <p>
+        If you have, please use this link to suggest a new opportunity:{' '}
+        <a href={link}>{link}</a>.
+      </p>
+      <p>I will be notified via email</p>
       <Button onClick={() => setPrefillStepsDone(null)}>
         Suggest another opportunity
       </Button>

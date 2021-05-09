@@ -12,7 +12,10 @@ import {
 import { QuestionCategory } from '../question-category/question-category.model';
 import { User } from '../user/user.model';
 import { Answer } from '../answer/answer.model';
-import { DEFAULT_USER_ID } from '../../app/app.constant';
+import { DEFAULT_USER_ID } from '~app/app.constant';
+
+// todo make proper imports from shared-lib
+import { InputTypes } from '@job-search-organizer/shared/src/types/entities.types';
 
 @Table({ timestamps: false, tableName: 'jso_question' })
 export class Question extends Model {
@@ -48,7 +51,7 @@ export class Question extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @Default(false)
+  @Default('radio')
   @Column
-  is_multi_choice: boolean;
+  input_type: InputTypes;
 }

@@ -40,10 +40,14 @@ export class IterationService {
     });
   }
 
-  async findActiveUserIterations(accessToken: string): Promise<Iteration[]> {
+  async findActiveUserIteration(
+    accessToken: string,
+  ): Promise<Iteration | null> {
     const user = await this.userService.verifyUserExists(accessToken);
 
-    return Iteration.findAll<Iteration>({
+    console.log('user id from VERIFY USER EXISTS', user.id);
+
+    return Iteration.findOne<Iteration>({
       where: { user_id: user.id, final_date: { [Op.gte]: new Date() } },
     });
   }

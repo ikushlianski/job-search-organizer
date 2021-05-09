@@ -6,6 +6,7 @@ import {
   PrimaryKey,
   BelongsTo,
   AutoIncrement,
+  Default,
 } from 'sequelize-typescript';
 import { Question } from '../question/question.model';
 import { Answer } from '../answer/answer.model';
@@ -47,5 +48,23 @@ export class OpportunityAnswer extends Model {
   @Column({
     comment: 'Some comment to the answer if HR wants to be more specific',
   })
-  answer_string: string;
+  hr_comment: string;
+
+  @Column({
+    comment: 'Extended details about this question',
+  })
+  my_comment: string;
+
+  @Default(false)
+  @Column({
+    comment:
+      'When HR does not know the answer they can table this question and find out details later',
+  })
+  is_delayed: boolean;
+
+  @Column({
+    comment:
+      'We record the date when HR delayed this answer, so we know when to ping them for information later',
+  })
+  delayed_date: Date;
 }

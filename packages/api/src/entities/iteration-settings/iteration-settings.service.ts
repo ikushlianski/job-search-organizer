@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Transaction } from 'sequelize';
 import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 import { CreateIterationSettingsDto } from './dto/create-iteration-settings.dto';
@@ -12,9 +12,19 @@ import {
   AnswersByQuestionId,
   DetailedIterationSettingsDto,
 } from './dto/detailed-iter-settings.dto';
+import { UserService } from '../user/user.service';
+import { IterationService } from '../iteration/iteration.service';
+import { IterationSettingsByCat } from './iteration-settings.interface';
+import { QuestionCategory } from '../question-category/question-category.model';
 
 @Injectable()
 export class IterationSettingsService {
+  constructor(
+    private userService: UserService,
+    @Inject(forwardRef(() => IterationService))
+    private iterationService: IterationService,
+  ) {}
+
   async create(
     iterationId: number,
     iterationQuestionsDtos: CreateIterationQuestionsDto[],
@@ -56,17 +66,37 @@ export class IterationSettingsService {
   }
 
   async getDetailedIterationSettings(
-    iterationId: number,
+    accessToken: string,
   ): Promise<DetailedIterationSettingsDto> {
-    const iterationDetails = await IterationSettings.findAll({
-      where: { iteration_id: iterationId },
-      include: [Iteration, Question, Answer],
+    const activeIteration = await this.iterationService.findActiveUserIteration(
+      accessToken,
+    );
+
+    if (!activeIteration)
+      return {
+        iterationSettings: {},
+        answersByQuestion: [],
+      };
+
+    const iterationSettings = await IterationSettings.findAll({
+      where: {
+        iteration_id: activeIteration.id,
+      },
+      include: [
+        Iteration,
+        { model: Question, include: [{ model: QuestionCategory }] },
+        Answer,
+      ],
     });
+
+    const groupedIterationSettings = this.groupIterationSettingsByCategory(
+      iterationSettings,
+    );
 
     const allAnswerOptions = await Answer.findAll();
 
     return IterationSettingsService.attachAllPossibleAnswers(
-      iterationDetails,
+      groupedIterationSettings,
       allAnswerOptions,
     );
   }
@@ -107,23 +137,18 @@ export class IterationSettingsService {
   }
 
   private static attachAllPossibleAnswers(
-    iterSettings: IterationSettings[],
+    iterSettings: IterationSettingsByCat,
     answers: Answer[],
   ) {
     const allPossibleAnswersByQuestion = answers.reduce(
       (acc: AnswersByQuestionId, answer: Answer) => {
-        const partialAnswer = {
-          id: answer.id,
-          answer_text: answer.answer_text,
-        };
-
         if (!acc[answer.question_id]) {
-          acc[answer.question_id] = [partialAnswer];
+          acc[answer.question_id] = [answer];
 
           return acc;
         }
 
-        acc[answer.question_id].push(partialAnswer);
+        acc[answer.question_id].push(answer);
 
         return acc;
       },
@@ -134,5 +159,33 @@ export class IterationSettingsService {
       iterationSettings: iterSettings,
       answersByQuestion: allPossibleAnswersByQuestion,
     };
+  }
+
+  private groupIterationSettingsByCategory(settings: IterationSettings[]) {
+    return settings.reduce(
+      (
+        settingsByCategory: IterationSettingsByCat,
+        setting: IterationSettings,
+      ): IterationSettingsByCat => {
+        const category = settings.find(
+          (cat) => cat.id === setting.question.question_category_id,
+        );
+
+        if (!category) {
+          return settingsByCategory;
+        }
+
+        const catName = category.question.question_category.category_name;
+
+        if (settingsByCategory[catName]) {
+          settingsByCategory[catName].push(setting);
+        } else {
+          settingsByCategory[catName] = [setting];
+        }
+
+        return settingsByCategory;
+      },
+      {},
+    );
   }
 }

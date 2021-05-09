@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/frontend/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/frontend/.cache" />
       <excludeFolder url="file://$MODULE_DIR$/packages/frontend/.parcel-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

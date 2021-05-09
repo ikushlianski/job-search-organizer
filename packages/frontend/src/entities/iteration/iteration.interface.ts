@@ -1,4 +1,6 @@
 import { LoadingProps } from '../../common/types/loading-props.interface';
+import { Question } from '../question/question.interface';
+import { Answer, AnswersByQuestionId } from '../answer/answer.interface';
 
 export interface IterationListState extends LoadingProps {
   iterations: IterationItemState[];
@@ -6,34 +8,33 @@ export interface IterationListState extends LoadingProps {
   activeIterationSettings?: IterationSettingsWithAnswers;
 }
 
-export interface IterationItemState extends LoadingProps {
+export interface Iteration {
   id: number;
   start_date: string;
   final_date: string;
   name: string;
+  user_id: number;
 }
+
+export interface IterationItemState extends Iteration, LoadingProps {}
 
 export interface IterationSetting {
-  iteration_id: number;
-  question_id: number;
-  answer_id: number;
-  boolean_answer: boolean;
-  numeric_answer: number;
-  string_answer: string;
-  weight: number; // from -1 to +1, with a 0.5 increment
-}
-
-export interface Answer {
   id: number;
-  answer_text: string;
   question_id: number;
-}
-
-export interface AnswersByQuestionId {
-  [key: number]: Answer[];
+  iteration_id: number;
+  answer_id: number | null;
+  answer: Answer | null;
+  boolean_answer: boolean | null;
+  numeric_answer: number | null;
+  string_answer: string | null;
+  weight: number | null;
+  iteration: Iteration;
+  question: Question;
 }
 
 export interface IterationSettingsWithAnswers {
-  iterationSettings: IterationSetting[];
+  iterationSettings: {
+    [key: string]: IterationSetting[];
+  };
   answersByQuestion: AnswersByQuestionId;
 }

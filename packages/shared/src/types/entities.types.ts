@@ -1,0 +1,16 @@
+export type InputTypes =
+  | 'checkbox'
+  | 'date'
+  | 'email'
+  | 'file'
+  | 'image'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'search'
+  | 'select'
+  | 'tel'
+  | 'time'
+  | 'url'
+  | 'textarea';

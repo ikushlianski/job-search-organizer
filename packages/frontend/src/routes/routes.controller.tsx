@@ -10,11 +10,11 @@ import { IterationsPage } from '../entities/iteration/ui/pages/iterations.page';
 import { SignUpPage } from '../auth/ui/pages/signup.page';
 import { SignInPage } from '../auth/ui/pages/signin.page';
 import { NotFoundPage } from '../common/pages/not-found.page';
-import { CurrentOpportunitiesPage } from '../entities/opportunity/opportunities-current/pages/current-opps.page';
+import { CurrentOpportunitiesPage } from '../entities/opportunity/pages/current-opps.page';
 import { Layout } from '../common/components/layout.component';
-import { SingleOpportunityDetailsPage } from '../entities/opportunity/opportunities-current/pages/single-opp.page';
+import { OpportunityAnswersPage } from '../entities/opportunity/pages/single-opp.page';
 import { AuthContext } from '../auth/auth.context';
-import { CreateOpportunityPage } from '../entities/opportunity/new-opportunity/pages/create-opp.page';
+import { CreateOpportunityPage } from '../entities/opportunity/pages/new-opp.page';
 
 interface Props {
   onSignOut: () => void;
@@ -38,7 +38,7 @@ export const Routes: React.FC<Props> = ({ onSignOut }) => {
               <CurrentOpportunitiesPage />
             </Route>
             <Route exact path={Routing.singleOpportunityDetails}>
-              <SingleOpportunityDetailsPage />
+              <OpportunityAnswersPage />
             </Route>
             <Route exact path={Routing.signUp}>
               <Redirect to={Routing.home} />
@@ -62,7 +62,7 @@ export const Routes: React.FC<Props> = ({ onSignOut }) => {
               <SignInPage />
             </Route>
             <Route exact path={Routing.singleOpportunityDetails}>
-              <SingleOpportunityDetailsPage />
+              <OpportunityAnswersPage />
             </Route>
             <Route exact path={Routing.createOpportunity}>
               <CreateOpportunityPage />

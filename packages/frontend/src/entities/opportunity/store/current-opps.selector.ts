@@ -3,7 +3,7 @@ import {
   OpportunityItemState,
   OpportunityListState,
 } from '../current-opps.interface';
-import { ApplicationState } from '../../../../store/app.store';
+import { ApplicationState } from '../../../store/app.store';
 
 export const selectMyCurrentOpportunities = (
   state: ApplicationState,

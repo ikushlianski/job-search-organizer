@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database/database.module';
 import { IterationService } from './iteration.service';
 import { iterationProviders } from './iteration.providers';
@@ -13,7 +13,7 @@ import { IterationQuestionsModule } from '../iteration-questions/iteration-quest
     DatabaseModule,
     AuthModule,
     UserModule,
-    IterationSettingsModule,
+    forwardRef(() => IterationSettingsModule),
     IterationQuestionsModule,
   ],
   controllers: [IterationController],

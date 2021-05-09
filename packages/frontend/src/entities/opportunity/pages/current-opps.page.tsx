@@ -1,9 +1,9 @@
 import React from 'react';
 import { OpportunitiesTable } from '../components/opps-table.component';
 import { CurrentOppsController } from '../controllers/current-opps.controller';
-import { Loader } from '../../../../common/components/loader.component';
+import { Loader } from '../../../common/components/loader.component';
 
-import '../../../../common/pages/page.scss';
+import '../../../common/pages/page.scss';
 
 export const CurrentOpportunitiesPage: React.FC = () => {
   return (

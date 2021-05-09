@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { opportunityApiService } from '../../../../api-client/services/opportunity-api.service';
+import { opportunityApiService } from '../../../api-client/services/opportunity-api.service';
 import {
   OpportunityItemState,
   OpportunityListState,
 } from '../current-opps.interface';
-import { LoadingProps } from '../../../../common/types/loading-props.interface';
+import { LoadingProps } from '../../../common/types/loading-props.interface';
 
 export const getMyCurrentOpportunities = createAsyncThunk<
   OpportunityListState,
@@ -30,7 +30,7 @@ export const getMyCurrentOpportunities = createAsyncThunk<
   return currentOppsState;
 });
 
-export const getOpportunityDetails = createAsyncThunk<
+export const fetchOpportunityDetails = createAsyncThunk<
   OpportunityItemState,
   { accessToken: string; opportunityId: number; iterationId: number },
   {
