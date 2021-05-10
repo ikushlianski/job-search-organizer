@@ -123,6 +123,19 @@ export class OpportunityService {
     }
   }
 
+  // just creates an opportunity record in DB, no payload for now
+  async initOpportunity(accessToken: string): Promise<number> {
+    const user = await this.userService.verifyUserExists(accessToken);
+
+    const newOpportunity = new Opportunity({
+      user_id: user.id,
+    });
+
+    const recorded = await newOpportunity.save();
+
+    return recorded.id;
+  }
+
   async verifyOpportunityExists(opportunityId: number): Promise<Opportunity> {
     const opportunity = await Opportunity.findByPk(opportunityId, {
       include: [

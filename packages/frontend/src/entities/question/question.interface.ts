@@ -13,7 +13,7 @@ export interface Question {
   myAnswers?: Array<Answer | number | string | boolean | null>; // your iteration preferences: either question_id, or some numeric or string answer
 }
 
-export interface QuestionsByCategory {
+export interface QuestionsWithAnswersByCategory {
   [categoryName: string]: Question[];
 }
 

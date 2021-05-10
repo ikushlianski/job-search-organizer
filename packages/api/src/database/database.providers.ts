@@ -44,6 +44,7 @@ export const databaseProviders = [
         User,
         UserOpportunityScore,
       ]);
+
       // todo remove when schema stabilizes, move to migrations
       await sequelize.sync({ force: false });
 

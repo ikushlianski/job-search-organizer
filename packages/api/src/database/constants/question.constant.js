@@ -2,9 +2,9 @@ const categories = require('./category.constant');
 
 const questions = {
   [categories['financial']]: {
-    net_salary: 'What net salary would you prefer?',
-    min_salary: 'What is the minimum salary you would accept this time?',
-    probation_salary: 'What salary would you accept during probation period?',
+    net_salary: 'Average net salary you are ready to offer',
+    min_salary: 'Minimum salary for this position',
+    probation_salary: 'Planned salary during probation period',
   },
   [categories['company']]: {
     office_location: 'Is office location suitable for me?',

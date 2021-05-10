@@ -41,8 +41,13 @@ export const CreateOppController: React.FC<Props> = ({
     const newOpptyId = newOpportunityState.opportunity_id;
 
     if (newOpportunityState.created && newOpptyId) {
-      history.push(`/opportunities/id/${newOpptyId}`);
-      dispatch(resetCreatedOppty);
+      console.log('RIGHT BEFORE RESET CREATED OPPTY');
+
+      history.push(
+        `/opportunities/id/${newOpptyId}?token=${process.env.TEMP_TOKEN}`,
+      );
+
+      dispatch(resetCreatedOppty(''));
     }
   }, [
     dispatch,

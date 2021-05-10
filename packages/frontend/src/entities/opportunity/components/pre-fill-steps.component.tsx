@@ -26,18 +26,23 @@ export const PreFillSteps: React.FC<Props> = ({ setPreFillStepsDone }) => {
     <div className="PreFillSteps">
       {!explanationDone && (
         <>
-          <h2>Spend ~5 min filling in the form and save ~30 min</h2>
+          <h2>
+            Spend ~5 min filling in the form and save us both about an hour!
+          </h2>
           <p>
-            All answers are automatically analyzed against my preferences and
-            each opportunity gets ranked by score
+            The system automatically analyzes all your answers against my
+            preferences. Each project gets ranked by score.
           </p>
           <p>
-            As you go you will see my reaction to suggested project parameters.
+            The most interesting projects catch my attention, as they land at
+            the top of opportunity list
           </p>
+          <p>As you go you will see my reaction to the answers you provide.</p>
           <p>
             At the end of this short form, you will see my salary expectations,
-            English level and availability dates
+            English level and availability dates.
           </p>
+          <p> Thank you and let's get started!</p>
           <Button onClick={() => setExplanationDone(true)}>Ok, got it</Button>
         </>
       )}
@@ -64,7 +69,7 @@ export const PreFillSteps: React.FC<Props> = ({ setPreFillStepsDone }) => {
           </ul>
 
           <Pane>
-            <Button onClick={onProjectFits}>My project fits</Button>
+            <Button onClick={onProjectFits}>My project fits 👍</Button>
             <Button onClick={onProjectNotFits}>Hmm, does not fit</Button>
           </Pane>
         </>

@@ -5,12 +5,15 @@ import { GlobalInfoText } from '../../../../common/components/global-info-text.c
 import { Button } from 'evergreen-ui';
 
 import './iterations.scss';
+import { Loader } from '../../../../common/components/loader.component';
 
 export const IterationsPage: React.FC = () => {
   return (
     <IterationController
-      render={({ iterations, onIterationStart }) => {
-        return (
+      render={({ iterations, onIterationStart, loading }) => {
+        return loading ? (
+          <Loader />
+        ) : (
           <div className="Page IterationsPage">
             {iterations.length > 0 ? (
               <IterationTable iterations={iterations} />

@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { OpportunityService } from './opportunity.service';
 import { Opportunity } from './opportunity.model';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
-import { CreateOpportunityDto } from './dto/create-opportunity.dto';
 import { IterationService } from '../iteration/iteration.service';
 import { AuthGuard } from '../../auth/auth.guard';
 
@@ -61,26 +60,6 @@ export class OpportunityController {
       throw e;
     }
   }
-
-  @Post('/')
-  async createOpportunity(
-    @Param() { iterationId }: { iterationId: number },
-    @GetToken() accessToken: string,
-    @Body() opportunityData: CreateOpportunityDto,
-  ): Promise<Opportunity> {
-    try {
-      return await this.opportunityService.create(
-        iterationId,
-        accessToken,
-        opportunityData,
-      );
-    } catch (e) {
-      console.error('OpportunityController -> createOpportunity', e);
-
-      // to be handled by error interceptor
-      throw e;
-    }
-  }
 }
 
 @Controller('current-opportunities')
@@ -100,6 +79,18 @@ export class CurrentOpportunityController {
         'CurrentOpportunityController -> findAllCurrentOpportsByUserToken',
         e,
       );
+
+      // to be handled by error interceptor
+      throw e;
+    }
+  }
+
+  @Post('/')
+  async createOpportunity(@GetToken() accessToken: string): Promise<number> {
+    try {
+      return await this.opportunityService.initOpportunity(accessToken);
+    } catch (e) {
+      console.error('CurrentOpportunityController -> createOpportunity', e);
 
       // to be handled by error interceptor
       throw e;

@@ -1,6 +1,9 @@
 import { LoadingProps } from '../../common/types/loading-props.interface';
-import { Question } from '../question/question.interface';
-import { Answer, AnswersByQuestionId } from '../answer/answer.interface';
+import {
+  Question,
+  QuestionsWithAnswersByCategory,
+} from '../question/question.interface';
+import { Answer } from '../answer/answer.interface';
 
 export interface IterationListState extends LoadingProps {
   iterations: IterationItemState[];
@@ -33,8 +36,6 @@ export interface IterationSetting {
 }
 
 export interface IterationSettingsWithAnswers {
-  iterationSettings: {
-    [key: string]: IterationSetting[];
-  };
-  answersByQuestion: AnswersByQuestionId;
+  iterationSettings: IterationSetting[];
+  questionsWithAnswersByCat: QuestionsWithAnswersByCategory;
 }

@@ -1,11 +1,14 @@
 import { Answer } from '../../answer/answer.model';
-import { IterationSettingsByCat } from '../iteration-settings.interface';
+import { IterationSettings } from '../iteration-settings.model';
+import { Question } from '../../question/question.model';
 
 // detailed iteration settings
 // with all possible answers
 export interface DetailedIterationSettingsDto {
-  iterationSettings: IterationSettingsByCat;
-  answersByQuestion: AnswersByQuestionId;
+  iterationSettings: IterationSettings[];
+  questionsWithAnswersByCat: {
+    [category: string]: Question[];
+  };
 }
 
 export interface AnswersByQuestionId {

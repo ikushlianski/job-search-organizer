@@ -16,6 +16,7 @@ import { UserService } from '../user/user.service';
 import { IterationService } from '../iteration/iteration.service';
 import { IterationSettingsByCat } from './iteration-settings.interface';
 import { QuestionCategory } from '../question-category/question-category.model';
+import { groupBy } from 'lodash';
 
 @Injectable()
 export class IterationSettingsService {
@@ -74,8 +75,8 @@ export class IterationSettingsService {
 
     if (!activeIteration)
       return {
-        iterationSettings: {},
-        answersByQuestion: [],
+        questionsWithAnswersByCat: {},
+        iterationSettings: [],
       };
 
     const iterationSettings = await IterationSettings.findAll({
@@ -89,16 +90,22 @@ export class IterationSettingsService {
       ],
     });
 
-    const groupedIterationSettings = this.groupIterationSettingsByCategory(
-      iterationSettings,
-    );
-
     const allAnswerOptions = await Answer.findAll();
 
-    return IterationSettingsService.attachAllPossibleAnswers(
-      groupedIterationSettings,
+    const iterationSettingsAndAnswers = this.iterationSettingsToQA(
+      iterationSettings,
       allAnswerOptions,
     );
+
+    const iterSettAndAnswsByCat = groupBy(
+      iterationSettingsAndAnswers,
+      (question) => question.question_category.category_name,
+    );
+
+    return {
+      questionsWithAnswersByCat: iterSettAndAnswsByCat,
+      iterationSettings,
+    };
   }
 
   private static toIterationQuestions = (
@@ -168,7 +175,9 @@ export class IterationSettingsService {
         setting: IterationSettings,
       ): IterationSettingsByCat => {
         const category = settings.find(
-          (cat) => cat.id === setting.question.question_category_id,
+          (_setting) =>
+            _setting.question.question_category_id ===
+            setting.question.question_category_id,
         );
 
         if (!category) {
@@ -186,6 +195,67 @@ export class IterationSettingsService {
         return settingsByCategory;
       },
       {},
+    );
+  }
+
+  /**
+   * extract questions from Iteration Settings and attach to them:
+   * 1) answers that user gave when creating an iteration
+   * 2) all possible answers, so we can show question options
+   */
+  private iterationSettingsToQA(
+    iterationSettings: IterationSettings[],
+    answers: Answer[],
+  ): Question[] {
+    return iterationSettings.reduce(
+      (questions: Question[], iterSetting: IterationSettings) => {
+        const existingQuestion = questions.find(
+          (q) => q.id === iterSetting.question_id,
+        );
+
+        const anyIterationAnswer =
+          iterSetting.answer ||
+          iterSetting.string_answer ||
+          iterSetting.numeric_answer ||
+          iterSetting.boolean_answer;
+
+        if (!existingQuestion) {
+          const newQuestion = {
+            id: iterSetting.question.id,
+            question_key: iterSetting.question.question_key,
+            question_text: iterSetting.question.question_text,
+            myAnswers: [] as Answer[],
+            answers: [] as Answer[],
+            question_category: iterSetting.question.question_category,
+            input_type: iterSetting.question.input_type,
+          };
+
+          const { question_id } = iterSetting;
+
+          const allPossibleAnswToThisQtn = answers.filter(
+            (answer) => answer.question_id === question_id,
+          );
+
+          newQuestion.myAnswers = [anyIterationAnswer];
+
+          if (allPossibleAnswToThisQtn) {
+            newQuestion.answers = allPossibleAnswToThisQtn;
+          }
+
+          questions.push(newQuestion as Question);
+
+          return questions;
+        }
+
+        if (existingQuestion.myAnswers) {
+          existingQuestion.myAnswers.push(anyIterationAnswer);
+        } else {
+          existingQuestion.myAnswers = [anyIterationAnswer];
+        }
+
+        return questions;
+      },
+      [],
     );
   }
 }

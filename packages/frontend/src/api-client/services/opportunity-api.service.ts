@@ -3,7 +3,7 @@ import {
   OpportunityItemState,
   OpportunityListState,
 } from '../../entities/opportunity/current-opps.interface';
-import { QuestionsByCategory } from '../../entities/question/question.interface';
+import { QuestionsWithAnswersByCategory } from '../../entities/question/question.interface';
 
 export const opportunityApiService = {
   async getCurrentOpportunities(
@@ -63,8 +63,10 @@ export const opportunityApiService = {
       answers: result.data.answers,
     };
   },
-  async getAllQuestions(accessToken: string): Promise<QuestionsByCategory> {
-    const result = await client<QuestionsByCategory>({
+  async getAllQuestions(
+    accessToken: string,
+  ): Promise<QuestionsWithAnswersByCategory> {
+    const result = await client<QuestionsWithAnswersByCategory>({
       url: `/questions?byCategory=true&answers=true`,
       method: 'get',
       headers: {
@@ -76,7 +78,7 @@ export const opportunityApiService = {
   },
   async createNew(accessToken: string): Promise<number> {
     const result = await client<number>({
-      url: `/opportunities`,
+      url: `/current-opportunities`,
       method: 'post',
       headers: {
         authorization: `Bearer ${accessToken}`,
