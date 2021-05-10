@@ -69,4 +69,14 @@ export class Opportunity extends Model {
 
   @HasOne(() => UserOpportunityScore)
   userOpportunityScore: UserOpportunityScore;
+
+  // temp
+  @Column
+  company_name: string;
+
+  @Column
+  contact_person_name: string;
+
+  @Column
+  project_name: string;
 }

@@ -1,9 +1,10 @@
 import {
   IterationItemState,
   IterationListState,
+  IterationSetting,
   IterationSettingsWithAnswers,
 } from '../iteration.interface';
-import { ApplicationState } from '../../../store/app.store';
+import { ApplicationState } from '../../../app/store/app.store';
 
 export const selectUserIterationState = (
   state: ApplicationState,
@@ -31,6 +32,6 @@ export const selectActiveIterationId = (
 
 export const selectIterationSettings = (
   state: ApplicationState,
-): IterationSettingsWithAnswers | undefined => {
+): IterationSetting[] | undefined => {
   return state.iteration.activeIterationSettings;
 };

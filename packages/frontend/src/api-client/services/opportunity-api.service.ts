@@ -1,5 +1,6 @@
 import { client } from '../http-client';
 import {
+  OpportunityAnswer,
   OpportunityItemState,
   OpportunityListState,
 } from '../../entities/opportunity/current-opps.interface';
@@ -76,9 +77,39 @@ export const opportunityApiService = {
 
     return result.data;
   },
+
   async createNew(accessToken: string): Promise<number> {
     const result = await client<number>({
       url: `/current-opportunities`,
+      method: 'post',
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return result.data;
+  },
+
+  async getOpportunityAnswers(
+    accessToken: string,
+    opportunityId: number,
+  ): Promise<OpportunityAnswer[]> {
+    const result = await client<OpportunityAnswer[]>({
+      url: `/opportunities/${opportunityId}/qa`,
+      method: 'get',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return result.data;
+  },
+  async recordAnswer(
+    accessToken: string,
+    opportunityId: number,
+  ): Promise<number> {
+    const result = await client<number>({
+      url: `/opportunities/${opportunityId}/qa`,
       method: 'post',
       headers: {
         authorization: `Bearer ${accessToken}`,

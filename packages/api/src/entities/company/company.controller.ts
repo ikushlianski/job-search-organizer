@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   Patch,
   Post,
@@ -15,6 +16,17 @@ import { CompanyService } from './company.service';
 @Controller('companies')
 export class CompanyController {
   constructor(private companyService: CompanyService) {}
+
+  @Get('/')
+  async findCompanies(): Promise<Company[]> {
+    try {
+      return await this.companyService.findAll();
+    } catch (e) {
+      console.error('CompanyController -> findCompanies', e);
+
+      throw e;
+    }
+  }
 
   @Post('/')
   async createCompany(

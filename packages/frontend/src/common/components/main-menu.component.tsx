@@ -45,7 +45,7 @@ export const MainMenu: React.FC<AuthProps> = ({ signedIn, onSignOut }) => {
         ) : (
           <MenuItem>
             <NavLink exact to={Routing.signIn}>
-              Sign In/Sign Up
+              Sign In
             </NavLink>
           </MenuItem>
         )}

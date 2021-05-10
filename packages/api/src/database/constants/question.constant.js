@@ -18,7 +18,7 @@ const questions = {
     project_staffing_type:
       'Is the project outsource, outstaff or custom product?',
     interview_count: 'How many interviews does the project carry out?',
-    is_foreign_project: 'Is your customer foreign?',
+    is_foreign_project: 'What country is the customer from?',
     is_legacy: 'Are legacy technologies involved?',
     is_new: 'Is the project written from scratch?',
     is_rewrite: 'Is the project a re-write from older system/solution?',

@@ -1,36 +1,44 @@
-import { Pane } from 'evergreen-ui';
+import { Pane, toaster } from 'evergreen-ui';
 import React from 'react';
 import { QuestionCategoryBlock } from './question-block.component';
 import { SingleOpptyPageData } from '../current-opps.interface';
+import { FormIntroduction } from './form-intro.component';
 
 export const OpportunityAnswersForm: React.FC<SingleOpptyPageData> = ({
   hasError,
   message,
   opportunityDetails, // how HR answered earlier
-  iterationSettings,
+  questionsWithAnswersByCat,
+  opportunityAnswers,
 }) => {
-  const questionnaire = Object.entries(
-    iterationSettings?.questionsWithAnswersByCat || [],
-  ).map(([categoryName]) => {
-    if (!iterationSettings) return null;
+  const mainQuestionnaire = Object.entries(questionsWithAnswersByCat || []).map(
+    ([categoryName, questions]) => {
+      if (questions.length === 0) return null;
 
-    return (
-      <Pane key={categoryName} elevation={1} padding="2rem" marginBottom="2rem">
-        <QuestionCategoryBlock
-          questionCategoryTitle={categoryName}
-          questionsWithAnswers={iterationSettings.questionsWithAnswersByCat}
-          opportunityAnswers={opportunityDetails?.answers}
-        />
-      </Pane>
-    );
-  });
+      return (
+        <Pane
+          key={categoryName}
+          elevation={1}
+          padding="2rem"
+          marginBottom="2rem"
+        >
+          <QuestionCategoryBlock
+            questionCategoryTitle={categoryName}
+            questionsWithAnswers={questionsWithAnswersByCat || {}}
+            opportunityAnswers={opportunityAnswers}
+          />
+        </Pane>
+      );
+    },
+  );
 
   return (
     <form className="OpportunityAnswersForm">
-      {questionnaire}
-      {hasError && (
-        <div className="OpportunityAnswersPage__ErrorMessage">{message}</div>
-      )}
+      <FormIntroduction />
+
+      {mainQuestionnaire}
+
+      {hasError && message && toaster.danger(message)}
     </form>
   );
 };

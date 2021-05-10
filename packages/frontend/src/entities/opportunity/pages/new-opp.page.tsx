@@ -2,7 +2,7 @@ import React from 'react';
 import { CreateOppController } from '../controllers/new-opp.controller';
 import { PreFillSteps } from '../components/pre-fill-steps.component';
 import { ThankYouAnyway } from '../components/thanks-anyway.component';
-import { Loader } from '../../../common/components/loader.component';
+import { PageLoader } from '../../../common/components/loader.component';
 import '../../../common/pages/page.scss';
 
 export const CreateOpportunityPage: React.FC = () => {
@@ -16,7 +16,7 @@ export const CreateOpportunityPage: React.FC = () => {
         return (
           <div className="Page CreateOpportunityPage">
             {loading ? (
-              <Loader />
+              <PageLoader />
             ) : (
               <>
                 {prefillStepsDone === null && (

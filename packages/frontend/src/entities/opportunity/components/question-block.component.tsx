@@ -1,10 +1,13 @@
 import React from 'react';
-import { InputTypes } from '../../../../../shared/src/types/entities.types';
-import {
-  Question,
-  QuestionsWithAnswersByCategory,
-} from '../../question/question.interface';
+import { QuestionsWithAnswersByCategory } from '../../question/question.interface';
 import { OpportunityAnswer } from '../current-opps.interface';
+import { useDispatch, useSelector } from 'react-redux';
+import { QuestionAndAnswers } from './qa.component';
+import { selectActiveOpportunityState } from '../store/active-opp.selector';
+import './question-block.style.scss';
+import { recordAnswer } from '../store/active-opp.action';
+import { useAccessToken } from '../../../common/hooks/use-access-token.hook';
+import { Heading } from 'evergreen-ui';
 
 interface Props {
   questionsWithAnswers: QuestionsWithAnswersByCategory; // how you answered iteration questions
@@ -15,69 +18,44 @@ interface Props {
 export const QuestionCategoryBlock: React.FC<Props> = ({
   questionCategoryTitle,
   questionsWithAnswers,
+  opportunityAnswers,
 }) => {
+  const dispatch = useDispatch();
+  const accessToken = useAccessToken();
+  const { activeOpportunityId } = useSelector(selectActiveOpportunityState);
+
+  const onConfirm = (event: React.MouseEvent) => {
+    event.preventDefault();
+    dispatch(
+      recordAnswer({ opportunityId: Number(activeOpportunityId), accessToken }),
+    );
+  };
+
+  const onDelay = (event: React.MouseEvent) => {
+    event.preventDefault();
+
+    // dispatch(recordDelay());
+  };
+
   return (
     <div className="QuestionBlock">
-      <h3>{questionCategoryTitle.toUpperCase()}</h3>
+      <Heading size={700}>{questionCategoryTitle.toUpperCase()}</Heading>
       {questionsWithAnswers[questionCategoryTitle].map((question) => {
-        const { input_type, question_text, question_key } = question;
-
-        const answers = resolveAnswerElement(input_type, question);
+        const hrAnswersToThisQuestion = opportunityAnswers?.filter(
+          (answer) => answer.question_id === question.id,
+        );
 
         return (
-          <div key={question_key} className="QuestionBlock__AnswerArea">
-            <p>
-              <b>{question_text}</b>
-            </p>
-
-            {answers}
-          </div>
+          <QuestionAndAnswers
+            key={question.id}
+            onConfirm={onConfirm}
+            onDelay={onDelay}
+            question={question}
+            opportunityId={activeOpportunityId}
+            hrAnswers={hrAnswersToThisQuestion || []}
+          />
         );
       })}
     </div>
   );
 };
-
-function resolveAnswerElement(inputType: InputTypes, question: Question) {
-  let answers;
-
-  if (inputType === 'select') {
-    answers = (
-      <select
-        name={String(question.question_key)}
-        id={String(question.question_key)}
-      >
-        {question.answers?.map((answer) => {
-          return (
-            <option value={String(answer.id)}>{answer.answer_text}</option>
-          );
-        })}
-      </select>
-    );
-  } else {
-    if (question?.answers?.length) {
-      answers = question.answers?.map((answer) => (
-        <div key={answer.id} className="SingleOption">
-          <label>
-            <input type={inputType} name={`${answer.question_id}`} />
-            {answer.answer_text}{' '}
-          </label>
-        </div>
-      ));
-    } else {
-      answers = (
-        <div className="SingleOption">
-          <label>
-            <input type={inputType} name={`${question.id}`} />
-          </label>
-        </div>
-      );
-    }
-  }
-
-  return (
-    <div key={question.question_key} className="QuestionBlock__AnswerOption">
-      {answers}
-    </div>
-  );
-}

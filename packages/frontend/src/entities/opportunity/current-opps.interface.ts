@@ -2,7 +2,7 @@ import { LoadingProps } from '../../common/types/loading-props.interface';
 import { Company } from '../company/company.interface';
 import { Project } from '../project/project.interface';
 import { UserOpportunityScore } from '../user-opp-score/user-opp-score.interface';
-import { IterationSettingsWithAnswers } from '../iteration/iteration.interface';
+import { QuestionsWithAnswersByCategory } from '../question/question.interface';
 
 export interface OpportunityListState extends LoadingProps {
   opportunities: OpportunityItemState[];
@@ -20,14 +20,17 @@ export interface OpportunityItemState extends LoadingProps {
 }
 
 export interface OpportunityAnswer {
-  question: string;
-  questionId: number;
-  answer: string[];
-  answerIds: number[];
-  comment: string;
+  opportunity_id: number;
+  question_id: number;
+  answer_id: number;
+  hr_comment: string;
+  my_comment: string;
+  is_delayed: boolean;
+  delayed_date: Date;
 }
 
 export interface SingleOpptyPageData extends LoadingProps {
-  iterationSettings?: IterationSettingsWithAnswers;
   opportunityDetails: OpportunityItemState | undefined;
+  opportunityAnswers: OpportunityAnswer[];
+  questionsWithAnswersByCat?: QuestionsWithAnswersByCategory;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpAction } from '../../store/auth.action';
-import { ApplicationState } from '../../../store/app.store';
+import { ApplicationState } from '../../../app/store/app.store';
 import { clearAuthMessage } from '../../store/auth.reducer';
 
 export const SignUpForm = (): React.ReactElement => {

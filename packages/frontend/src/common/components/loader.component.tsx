@@ -1,7 +1,8 @@
 import React from 'react';
 import { Spinner } from 'evergreen-ui';
 
-export const Loader = (): React.ReactElement => {
+// page-level or app level loader
+export const PageLoader = (): React.ReactElement => {
   const centeredStyle = {
     position: 'absolute',
     display: 'flex',

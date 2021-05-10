@@ -5,6 +5,6 @@ export interface QuestionEndpointQueryParams {
   answers: boolean; // should response include answers
 }
 
-export interface QuestionsWithAnswersByCat {
+export interface QuestionsWithAnswersByCategory {
   [key: string]: Question[];
 }

@@ -8,7 +8,7 @@ import { Answer } from '../answer/answer.interface';
 export interface IterationListState extends LoadingProps {
   iterations: IterationItemState[];
   activeIterationId?: number;
-  activeIterationSettings?: IterationSettingsWithAnswers;
+  activeIterationSettings?: IterationSetting[];
 }
 
 export interface Iteration {

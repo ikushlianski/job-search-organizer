@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Routes } from '../../../routes/routes.controller';
 import { AuthController } from '../../../auth/auth.controller';
 import { isLoading } from '../../store/app.selector';
-import { Loader } from '../../../common/components/loader.component';
+import { PageLoader } from '../../../common/components/loader.component';
 import { AuthContext } from '../../../auth/auth.context';
 
 import './app.scss';
@@ -20,7 +20,7 @@ export const App = (): React.ReactElement => {
           </AuthContext.Provider>
         )}
       />
-      {loading && <Loader />}
+      {loading && <PageLoader />}
     </>
   );
 };

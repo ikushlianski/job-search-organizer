@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { opportunityApiService } from '../../../api-client/services/opportunity-api.service';
 import {
+  OpportunityAnswer,
   OpportunityItemState,
   OpportunityListState,
 } from '../current-opps.interface';
@@ -50,6 +51,31 @@ export const fetchOpportunityDetails = createAsyncThunk<
         loaded: true,
         loading: false,
         message: `Could not fetch opportunity with id ${opportunityId}`,
+        hasError: true,
+      });
+    }
+  },
+);
+
+export const fetchOpportunityAnswers = createAsyncThunk<
+  OpportunityAnswer[],
+  { accessToken: string; opportunityId: number },
+  {
+    rejectValue: LoadingProps;
+  }
+>(
+  'opportunityAnswers/get',
+  async ({ accessToken, opportunityId }, { rejectWithValue }) => {
+    try {
+      return await opportunityApiService.getOpportunityAnswers(
+        accessToken,
+        opportunityId,
+      );
+    } catch (e) {
+      return rejectWithValue({
+        loaded: true,
+        loading: false,
+        message: `Could not fetch answers for opportunity with id ${opportunityId}`,
         hasError: true,
       });
     }

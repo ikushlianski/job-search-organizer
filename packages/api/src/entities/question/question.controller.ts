@@ -2,7 +2,7 @@ import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { Question } from './question.model';
 import {
   QuestionEndpointQueryParams,
-  QuestionsWithAnswersByCat,
+  QuestionsWithAnswersByCategory,
 } from './question.interface';
 import { QuestionService } from './question.service';
 import { AuthGuard } from '../../auth/auth.guard';
@@ -15,7 +15,7 @@ export class QuestionController {
   @Get('/')
   async getAllQuestions(
     @Query() { byCategory, answers }: QuestionEndpointQueryParams,
-  ): Promise<Question[] | QuestionsWithAnswersByCat> {
+  ): Promise<Question[] | QuestionsWithAnswersByCategory> {
     try {
       return await this.questionService.getAllQuestions({
         byCategory,

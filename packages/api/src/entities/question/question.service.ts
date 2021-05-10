@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {
   QuestionEndpointQueryParams,
-  QuestionsWithAnswersByCat,
+  QuestionsWithAnswersByCategory,
 } from './question.interface';
 import { Question } from './question.model';
 import { Answer } from '../answer/answer.model';
@@ -11,7 +11,7 @@ import { QuestionCategory } from '../question-category/question-category.model';
 export class QuestionService {
   async getAllQuestions(
     queryParams: QuestionEndpointQueryParams,
-  ): Promise<Question[] | QuestionsWithAnswersByCat> {
+  ): Promise<Question[] | QuestionsWithAnswersByCategory> {
     const options = queryParams.answers ? { include: [Answer] } : undefined;
 
     const questions = await Question.findAll(options);
@@ -23,9 +23,9 @@ export class QuestionService {
 
     return questions.reduce(
       (
-        questionsByCategory: QuestionsWithAnswersByCat,
+        questionsByCategory: QuestionsWithAnswersByCategory,
         question,
-      ): QuestionsWithAnswersByCat => {
+      ): QuestionsWithAnswersByCategory => {
         const category = questionCategories.find(
           (cat) => cat.id === question.question_category_id,
         );

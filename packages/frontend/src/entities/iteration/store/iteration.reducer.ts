@@ -51,7 +51,7 @@ export const iterationSlice = createSlice<
         (state, { payload }) => {
           state.loaded = true;
           state.loading = false;
-          state.activeIterationSettings = payload;
+          state.activeIterationSettings = payload.iterationSettings;
           state.hasError = Object.keys(payload.iterationSettings).length > 0;
           state.message = getIterationSettingsError(state, payload);
         },

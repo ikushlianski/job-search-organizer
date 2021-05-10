@@ -14,6 +14,10 @@ import { EditCompanyDto } from './dto/edit-company.dto';
 export class CompanyService {
   constructor(@Inject(SEQUELIZE) private sequelize: Sequelize) {}
 
+  async findAll(): Promise<Company[]> {
+    return Company.findAll({ attributes: ['id', 'name'] });
+  }
+
   async findCompanyById(companyId: number): Promise<Company | null> {
     return Company.findByPk(companyId);
   }

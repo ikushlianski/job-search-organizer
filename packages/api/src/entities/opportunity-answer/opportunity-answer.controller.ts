@@ -22,8 +22,6 @@ export class OpportunityAnswerController {
     private opportunityAnswerService: OpportunityAnswerService,
   ) {}
 
-  // todo return:
-  //  and opportunity-answers, including comment text from hr
   @Get('/')
   async getAllOpportunityAnswers(
     @Param()

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAppLoading } from '../app/store/app.reducer';
 import { checkIsLoggedIn } from './store/auth.action';
 import { authService } from './auth.service';
 import { isSignedIn } from './store/auth.selector';
@@ -27,8 +26,6 @@ export const AuthController: React.FC<Props> = ({ render }) => {
 
       return;
     }
-
-    dispatch(setAppLoading(true));
 
     if (accessToken) {
       dispatch(checkIsLoggedIn(accessToken));

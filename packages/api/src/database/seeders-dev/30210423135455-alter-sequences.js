@@ -55,4 +55,6 @@ module.exports = {
       select setval('jso_user_id_seq', (select max(id) from jso_user), true);
     `);
   },
+
+  down: async (queryInterface, Sequelize) => {},
 };
