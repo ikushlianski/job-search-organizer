@@ -13,6 +13,7 @@ import { OpportunityService } from '../opportunity/opportunity.service';
 import { CreateOpportunityAnswerDto } from './dto/create-opportunity-answer.dto';
 import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto';
 import { AuthGuard } from '../../auth/auth.guard';
+import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
 
 @UseGuards(AuthGuard)
 @Controller('opportunities/:opportunityId/qa')
@@ -47,13 +48,16 @@ export class OpportunityAnswerController {
   @Post('/')
   async createOpportunityAnswers(
     @Param()
-    {
-      iterationId,
-      opportunityId,
-    }: { iterationId: number; opportunityId: number },
+    { opportunityId }: { opportunityId: number },
     @Body() opportunityAnswerData: CreateOpportunityAnswerDto[],
-  ): Promise<OpportunityAnswer[]> {
+  ): Promise<number> {
     try {
+      const iterationId = await this.opportunityService.getIterationByOpportunity(
+        opportunityId,
+      );
+
+      if (!iterationId) throw new EntityNotFoundError('Iteration');
+
       await this.opportunityService.verifyOpportunityExists(opportunityId);
 
       return await this.opportunityAnswerService.create(

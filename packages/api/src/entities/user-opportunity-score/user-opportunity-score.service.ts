@@ -11,26 +11,20 @@ export class UserOpportunityScoreService {
     opportunityId: number,
   ): Promise<[unknown[], unknown]> {
     return await this.sequelize.query(
-      // todo make table names dynamic
       `
-      insert into public.jso_user_opportunity_score
-      select ju.user_id, {$opportunity_id}, sum(jis.weight)
-      from public.jso_iteration_settings jis
-      join public.jso_iteration ji on ji.id = jis.iteration_id 
-      join public.jso_user ju on ji.user_id = ju.id
-      join jso_opportunity_answer joa 
-      on 
-        jis.question_id = joa.question_id
-        and jis.answer_id = joa.answer_id
-      where jis.iteration_id = :iterationId and joa.opportunity_id = :opportunityId;
+      update public.jso_user_opportunity_score
+      set score = (
+        select sum(weight)
+        from public.jso_opportunity_answer joa
+        join public.jso_opportunity jo on jo.id = joa.opportunity_id
+        join public.jso_iteration ji on ji.id = jo.iteration_id
+        join public.jso_iteration_settings jis on ji.id = jis.iteration_id and jis.answer_id = joa.answer_id and jis.question_id = joa.question_id   
+        where jis.iteration_id = :iterationId and joa.opportunity_id = :opportunityId
+      ) where opportunity_id = :opportunityId
+      returning score;
     `,
       {
-        replacements: [
-          { iterationId },
-          {
-            opportunityId,
-          },
-        ],
+        replacements: { iterationId, opportunityId },
       },
     );
   }

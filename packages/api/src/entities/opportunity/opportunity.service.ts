@@ -34,6 +34,16 @@ export class OpportunityService {
     return this.opportunityRepo.findOne({ where: { id: opportunityId } });
   }
 
+  async getIterationByOpportunity(
+    opportunityId: number,
+  ): Promise<number | undefined> {
+    console.log('opportunityId', opportunityId);
+
+    const opportunity = await Opportunity.findByPk(opportunityId);
+
+    return opportunity?.iteration_id;
+  }
+
   async findAllUserOpportunities(
     iterationId: number,
     accessToken: string,
@@ -124,14 +134,28 @@ export class OpportunityService {
   }
 
   // just creates an opportunity record in DB, no payload for now
-  async initOpportunity(accessToken: string): Promise<number> {
+  async initOpportunity(
+    accessToken: string,
+    iterationId: number,
+  ): Promise<number> {
     const user = await this.userService.verifyUserExists(accessToken);
+
+    await this.iterationService.verifyIterationExists(iterationId);
 
     const newOpportunity = new Opportunity({
       user_id: user.id,
+      iteration_id: iterationId,
     });
 
     const recorded = await newOpportunity.save();
+
+    const newOpportunityScore = new UserOpportunityScore({
+      user_id: user.id,
+      opportunity_id: recorded.id,
+      score: 0,
+    });
+
+    await newOpportunityScore.save();
 
     return recorded.id;
   }

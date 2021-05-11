@@ -5,6 +5,7 @@ import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto'
 import { IterationService } from '../iteration/iteration.service';
 import { OpportunityService } from '../opportunity/opportunity.service';
 import { UserOpportunityScoreService } from '../user-opportunity-score/user-opportunity-score.service';
+import { differenceWith } from 'lodash';
 
 @Injectable()
 export class OpportunityAnswerService {
@@ -35,26 +36,50 @@ export class OpportunityAnswerService {
     iterationId: number,
     opportunityId: number,
     opportunityAnswerData: CreateOpportunityAnswerDto[],
-  ): Promise<OpportunityAnswer[] | never> {
+  ): Promise<number | never> {
     await this.iterationService.verifyIterationExists(iterationId);
     await this.opportunityService.verifyOpportunityExists(opportunityId);
+
+    const existingOppAnswerPromises = opportunityAnswerData.map(
+      (oppAnswerData) => {
+        return OpportunityAnswer.findAll({
+          where: {
+            answer_id: oppAnswerData.answer_id,
+            question_id: oppAnswerData.question_id,
+            opportunity_id: oppAnswerData.opportunity_id,
+          },
+        });
+      },
+    );
+
+    const existingOppAnswers = (
+      await Promise.all(existingOppAnswerPromises)
+    ).flatMap((ex) => ex);
 
     const incomingOppAnswers = opportunityAnswerData.map(
       (answerData) => new OpportunityAnswer(answerData),
     );
 
-    const saveAnswerPromises = incomingOppAnswers.map((answer) =>
-      answer.save(),
+    const onlyNewIncoming = this.filterOutExisting(
+      incomingOppAnswers,
+      existingOppAnswers,
     );
 
-    const opportunityAnswers = await Promise.all(saveAnswerPromises);
+    const saveAnswerPromises = onlyNewIncoming.map((answer) => answer.save());
 
-    await this.userOppScoreService.calculateOpportunityScore(
+    await Promise.all(saveAnswerPromises);
+
+    const [
+      _,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      { rows },
+    ] = await this.userOppScoreService.calculateOpportunityScore(
       iterationId,
       opportunityId,
     );
 
-    return opportunityAnswers;
+    return rows[0].score as number;
   }
 
   async update(

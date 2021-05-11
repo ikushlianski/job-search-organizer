@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { OpportunityService } from './opportunity.service';
 import { Opportunity } from './opportunity.model';
 import { GetToken } from '../../auth/decorators/get-token.decorator';
@@ -86,9 +86,15 @@ export class CurrentOpportunityController {
   }
 
   @Post('/')
-  async createOpportunity(@GetToken() accessToken: string): Promise<number> {
+  async createOpportunity(
+    @GetToken() accessToken: string,
+    @Body() { iterationId }: { iterationId: number },
+  ): Promise<number> {
     try {
-      return await this.opportunityService.initOpportunity(accessToken);
+      return await this.opportunityService.initOpportunity(
+        accessToken,
+        iterationId,
+      );
     } catch (e) {
       console.error('CurrentOpportunityController -> createOpportunity', e);
 
