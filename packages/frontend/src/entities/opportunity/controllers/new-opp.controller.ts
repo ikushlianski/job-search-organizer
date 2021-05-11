@@ -6,6 +6,8 @@ import { selectNewUserOpportunityState } from '../store/new-opp.selector';
 import { resetCreatedOppty } from '../store/new-opp.reducer';
 import { createNewOpportunity } from '../store/new-opp.action';
 import { LoadingProps } from '../../../common/types/loading-props.interface';
+import { fetchMyCurrentIterationSettings } from '../../iteration/store/iteration.action';
+import { selectUserIterationState } from '../../iteration/store/iteration.selector';
 
 interface PageProps extends LoadingProps {
   prefillStepsDone: boolean | null;
@@ -27,11 +29,16 @@ export const CreateOppController: React.FC<Props> = ({
   const history = useHistory();
   const accessToken = useAccessToken();
   const newOpportunityState = useSelector(selectNewUserOpportunityState);
+  const activeIterationSettings = useSelector(selectUserIterationState);
+
+  const activeIterationId =
+    activeIterationSettings.activeIterationId ||
+    activeIterationSettings?.activeIterationSettings?.[0].iteration_id;
 
   const onPrefillStepsDone = (status: boolean | null) => {
     if (status) {
       setPrefillStepsDone(true);
-      dispatch(createNewOpportunity(accessToken));
+      dispatch(fetchMyCurrentIterationSettings(accessToken));
     } else {
       setPrefillStepsDone(false);
     }
@@ -40,7 +47,14 @@ export const CreateOppController: React.FC<Props> = ({
   React.useEffect(() => {
     const newOpptyId = newOpportunityState.opportunity_id;
 
-    if (newOpportunityState.created && newOpptyId) {
+    console.log('activeIterationId', activeIterationId);
+    if (prefillStepsDone && activeIterationId && !newOpportunityState.created) {
+      dispatch(
+        createNewOpportunity({ accessToken, iterationId: activeIterationId }),
+      );
+    }
+
+    if (newOpportunityState.created && newOpptyId && activeIterationId) {
       console.log('RIGHT BEFORE RESET CREATED OPPTY');
 
       history.push(
@@ -50,10 +64,13 @@ export const CreateOppController: React.FC<Props> = ({
       dispatch(resetCreatedOppty(''));
     }
   }, [
+    accessToken,
+    activeIterationId,
     dispatch,
     history,
     newOpportunityState.created,
     newOpportunityState.opportunity_id,
+    prefillStepsDone,
   ]);
 
   return render({

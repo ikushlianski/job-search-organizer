@@ -11,8 +11,14 @@ export class CreateOpportunityAnswerDto {
   answer_id?: number;
 
   @IsOptional()
-  answer_string?: string;
+  hr_comment?: string;
 
   @IsOptional()
-  points?: number;
+  my_comment?: string;
+
+  @IsOptional()
+  is_delayed?: boolean;
+
+  @IsOptional()
+  delayed_date?: Date;
 }

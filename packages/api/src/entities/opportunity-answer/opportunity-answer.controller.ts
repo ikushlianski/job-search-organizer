@@ -14,6 +14,7 @@ import { CreateOpportunityAnswerDto } from './dto/create-opportunity-answer.dto'
 import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto';
 import { AuthGuard } from '../../auth/auth.guard';
 import { EntityNotFoundError } from '../../errors/domain-errors/abstract-entity/entity.error';
+import { SavedOppAnswersDto } from './dto/saved-opp-answers.dto';
 
 @UseGuards(AuthGuard)
 @Controller('opportunities/:opportunityId/qa')
@@ -50,7 +51,7 @@ export class OpportunityAnswerController {
     @Param()
     { opportunityId }: { opportunityId: number },
     @Body() opportunityAnswerData: CreateOpportunityAnswerDto[],
-  ): Promise<number> {
+  ): Promise<SavedOppAnswersDto> {
     try {
       const iterationId = await this.opportunityService.getIterationByOpportunity(
         opportunityId,

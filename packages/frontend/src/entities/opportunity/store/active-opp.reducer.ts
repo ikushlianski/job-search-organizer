@@ -15,6 +15,7 @@ export const activeOpportunitySlice = createSlice<
     loaded: false,
     hasError: false,
     message: '',
+    score: 0,
     opportunityAnswers: [],
   },
   reducers: {
@@ -29,6 +30,8 @@ export const activeOpportunitySlice = createSlice<
         state.loading = false;
         state.message = '';
         state.hasError = false;
+        state.opportunityAnswers.push(...payload.answers);
+        state.score = payload.score;
       })
       .addCase(recordAnswer.rejected, (state, action) => {
         state.loaded = true;

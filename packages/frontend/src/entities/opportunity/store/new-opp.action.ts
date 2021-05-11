@@ -4,19 +4,25 @@ import { opportunityApiService } from '../../../api-client/services/opportunity-
 
 export const createNewOpportunity = createAsyncThunk<
   number, // id of created opportunity
-  string, // accessToken
+  { accessToken: string; iterationId: number }, // accessToken
   {
     rejectValue: LoadingProps;
   }
->('opportunity/createNew', async (accessToken, { rejectWithValue }) => {
-  try {
-    return await opportunityApiService.createNew(accessToken);
-  } catch (e) {
-    return rejectWithValue({
-      loaded: true,
-      loading: false,
-      message: `Could not create new opportunity`,
-      hasError: true,
-    });
-  }
-});
+>(
+  'opportunity/createNew',
+  async ({ accessToken, iterationId }, { rejectWithValue }) => {
+    try {
+      return await opportunityApiService.createNew({
+        accessToken,
+        iterationId,
+      });
+    } catch (e) {
+      return rejectWithValue({
+        loaded: true,
+        loading: false,
+        message: `Could not create new opportunity`,
+        hasError: true,
+      });
+    }
+  },
+);

@@ -23,10 +23,10 @@ export interface OpportunityAnswer {
   opportunity_id: number;
   question_id: number;
   answer_id: number;
-  hr_comment: string;
-  my_comment: string;
-  is_delayed: boolean;
-  delayed_date: Date;
+  hr_comment?: string;
+  my_comment?: string;
+  is_delayed?: boolean;
+  delayed_date?: Date;
 }
 
 export interface SingleOpptyPageData extends LoadingProps {

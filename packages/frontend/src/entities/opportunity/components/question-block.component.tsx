@@ -20,23 +20,6 @@ export const QuestionCategoryBlock: React.FC<Props> = ({
   questionsWithAnswers,
   opportunityAnswers,
 }) => {
-  const dispatch = useDispatch();
-  const accessToken = useAccessToken();
-  const { activeOpportunityId } = useSelector(selectActiveOpportunityState);
-
-  const onConfirm = (event: React.MouseEvent) => {
-    event.preventDefault();
-    dispatch(
-      recordAnswer({ opportunityId: Number(activeOpportunityId), accessToken }),
-    );
-  };
-
-  const onDelay = (event: React.MouseEvent) => {
-    event.preventDefault();
-
-    // dispatch(recordDelay());
-  };
-
   return (
     <div className="QuestionBlock">
       <Heading size={700}>{questionCategoryTitle.toUpperCase()}</Heading>
@@ -48,10 +31,7 @@ export const QuestionCategoryBlock: React.FC<Props> = ({
         return (
           <QuestionAndAnswers
             key={question.id}
-            onConfirm={onConfirm}
-            onDelay={onDelay}
             question={question}
-            opportunityId={activeOpportunityId}
             hrAnswers={hrAnswersToThisQuestion || []}
           />
         );

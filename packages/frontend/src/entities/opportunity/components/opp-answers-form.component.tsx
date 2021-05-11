@@ -7,9 +7,8 @@ import { FormIntroduction } from './form-intro.component';
 export const OpportunityAnswersForm: React.FC<SingleOpptyPageData> = ({
   hasError,
   message,
-  opportunityDetails, // how HR answered earlier
   questionsWithAnswersByCat,
-  opportunityAnswers,
+  opportunityAnswers, // how HR answered earlier
 }) => {
   const mainQuestionnaire = Object.entries(questionsWithAnswersByCat || []).map(
     ([categoryName, questions]) => {

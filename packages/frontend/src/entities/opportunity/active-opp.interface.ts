@@ -6,4 +6,10 @@ export interface ActiveOpportunityState extends LoadingProps {
   questionnaire?: QuestionsWithAnswersByCategory;
   activeOpportunityId?: number;
   opportunityAnswers: OpportunityAnswer[];
+  score: number;
+}
+
+export interface SavedOppAnswersResponse {
+  score: number;
+  answers: OpportunityAnswer[];
 }

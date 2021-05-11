@@ -5,6 +5,7 @@ import {
   OpportunityListState,
 } from '../../entities/opportunity/current-opps.interface';
 import { QuestionsWithAnswersByCategory } from '../../entities/question/question.interface';
+import { SavedOppAnswersResponse } from '../../entities/opportunity/active-opp.interface';
 
 export const opportunityApiService = {
   async getCurrentOpportunities(
@@ -78,12 +79,21 @@ export const opportunityApiService = {
     return result.data;
   },
 
-  async createNew(accessToken: string): Promise<number> {
+  async createNew({
+    accessToken,
+    iterationId,
+  }: {
+    accessToken: string;
+    iterationId: number;
+  }): Promise<number> {
     const result = await client<number>({
       url: `/current-opportunities`,
       method: 'post',
       headers: {
         authorization: `Bearer ${accessToken}`,
+      },
+      data: {
+        iterationId,
       },
     });
 
@@ -107,13 +117,15 @@ export const opportunityApiService = {
   async recordAnswer(
     accessToken: string,
     opportunityId: number,
-  ): Promise<number> {
-    const result = await client<number>({
+    data: OpportunityAnswer[],
+  ): Promise<SavedOppAnswersResponse> {
+    const result = await client<SavedOppAnswersResponse>({
       url: `/opportunities/${opportunityId}/qa`,
       method: 'post',
       headers: {
         authorization: `Bearer ${accessToken}`,
       },
+      data,
     });
 
     return result.data;

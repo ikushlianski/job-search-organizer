@@ -6,6 +6,7 @@ import { IterationService } from '../iteration/iteration.service';
 import { OpportunityService } from '../opportunity/opportunity.service';
 import { UserOpportunityScoreService } from '../user-opportunity-score/user-opportunity-score.service';
 import { differenceWith } from 'lodash';
+import { SavedOppAnswersDto } from './dto/saved-opp-answers.dto';
 
 @Injectable()
 export class OpportunityAnswerService {
@@ -36,7 +37,7 @@ export class OpportunityAnswerService {
     iterationId: number,
     opportunityId: number,
     opportunityAnswerData: CreateOpportunityAnswerDto[],
-  ): Promise<number | never> {
+  ): Promise<SavedOppAnswersDto | never> {
     await this.iterationService.verifyIterationExists(iterationId);
     await this.opportunityService.verifyOpportunityExists(opportunityId);
 
@@ -67,7 +68,7 @@ export class OpportunityAnswerService {
 
     const saveAnswerPromises = onlyNewIncoming.map((answer) => answer.save());
 
-    await Promise.all(saveAnswerPromises);
+    const savedAnswers = await Promise.all(saveAnswerPromises);
 
     const [
       _,
@@ -79,7 +80,10 @@ export class OpportunityAnswerService {
       opportunityId,
     );
 
-    return rows[0].score as number;
+    return {
+      score: rows[0].score as number,
+      answers: savedAnswers,
+    };
   }
 
   async update(

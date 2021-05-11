@@ -9,15 +9,23 @@ import { OpportunityAnswer } from '../current-opps.interface';
 interface Props {
   inputType: InputTypes;
   question: Question;
-  hrAnswers: OpportunityAnswer[];
+  hrAnswers: OpportunityAnswer[]; // came from backend
+  selectedOpportunityAnswers: OpportunityAnswer[]; // our changes to these answers on frontend
   disabled: boolean;
+  onSelect: (e: React.ChangeEvent, data: number[]) => void;
 }
 export const AnswerElementResolver: React.FC<Props> = ({
   inputType,
   question,
   hrAnswers,
   disabled,
+  onSelect,
+  selectedOpportunityAnswers,
 }) => {
+  // React.useEffect(() => {
+  //   console.log('checkedId', checkedId);
+  // }, [checkedId]);
+
   let answers;
 
   if (inputType === 'select') {
@@ -29,12 +37,12 @@ export const AnswerElementResolver: React.FC<Props> = ({
       >
         {question.answers?.map((answer) => {
           const selected = Boolean(
-            hrAnswers.find((hrAnswer) => hrAnswer.answer_id === answer.id) ||
-              undefined,
+            hrAnswers.find((hrAnswer) => hrAnswer.answer_id === answer.id),
           );
 
           return (
             <option
+              onChange={console.log}
               selected={selected}
               key={answer.id}
               value={String(answer.id)}
@@ -49,16 +57,20 @@ export const AnswerElementResolver: React.FC<Props> = ({
     if (question?.answers?.length) {
       if (question.input_type === 'checkbox') {
         answers = answers = question.answers?.map((answer) => {
-          // if we just left `checked` as false, React would not allow us to check the checkbox at all
-          const checked = Boolean(
-            hrAnswers.find((hrAnswer) => hrAnswer.answer_id === answer.id) ||
-              undefined,
+          const defaultChecked = hrAnswers.some(
+            (hrAnswer) => hrAnswer.answer_id === answer.id,
           );
+
+          const checkedId = selectedOpportunityAnswers.find(
+            (selectedAnswer) => selectedAnswer.answer_id === answer.id,
+          )?.answer_id;
 
           return (
             <div key={answer.id} className="SingleOption">
               <Checkbox
-                checked={checked}
+                defaultChecked={defaultChecked}
+                onChange={(e) => onSelect(e, [answer.id])}
+                checked={disabled ? defaultChecked : checkedId === answer.id}
                 disabled={disabled}
                 name={`${answer.question_id}`}
                 label={answer.answer_text}
@@ -68,22 +80,26 @@ export const AnswerElementResolver: React.FC<Props> = ({
         });
       } else if (question.input_type === 'radio') {
         answers = answers = question.answers?.map((answer) => {
-          // if we didn't use undefined as a fallback, React would not allow us to check the radio button at all
-          const checked =
-            Boolean(
-              hrAnswers.find((hrAnswer) => hrAnswer.answer_id === answer.id),
-            ) || undefined;
+          const defaultChecked = hrAnswers.some(
+            (hrAnswer) => hrAnswer.answer_id === answer.id,
+          );
+
+          const checkedId = selectedOpportunityAnswers.find(
+            (selectedAnswer) => selectedAnswer.answer_id === answer.id,
+          )?.answer_id;
 
           return (
-            <div key={answer.id} className="SingleOption">
-              <Radio
-                checked={checked}
-                disabled={disabled}
-                name={`${answer.question_id}`}
-                label={answer.answer_text}
-                size={16}
-              />
-            </div>
+            <Radio
+              key={answer.id}
+              defaultChecked={defaultChecked}
+              onChange={(e) => onSelect(e, [answer.id])}
+              checked={disabled ? defaultChecked : checkedId === answer.id}
+              disabled={disabled}
+              name={`${answer.id}`}
+              label={answer.answer_text}
+              size={16}
+              value={`${answer.id}`}
+            />
           );
         });
       } else {
@@ -117,3 +133,38 @@ export const AnswerElementResolver: React.FC<Props> = ({
 
   return <div className="QuestionBlock__Options">{answers}</div>;
 };
+
+// interface RadioBtnProps {
+//   answer: Answer;
+//   hrAnswers: OpportunityAnswer[];
+//   disabled: boolean;
+//   defaultChecked: boolean;
+//   onChange: (value: number) => void;
+//   checkedId: number;
+// }
+
+// const RadioBtn: React.FC<RadioBtnProps> = ({
+//   defaultChecked,
+//   hrAnswers,
+//   answer,
+//   disabled,
+//   onChange,
+//   checkedId,
+// }) => {
+//   console.log('defaultChecked', defaultChecked);
+//
+//   return (
+//     <div key={answer.id} className="SingleOption">
+//       <Radio
+//         defaultChecked={defaultChecked}
+//         onChange={() => onChange(answer.id)}
+//         checked={disabled ? defaultChecked : checkedId === answer.id}
+//         disabled={disabled}
+//         name={`${answer.id}`}
+//         label={answer.answer_text}
+//         size={16}
+//         value={`${answer.id}`}
+//       />
+//     </div>
+//   );
+// };

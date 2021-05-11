@@ -6,7 +6,7 @@ export const FormIntroduction: React.FC = () => {
     <Pane elevation={1} padding="2rem" marginBottom="2rem">
       <div className="QuestionBlock">
         <div className="QuestionBlock__AnswerArea">
-          <Heading marginTop="default" size={500}>
+          <Heading marginTop="default" marginBottom="default" size={500}>
             <b>
               Please introduce yourself (so that I can contact you on LinkedIn)
             </b>
@@ -18,7 +18,7 @@ export const FormIntroduction: React.FC = () => {
 
       <div className="QuestionBlock">
         <div className="QuestionBlock__AnswerArea">
-          <Heading marginTop="default" size={500}>
+          <Heading marginTop="default" marginBottom="default" size={500}>
             <b>What's the project name?</b>
           </Heading>
           <TextInput type="text" name="project_name" />
@@ -27,7 +27,7 @@ export const FormIntroduction: React.FC = () => {
 
       <div className="QuestionBlock">
         <div className="QuestionBlock__AnswerArea">
-          <Heading marginTop="default" size={500}>
+          <Heading marginTop="default" marginBottom="default" size={500}>
             <b>What company works on this project?</b>
           </Heading>
           <TextInput type="text" name="company_name" />
