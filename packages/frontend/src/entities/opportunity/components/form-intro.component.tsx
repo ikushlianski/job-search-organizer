@@ -127,6 +127,7 @@ export const FormIntroduction: React.FC = () => {
   return (
     <Pane elevation={1} padding="2rem" marginBottom="2rem">
       <Pane
+        fontSize={14}
         color={'grey'}
         background="blueTint"
         padding={'2rem'}
@@ -143,6 +144,10 @@ export const FormIntroduction: React.FC = () => {
         </p>
         <p>
           Please answer only if you are really sure the information is correct!
+        </p>
+        <p>
+          Answers are saved on every confirm. Feel free to stop wherever you
+          like. Thanks for your 🕒
         </p>
       </Pane>
       <div className="QuestionBlock">

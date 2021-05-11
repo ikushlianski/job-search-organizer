@@ -40,8 +40,15 @@ export class OpportunityAnswerService {
     await this.iterationService.verifyIterationExists(iterationId);
     await this.opportunityService.verifyOpportunityExists(opportunityId);
 
-    const existingOppAnswerPromises = opportunityAnswerData.map(
-      (oppAnswerData) => {
+    const every = opportunityAnswerData.every((oppAnswerData) =>
+      Boolean(oppAnswerData.answer_id),
+    );
+
+    let existingOppAnswerPromises = [];
+    let existingOppAnswers = [] as OpportunityAnswer[];
+
+    if (every) {
+      existingOppAnswerPromises = opportunityAnswerData.map((oppAnswerData) => {
         return OpportunityAnswer.findAll({
           where: {
             answer_id: oppAnswerData.answer_id,
@@ -49,12 +56,12 @@ export class OpportunityAnswerService {
             opportunity_id: oppAnswerData.opportunity_id,
           },
         });
-      },
-    );
+      });
 
-    const existingOppAnswers = (
-      await Promise.all(existingOppAnswerPromises)
-    ).flatMap((ex) => ex);
+      existingOppAnswers = (
+        await Promise.all(existingOppAnswerPromises)
+      ).flatMap((ex) => ex);
+    }
 
     const incomingOppAnswers = opportunityAnswerData.map(
       (answerData) => new OpportunityAnswer(answerData),

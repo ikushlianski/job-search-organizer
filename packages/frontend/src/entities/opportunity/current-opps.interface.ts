@@ -40,11 +40,13 @@ export interface CreateOpportunityDto {
 export interface OpportunityAnswer {
   opportunity_id: number;
   question_id: number;
-  answer_id: number;
+  answer_id?: number;
   hr_comment?: string;
   my_comment?: string;
   is_delayed?: boolean;
   delayed_date?: Date;
+  numeric_answer?: number;
+  string_answer?: string;
 }
 
 export interface SingleOpptyPageData extends LoadingProps {

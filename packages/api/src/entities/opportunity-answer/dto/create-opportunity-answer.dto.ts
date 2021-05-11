@@ -21,4 +21,10 @@ export class CreateOpportunityAnswerDto {
 
   @IsOptional()
   delayed_date?: Date;
+
+  @IsOptional()
+  numeric_answer?: number;
+
+  @IsOptional()
+  string_answer?: string;
 }

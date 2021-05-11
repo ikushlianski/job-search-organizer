@@ -46,6 +46,16 @@ export class OpportunityAnswer extends Model {
   answer: Answer;
 
   @Column({
+    comment: 'Some numeric answer, like salary',
+  })
+  numeric_answer: number;
+
+  @Column({
+    comment: 'Some string answer, anything basically',
+  })
+  string_answer: string;
+
+  @Column({
     comment: 'Some comment to the answer if HR wants to be more specific',
   })
   hr_comment: string;

@@ -13,6 +13,8 @@ interface Props {
   selectedOpportunityAnswers: OpportunityAnswer[]; // our changes to these answers on frontend
   disabled: boolean;
   onSelect: (e: React.ChangeEvent, data: number[]) => void;
+  onTextInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  textOrNumericAnswer: string | number;
 }
 export const AnswerElementResolver: React.FC<Props> = ({
   inputType,
@@ -20,11 +22,11 @@ export const AnswerElementResolver: React.FC<Props> = ({
   hrAnswers,
   disabled,
   onSelect,
+  onTextInputChange,
   selectedOpportunityAnswers,
+  textOrNumericAnswer, // text from local state
 }) => {
-  // React.useEffect(() => {
-  //   console.log('checkedId', checkedId);
-  // }, [checkedId]);
+  console.log('hrAnswers --->>', hrAnswers);
 
   let answers;
 
@@ -107,6 +109,7 @@ export const AnswerElementResolver: React.FC<Props> = ({
           <div key={answer.id} className="SingleOption">
             <label>
               <input
+                // onChange={onTextInputChange}
                 disabled={disabled}
                 type={inputType}
                 name={`${answer.question_id}`}
@@ -117,14 +120,29 @@ export const AnswerElementResolver: React.FC<Props> = ({
         ));
       }
     } else {
+      // plain string or number answers, without options
       answers = (
         <div className="SingleOption">
           <label>
-            <TextInput
-              // no disabled attribute in open question answers
-              type={inputType}
-              name={`${question.id}`}
-            />
+            {question.input_type === 'number' ? (
+              // NUMERIC INPUT
+              <TextInput
+                disabled={Boolean(hrAnswers[0]?.numeric_answer)}
+                type={inputType}
+                name={`${question.id}`}
+                onChange={onTextInputChange}
+                value={textOrNumericAnswer}
+              />
+            ) : (
+              // TEXT INPUT
+              <TextInput
+                disabled={Boolean(hrAnswers[0]?.string_answer)}
+                type={inputType}
+                name={`${question.id}`}
+                onChange={onTextInputChange}
+                value={textOrNumericAnswer}
+              />
+            )}
           </label>
         </div>
       );
@@ -133,38 +151,3 @@ export const AnswerElementResolver: React.FC<Props> = ({
 
   return <div className="QuestionBlock__Options">{answers}</div>;
 };
-
-// interface RadioBtnProps {
-//   answer: Answer;
-//   hrAnswers: OpportunityAnswer[];
-//   disabled: boolean;
-//   defaultChecked: boolean;
-//   onChange: (value: number) => void;
-//   checkedId: number;
-// }
-
-// const RadioBtn: React.FC<RadioBtnProps> = ({
-//   defaultChecked,
-//   hrAnswers,
-//   answer,
-//   disabled,
-//   onChange,
-//   checkedId,
-// }) => {
-//   console.log('defaultChecked', defaultChecked);
-//
-//   return (
-//     <div key={answer.id} className="SingleOption">
-//       <Radio
-//         defaultChecked={defaultChecked}
-//         onChange={() => onChange(answer.id)}
-//         checked={disabled ? defaultChecked : checkedId === answer.id}
-//         disabled={disabled}
-//         name={`${answer.id}`}
-//         label={answer.answer_text}
-//         size={16}
-//         value={`${answer.id}`}
-//       />
-//     </div>
-//   );
-// };

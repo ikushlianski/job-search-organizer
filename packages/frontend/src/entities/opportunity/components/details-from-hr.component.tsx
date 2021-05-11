@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pane, Text, Textarea, TextareaField } from 'evergreen-ui';
+import { Pane, Text, Textarea } from 'evergreen-ui';
 import { OpportunityAnswer } from '../current-opps.interface';
 import { Question } from '../../question/question.interface';
 
@@ -28,14 +28,13 @@ export const DetailsFromHR: React.FC<Props> = ({
     <>
       {selectedOppAnswers.length > 0 && hrAnswers.length === 0 && (
         <div className="QuestionAndAnswers__HrComment">
-          <TextareaField
+          <Textarea
             placeholder="Any details you want to add?"
             disabled={Boolean(hrAnswers.length)}
             onChange={onHrTypes}
             id={String(question.id)}
             name={question.question_key}
             value={hrComment}
-            inputHeight={1}
           />
         </div>
       )}
