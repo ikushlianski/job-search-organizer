@@ -1,12 +1,8 @@
 import React from 'react';
 import { QuestionsWithAnswersByCategory } from '../../question/question.interface';
 import { OpportunityAnswer } from '../current-opps.interface';
-import { useDispatch, useSelector } from 'react-redux';
 import { QuestionAndAnswers } from './qa.component';
-import { selectActiveOpportunityState } from '../store/active-opp.selector';
 import './question-block.style.scss';
-import { recordAnswer } from '../store/active-opp.action';
-import { useAccessToken } from '../../../common/hooks/use-access-token.hook';
 import { Heading } from 'evergreen-ui';
 
 interface Props {

@@ -7,6 +7,9 @@ export interface ActiveOpportunityState extends LoadingProps {
   activeOpportunityId?: number;
   opportunityAnswers: OpportunityAnswer[];
   score: number;
+  contact_person_name?: string;
+  company_name?: string;
+  project_name?: string;
 }
 
 export interface SavedOppAnswersResponse {

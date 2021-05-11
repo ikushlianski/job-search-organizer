@@ -1,5 +1,5 @@
 import { CreateInterviewDto } from '../../interview/dto/create-interview.dto';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { CreateCompanyDto } from '../../company/dto/create-company.dto';
 import { CreateProjectDto } from '../../project/dto/create-project.dto';
 
@@ -8,6 +8,7 @@ export class CreateOpportunityDto {
 
   final_date?: Date;
 
+  @IsOptional()
   @IsString()
   // default name could be formed on the frontend, according to an agreed convention, like: "<Company> - <Project Name>" or, if a company does not offer a project, "<Company> - No specific project"
   name: string;
@@ -21,4 +22,17 @@ export class CreateOpportunityDto {
   project_id?: number;
 
   interviews: CreateInterviewDto[];
+
+  // temp
+  @IsOptional()
+  @IsString()
+  company_name?: string;
+
+  @IsOptional()
+  @IsString()
+  project_name?: string;
+
+  @IsOptional()
+  @IsString()
+  contact_person_name?: string;
 }

@@ -1,6 +1,7 @@
 import { client } from '../http-client';
 import {
   OpportunityAnswer,
+  CreateOpportunityDto,
   OpportunityItemState,
   OpportunityListState,
 } from '../../entities/opportunity/current-opps.interface';
@@ -63,6 +64,10 @@ export const opportunityApiService = {
       userOpportunityScore: result.data.userOpportunityScore,
       project: result.data.project,
       answers: result.data.answers,
+      // temp
+      company_name: result.data.company_name,
+      project_name: result.data.project_name,
+      contact_person_name: result.data.contact_person_name,
     };
   },
   async getAllQuestions(
@@ -114,6 +119,7 @@ export const opportunityApiService = {
 
     return result.data;
   },
+
   async recordAnswer(
     accessToken: string,
     opportunityId: number,
@@ -122,6 +128,29 @@ export const opportunityApiService = {
     const result = await client<SavedOppAnswersResponse>({
       url: `/opportunities/${opportunityId}/qa`,
       method: 'post',
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+      data,
+    });
+
+    return result.data;
+  },
+
+  async updateOne({
+    accessToken,
+    opportunityId,
+    iterationId,
+    data,
+  }: {
+    accessToken: string;
+    iterationId: number;
+    opportunityId: number;
+    data: CreateOpportunityDto;
+  }): Promise<CreateOpportunityDto> {
+    const result = await client<CreateOpportunityDto>({
+      url: `iterations/${iterationId}/opportunities/${opportunityId}/`,
+      method: 'patch',
       headers: {
         authorization: `Bearer ${accessToken}`,
       },

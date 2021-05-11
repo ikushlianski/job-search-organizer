@@ -1,13 +1,15 @@
 import React from 'react';
+import { Badge, Heading } from 'evergreen-ui';
+import { useDispatch, useSelector } from 'react-redux';
 import { AnswerElementResolver } from './answer-elem-resolver.component';
 import { AnswerControls } from './answer-controls.component';
 import { Question } from '../../question/question.interface';
 import { OpportunityAnswer } from '../current-opps.interface';
-import { Badge, Heading } from 'evergreen-ui';
 import { recordAnswer } from '../store/active-opp.action';
-import { useDispatch, useSelector } from 'react-redux';
 import { useAccessToken } from '../../../common/hooks/use-access-token.hook';
 import { selectActiveOpportunityState } from '../store/active-opp.selector';
+import { DetailsFromHR } from './details-from-hr.component';
+import './qa.scss';
 
 interface Props {
   question: Question;
@@ -21,6 +23,7 @@ export const QuestionAndAnswers: React.FC<Props> = ({
   const [selectedOppAnswers, setSelectedOppAnswers] = React.useState(hrAnswers);
 
   const [showMyReaction, setShowMyReaction] = React.useState(false);
+  const [hrComment, setHrComment] = React.useState('');
 
   const dispatch = useDispatch();
   const accessToken = useAccessToken();
@@ -30,11 +33,13 @@ export const QuestionAndAnswers: React.FC<Props> = ({
   const isAnswered = hrAnswers.length > 0;
 
   const onSelect = (event: React.ChangeEvent, answerIds: number[]) => {
+    console.log('hrComment in onSelect', hrComment);
+
     const givenOpportunityAnswers = answerIds.map((answerId) => ({
       opportunity_id: Number(activeOpportunityId),
       answer_id: answerId,
       question_id: question.id,
-      hr_comment: hrAnswers.find((a) => a.answer_id === answerId)?.hr_comment,
+      hr_comment: hrComment,
       my_comment: hrAnswers.find((a) => a.answer_id === answerId)?.my_comment,
       is_delayed: undefined,
       delayed_date: undefined,
@@ -43,10 +48,11 @@ export const QuestionAndAnswers: React.FC<Props> = ({
     setSelectedOppAnswers(givenOpportunityAnswers);
   };
 
-  const onConfirm = (event: React.MouseEvent) => {
+  const onConfirmAnswer = (event: React.MouseEvent) => {
     event.preventDefault();
 
-    if (activeOpportunityId) {
+    if (activeOpportunityId && selectedOppAnswers.length) {
+      console.log('data --->', selectedOppAnswers);
       dispatch(
         recordAnswer({
           opportunityId: Number(activeOpportunityId),
@@ -55,6 +61,21 @@ export const QuestionAndAnswers: React.FC<Props> = ({
         }),
       );
     }
+  };
+
+  const onHrTypes = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const hrComment = event.target.value;
+
+    setHrComment(hrComment);
+
+    const updatedAnswers = selectedOppAnswers.map((answer) => {
+      return {
+        ...answer,
+        hr_comment: hrComment,
+      };
+    });
+
+    setSelectedOppAnswers(updatedAnswers);
   };
 
   const onDelay = (event: React.MouseEvent) => {
@@ -89,17 +110,30 @@ export const QuestionAndAnswers: React.FC<Props> = ({
           disabled={Boolean(hrAnswers.length)}
           hrAnswers={hrAnswers}
         />
-        <AnswerControls
-          answered={isAnswered}
-          onConfirm={onConfirm}
-          onDelay={onDelay}
-        />
-      </div>
-      {showMyReaction && (
-        <div className="QuestionAndAnswers__Reaction">
-          {/*{calculateMyReaction(hrAnswers, myAnswers)}*/}
+        <div className="QuestionBlock__ControlsAndDetails">
+          <DetailsFromHR
+            selectedOppAnswers={selectedOppAnswers}
+            hrAnswers={hrAnswers}
+            onHrTypes={onHrTypes}
+            question={question}
+            hrComment={hrComment}
+          />
+
+          <AnswerControls
+            selectedOpportunityAnswers={selectedOppAnswers}
+            answered={isAnswered}
+            onConfirm={onConfirmAnswer}
+            onDelay={onDelay}
+            question={question}
+          />
+
+          {showMyReaction && (
+            <div className="QuestionAndAnswers__Reaction">
+              {/*{calculateMyReaction(hrAnswers, myAnswers)}*/}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

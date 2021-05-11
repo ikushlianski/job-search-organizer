@@ -14,10 +14,6 @@ export const CompanyPicker: React.FC = () => {
     dispatch(fetchCompanies);
   }, [dispatch]);
 
-  // const onSelectCompany = (companyId: number) => {
-  //   dispatch(setCompany(companyId))
-  // }
-
   if (loading) return <PageLoader />;
 
   return (
@@ -29,7 +25,7 @@ export const CompanyPicker: React.FC = () => {
         items={companies}
       >
         {(props) => {
-          const { getInputProps, getRef, inputValue } = props;
+          const { getInputProps, getRef } = props;
 
           return (
             <TextInput

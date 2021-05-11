@@ -25,6 +25,7 @@
     "@parcel/transformer-sass": "2.0.0-beta.2",
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.23",
+    "@types/lodash": "^4.14.168",
     "@types/node": "12",
     "@types/parcel-env": "^0.0.0",
     "@types/react": "^16.9.53",

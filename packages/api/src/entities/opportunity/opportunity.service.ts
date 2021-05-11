@@ -160,6 +160,18 @@ export class OpportunityService {
     return recorded.id;
   }
 
+  async updateOne(
+    opportunityId: number,
+    data: CreateOpportunityDto,
+  ): Promise<[number, Opportunity[]]> {
+    return await Opportunity.update(data, {
+      where: {
+        id: opportunityId,
+      },
+      returning: true,
+    });
+  }
+
   async verifyOpportunityExists(opportunityId: number): Promise<Opportunity> {
     const opportunity = await Opportunity.findByPk(opportunityId, {
       include: [

@@ -17,6 +17,24 @@ export interface OpportunityItemState extends LoadingProps {
   userOpportunityScore?: UserOpportunityScore;
   project?: Project;
   answers: OpportunityAnswer[];
+
+  //temp
+  company_name?: string;
+  contact_person_name?: string;
+  project_name?: string;
+}
+
+export interface CreateOpportunityDto {
+  name?: string;
+  date?: Date;
+  final_date?: Date;
+  company?: Company;
+  project?: Project;
+
+  //temp
+  company_name?: string | null;
+  contact_person_name?: string | null;
+  project_name?: string | null;
 }
 
 export interface OpportunityAnswer {
