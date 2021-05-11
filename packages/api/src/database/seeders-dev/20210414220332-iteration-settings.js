@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       insert into public.jso_iteration_settings 
       (iteration_id, question_id, answer_id, boolean_answer, numeric_answer, string_answer, weight)
@@ -22,7 +22,7 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       truncate public.jso_iteration_settings RESTART IDENTITY CASCADE;
     `);

@@ -2,7 +2,7 @@
 
 // this seed sets "sequence" value to the actual number of records in each table where ID column is used
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       select setval('jso_answer_id_seq', (select max(id) from jso_answer), true);
     `);
@@ -56,5 +56,7 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {},
+  down: async () => {
+    console.log('');
+  },
 };

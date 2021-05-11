@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       insert into public.jso_user 
       (id, name, email, "currentAccessToken", password, "createdAt", "updatedAt") 
@@ -11,7 +11,7 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       truncate public.jso_user RESTART IDENTITY CASCADE;
     `);

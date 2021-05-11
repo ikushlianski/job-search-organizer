@@ -5,7 +5,6 @@ import { UpdateOpportunityAnswerDto } from './dto/update-opportunity-answer.dto'
 import { IterationService } from '../iteration/iteration.service';
 import { OpportunityService } from '../opportunity/opportunity.service';
 import { UserOpportunityScoreService } from '../user-opportunity-score/user-opportunity-score.service';
-import { differenceWith } from 'lodash';
 import { SavedOppAnswersDto } from './dto/saved-opp-answers.dto';
 
 @Injectable()
@@ -71,6 +70,7 @@ export class OpportunityAnswerService {
     const savedAnswers = await Promise.all(saveAnswerPromises);
 
     const [
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       _,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -81,7 +81,7 @@ export class OpportunityAnswerService {
     );
 
     return {
-      score: rows[0].score as number,
+      score: rows[0].score,
       answers: savedAnswers,
     };
   }

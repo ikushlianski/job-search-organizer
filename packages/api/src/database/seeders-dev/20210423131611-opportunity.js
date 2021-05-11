@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       insert into public.jso_opportunity 
       (id, date, final_date, name, iteration_id, company_id, project_id, user_id) 
@@ -10,7 +10,7 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       truncate public.jso_opportunity RESTART IDENTITY CASCADE;
     `);

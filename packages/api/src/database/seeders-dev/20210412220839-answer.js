@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     const [questions] = await queryInterface.sequelize.query(
       `select q.*, cat.category_name from public.jso_question q
            join public.jso_question_category cat on q.question_category_id = cat.id`,
@@ -237,7 +237,7 @@ module.exports = {
     `);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.sequelize.query(`
       truncate public.jso_answer RESTART IDENTITY CASCADE;
     `);
