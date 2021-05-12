@@ -33,7 +33,7 @@ export const fetchMyCurrentIterationSettings = createAsyncThunk<
   {
     rejectValue: IterationListState;
   }
->('getActiveIterationSettings', async (accessToken, { rejectWithValue }) => {
+>('iterationSettings/getActive', async (accessToken, { rejectWithValue }) => {
   try {
     return await iterationApiService.getIterationSettings(accessToken);
   } catch (e) {

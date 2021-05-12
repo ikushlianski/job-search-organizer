@@ -10,6 +10,8 @@ import { useAccessToken } from '../../../common/hooks/use-access-token.hook';
 import { selectActiveOpportunityState } from '../store/active-opp.selector';
 import { DetailsFromHR } from './details-from-hr.component';
 import './qa.scss';
+import { selectIterationSettings } from '../../iteration/store/iteration.selector';
+import { Reaction } from './reaction.component';
 
 interface Props {
   question: Question;
@@ -24,8 +26,6 @@ export const QuestionAndAnswers: React.FC<Props> = ({
     hrAnswers[0]?.string_answer,
   );
 
-  console.log('hrAnswers[0]?.numeric_answer', hrAnswers[0]?.numeric_answer);
-
   const [numericAnswer, setNumericAnswer] = React.useState(
     hrAnswers[0]?.numeric_answer,
   );
@@ -38,19 +38,21 @@ export const QuestionAndAnswers: React.FC<Props> = ({
   const dispatch = useDispatch();
   const accessToken = useAccessToken();
   const { activeOpportunityId } = useSelector(selectActiveOpportunityState);
+  const iterationSettings = useSelector(selectIterationSettings);
+
+  const iterSettingsForThisQ = iterationSettings?.filter(
+    (setting) => setting.question_id === question.id,
+  );
 
   const { input_type, question_text, question_key } = question;
   const isAnswered = hrAnswers.length > 0;
 
   React.useEffect(() => {
-    console.log('numericAnswer in useEffect', numericAnswer);
     setNumericAnswer(hrAnswers[0]?.numeric_answer);
   }, [hrAnswers.length]);
 
   const onTextInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (question.input_type === 'number') {
-      console.log('event.target.value', event.target.value);
-
       const upToDateValue = Number(event.target.value);
 
       setNumericAnswer(upToDateValue);
@@ -121,7 +123,6 @@ export const QuestionAndAnswers: React.FC<Props> = ({
       question.input_type === 'select';
 
     if (activeOpportunityId && (hasAnswers || !optionsArePossible)) {
-      console.log('data --->', selectedOppAnswers);
       dispatch(
         recordAnswer({
           opportunityId: Number(activeOpportunityId),
@@ -170,7 +171,11 @@ export const QuestionAndAnswers: React.FC<Props> = ({
           </Badge>
         )}
       </Heading>
-      <div className="QuestionBlock__Answers">
+      <div
+        className={`QuestionBlock__Answers ${
+          hrAnswers.length > 0 && `QuestionBlock__Answers--verticallyCentered`
+        }`}
+      >
         <AnswerElementResolver
           selectedOpportunityAnswers={selectedOppAnswers}
           onSelect={onSelect}
@@ -205,7 +210,10 @@ export const QuestionAndAnswers: React.FC<Props> = ({
 
           {showMyReaction && (
             <div className="QuestionAndAnswers__Reaction">
-              {/*{calculateMyReaction(hrAnswers, myAnswers)}*/}
+              <Reaction
+                iterationSettingsForQ={iterSettingsForThisQ}
+                answers={hrAnswers}
+              />
             </div>
           )}
         </div>

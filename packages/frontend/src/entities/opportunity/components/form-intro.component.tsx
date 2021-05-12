@@ -133,22 +133,25 @@ export const FormIntroduction: React.FC = () => {
         padding={'2rem'}
         marginBottom={16}
       >
-        <p>
-          If you don't know the answer now but can learn details later, just
-          leave these questions unanswered. You can return to this form at any
-          time by this same link
-        </p>
-        <p>
-          For tech questions, I'd appreciate if you shared this link with the
-          engineering team so they can provide precise answers.
-        </p>
-        <p>
-          Please answer only if you are really sure the information is correct!
-        </p>
-        <p>
-          Answers are saved on every confirm. Feel free to stop wherever you
-          like. Thanks for your 🕒
-        </p>
+        <ol>
+          <li>
+            If you don't know the answer now but can learn details later, just
+            leave these questions unanswered. You can return to this form at any
+            time by this same link
+          </li>
+          <li>
+            For tech questions, I'd appreciate if you shared this link with the
+            engineering team so they can provide precise answers.
+          </li>
+          <li>
+            Please answer only if you are really sure the information is
+            correct!
+          </li>
+          <li>
+            Answers are saved on every confirm. Feel free to stop wherever you
+            like. Thanks for your 🕒
+          </li>
+        </ol>
       </Pane>
       <div className="QuestionBlock">
         <div className="QuestionBlock__AnswerArea">

@@ -13,8 +13,6 @@ export const authApiService = {
       },
     });
 
-    console.log('checkIsLoggedIn result', result);
-
     return result.data;
   },
 

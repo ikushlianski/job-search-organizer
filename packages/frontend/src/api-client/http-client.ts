@@ -39,7 +39,7 @@ export const client = async function <T>(
   try {
     const response = await axiosClient(options);
 
-    console.log('response in client onSuccess', response);
+    console.log('http client: onSuccess', response);
 
     return onSuccess(response);
   } catch (error) {

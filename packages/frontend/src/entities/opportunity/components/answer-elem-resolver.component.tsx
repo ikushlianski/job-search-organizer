@@ -26,8 +26,6 @@ export const AnswerElementResolver: React.FC<Props> = ({
   selectedOpportunityAnswers,
   textOrNumericAnswer, // text from local state
 }) => {
-  console.log('hrAnswers --->>', hrAnswers);
-
   let answers;
 
   if (inputType === 'select') {

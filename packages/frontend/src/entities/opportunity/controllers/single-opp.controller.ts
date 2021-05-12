@@ -43,19 +43,10 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
 
   React.useEffect(() => {
     dispatch(fetchMyCurrentIterationSettings(accessToken));
+  }, [accessToken, dispatch]);
 
+  React.useEffect(() => {
     if (activeIterationId) {
-      dispatch(
-        fetchOpportunityDetails({
-          accessToken,
-          opportunityId: +opportunityId,
-          iterationId: activeIterationId,
-        }),
-      );
-    }
-
-    console.log('activeIterationId', activeIterationId);
-    if (!isNaN(Number(activeIterationId))) {
       dispatch(
         fetchOpportunityDetails({
           iterationId: Number(activeIterationId),
@@ -71,7 +62,7 @@ export const SingleOppController: React.FC<Props> = ({ render }) => {
         }),
       );
     }
-  }, [accessToken, dispatch, opportunityId, activeIterationId]);
+  }, [accessToken, activeIterationId, dispatch, opportunityId]);
 
   return render({
     loaded: opportunityState.loaded && iterationState.loaded,

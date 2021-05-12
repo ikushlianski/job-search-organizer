@@ -47,7 +47,6 @@ export const CreateOppController: React.FC<Props> = ({
   React.useEffect(() => {
     const newOpptyId = newOpportunityState.opportunity_id;
 
-    console.log('activeIterationId', activeIterationId);
     if (prefillStepsDone && activeIterationId && !newOpportunityState.created) {
       dispatch(
         createNewOpportunity({ accessToken, iterationId: activeIterationId }),
@@ -55,8 +54,6 @@ export const CreateOppController: React.FC<Props> = ({
     }
 
     if (newOpportunityState.created && newOpptyId && activeIterationId) {
-      console.log('RIGHT BEFORE RESET CREATED OPPTY');
-
       history.push(
         `/opportunities/id/${newOpptyId}?token=${process.env.TEMP_TOKEN}`,
       );
