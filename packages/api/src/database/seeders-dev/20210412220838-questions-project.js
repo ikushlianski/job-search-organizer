@@ -31,7 +31,7 @@ module.exports = {
       ('${questions.project.team_people_count}', ${categoriesByName['project'].id}, 'team_people_count', 'checkbox'),
       ('${questions.project.project_people_count}', ${categoriesByName['project'].id}, 'project_people_count', default),
       ('${questions.project.responsibilities}', ${categoriesByName['project'].id}, 'responsibilities', 'checkbox'),
-      ('${questions.project.seniority}', ${categoriesByName['project'].id}, 'seniority', 'checkbox'),
+      ('${questions.project.applicant_seniority}', ${categoriesByName['project'].id}, 'applicant_seniority', 'checkbox'),
       ('${questions.project.dev_ops_work_required}', ${categoriesByName['project'].id}, 'dev_ops_work_required', 'checkbox'),
       ('${questions.project.has_ba}', ${categoriesByName['project'].id}, 'has_ba', default),
       ('${questions.project.customer_communication}', ${categoriesByName['project'].id}, 'customer_communication', 'checkbox'),
@@ -44,7 +44,13 @@ module.exports = {
       ('${questions.project.overtimes}', ${categoriesByName['project'].id}, 'overtimes', 'checkbox'),
       ('${questions.project.customer_business_size}', ${categoriesByName['project'].id}, 'customer_business_size', default),
       ('${questions.project.project_business_model}', ${categoriesByName['project'].id}, 'project_business_model', default),
-      ('${questions.project.task_tracker}', ${categoriesByName['project'].id}, 'task_tracker', default)
+      ('${questions.project.task_tracker}', ${categoriesByName['project'].id}, 'task_tracker', default),
+      ('${questions.project.team_seniority}', ${categoriesByName['project'].id}, 'team_seniority', 'checkbox'),
+      ('${questions.project.customer_stakeholders}', ${categoriesByName['project'].id}, 'customer_stakeholders', 'checkbox'),
+      ('${questions.project.expected_work_schedule}', ${categoriesByName['project'].id}, 'expected_work_schedule', 'checkbox'),
+      ('${questions.project.is_microservices}', ${categoriesByName['project'].id}, 'is_microservices', default),
+      ('${questions.project.team_location}', ${categoriesByName['project'].id}, 'team_location', 'checkbox'),
+      ('${questions.project.project_communication_tool}', ${categoriesByName['project'].id}, 'project_communication_tool', 'checkbox')
     `);
   },
 

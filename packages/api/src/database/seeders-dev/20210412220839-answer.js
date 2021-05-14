@@ -33,6 +33,13 @@ module.exports = {
       (${questionsByKey['salary_currency'].id}, 'Possible in USD'),
       (${questionsByKey['salary_currency'].id}, 'Possible in EUR'),
       
+      (${questionsByKey['paid_leave_day_count'].id}, '15-20'),
+      (${questionsByKey['paid_leave_day_count'].id}, '21-24'),
+      (${questionsByKey['paid_leave_day_count'].id}, '24-27'),
+      (${questionsByKey['paid_leave_day_count'].id}, '28+'),
+      
+      
+      
       -- PROJECT: CODE --
       (${questionsByKey['is_legacy'].id}, 'No, only new technologies'),
       (${questionsByKey['is_legacy'].id}, 'Yes, but not you will not face them'),
@@ -60,9 +67,6 @@ module.exports = {
       (${questionsByKey['tech_stack'].id}, 'Angular 1 (Angular.js)'),
       (${questionsByKey['tech_stack'].id}, 'HTML/CSS'),
       (${questionsByKey['tech_stack'].id}, 'Vue.js'),
-      (${questionsByKey['tech_stack'].id}, 'PHP'),
-      (${questionsByKey['tech_stack'].id}, 'Java'),
-      (${questionsByKey['tech_stack'].id}, '.NET'),
       (${questionsByKey['tech_stack'].id}, 'Docker'),
       (${questionsByKey['tech_stack'].id}, 'AWS'),
       (${questionsByKey['tech_stack'].id}, 'Azure'),
@@ -73,16 +77,14 @@ module.exports = {
       (${questionsByKey['tech_stack'].id}, 'Express.js'),
       (${questionsByKey['tech_stack'].id}, 'Nest.js'),
       (${questionsByKey['tech_stack'].id}, 'Loopback'),
-      (${questionsByKey['tech_stack'].id}, 'Koa.js'),
-      (${questionsByKey['tech_stack'].id}, 'Hapi.js'),
       (${questionsByKey['tech_stack'].id}, 'Postgres'),
       (${questionsByKey['tech_stack'].id}, 'MySQL'),
       (${questionsByKey['tech_stack'].id}, 'MongoDB'),
       (${questionsByKey['tech_stack'].id}, 'Mongoose'),
-      (${questionsByKey['tech_stack'].id}, 'Oracle'),
       (${questionsByKey['tech_stack'].id}, 'TypeORM'),
       (${questionsByKey['tech_stack'].id}, 'Sequelize'),
       (${questionsByKey['tech_stack'].id}, 'RxJS'),
+      (${questionsByKey['tech_stack'].id}, 'Jest'),
       
       (${questionsByKey['position_type'].id}, 'Frontend only'),
       (${questionsByKey['position_type'].id}, 'Frontend, with some backend'),
@@ -109,12 +111,12 @@ module.exports = {
       (${questionsByKey['responsibilities'].id}, 'Developer/Software Engineer'),
       
       
-      (${questionsByKey['seniority'].id}, 'Trainee'),
-      (${questionsByKey['seniority'].id}, 'Junior'),
-      (${questionsByKey['seniority'].id}, 'Middle'),
-      (${questionsByKey['seniority'].id}, 'Senior'),
-      (${questionsByKey['seniority'].id}, 'Lead'),
-      (${questionsByKey['seniority'].id}, 'Chief/Principal'),
+      (${questionsByKey['applicant_seniority'].id}, 'Trainee'),
+      (${questionsByKey['applicant_seniority'].id}, 'Junior'),
+      (${questionsByKey['applicant_seniority'].id}, 'Middle'),
+      (${questionsByKey['applicant_seniority'].id}, 'Senior'),
+      (${questionsByKey['applicant_seniority'].id}, 'Lead'),
+      (${questionsByKey['applicant_seniority'].id}, 'Chief/Principal'),
       
       (${questionsByKey['project_staffing_type'].id}, 'Outsource'),
       (${questionsByKey['project_staffing_type'].id}, 'Outstaffing'),
@@ -126,8 +128,7 @@ module.exports = {
       (${questionsByKey['is_foreign_project'].id}, 'From UK'),
       (${questionsByKey['is_foreign_project'].id}, 'From Europe'),
       (${questionsByKey['is_foreign_project'].id}, 'From Asia'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Russia'),
-      (${questionsByKey['is_foreign_project'].id}, 'From Belarus'),
+      (${questionsByKey['is_foreign_project'].id}, 'From Belarus/Russia'),
       
       (${questionsByKey['customer_business_size'].id}, 'Large company'),
       (${questionsByKey['customer_business_size'].id}, 'Medium-sized company'),
@@ -148,7 +149,7 @@ module.exports = {
       (${questionsByKey['project_topic'].id}, 'Sport'),
       (${questionsByKey['project_topic'].id}, 'Gambling'),
       (${questionsByKey['project_topic'].id}, 'Online games'),
-      (${questionsByKey['project_topic'].id}, 'Finance'),
+      (${questionsByKey['project_topic'].id}, 'FinTech'),
       (${questionsByKey['project_topic'].id}, 'Cryptocurrencies'),
       (${questionsByKey['project_topic'].id}, 'Other'),
       
@@ -219,6 +220,40 @@ module.exports = {
       (${questionsByKey['task_tracker'].id}, 'Trello'),
       (${questionsByKey['task_tracker'].id}, 'Asana'),
       (${questionsByKey['task_tracker'].id}, 'Other'),
+      
+      (${questionsByKey['team_seniority'].id}, '2 team leads and 1-2 seniors'),
+      (${questionsByKey['team_seniority'].id}, '3-4 senior devs'),
+      (${questionsByKey['team_seniority'].id}, '1 team lead and 1-2 seniors'),
+      (${questionsByKey['team_seniority'].id}, '1 team lead and 1 senior'),
+      (${questionsByKey['team_seniority'].id}, 'No team lead, 1-2 seniors'),
+      (${questionsByKey['team_seniority'].id}, 'No team lead, no seniors'),
+     
+      (${questionsByKey['customer_stakeholders'].id}, 'Customer has another team on their side. We will need to work with that team'),
+      (${questionsByKey['customer_stakeholders'].id}, 'Customer has architect on their side'),
+      (${questionsByKey['customer_stakeholders'].id}, 'Customer has BA on their side'),
+      (${questionsByKey['customer_stakeholders'].id}, 'Customer has PM or other managers on their side'),
+      (${questionsByKey['customer_stakeholders'].id}, 'Customer has a team lead/lead developer on their side. That lead will review your code'),
+      
+      (${questionsByKey['expected_work_schedule'].id}, '9am to 6pm'),
+      (${questionsByKey['expected_work_schedule'].id}, '10-11am to 7-8pm'),
+      (${questionsByKey['expected_work_schedule'].id}, '12am-1pm to 8-9pm'),
+      (${questionsByKey['expected_work_schedule'].id}, '2pm to 10pm'),
+      (${questionsByKey['expected_work_schedule'].id}, 'You are free to choose'),
+      
+      (${questionsByKey['is_microservices'].id}, 'Yes, pure microservices'),
+      (${questionsByKey['is_microservices'].id}, 'Somewhat, this is a distributed monolith'),
+      (${questionsByKey['is_microservices'].id}, 'No, that is a monolith app'),
+      
+      (${questionsByKey['team_location'].id}, 'Most or all are from Belarus'),
+      (${questionsByKey['team_location'].id}, 'Some are from CIS (Russia, Ukraine, Armenia etc.)'),
+      (${questionsByKey['team_location'].id}, 'Some are from Europe'),
+      (${questionsByKey['team_location'].id}, 'Some are from the US'),
+      
+      (${questionsByKey['project_communication_tool'].id}, 'Slack'),
+      (${questionsByKey['project_communication_tool'].id}, 'MS Teams'),
+      (${questionsByKey['project_communication_tool'].id}, 'Telegram'),
+      (${questionsByKey['project_communication_tool'].id}, 'Other'),
+      
       
       -- WORKPLACE --
       (${questionsByKey['is_32_gb'].id}, 'No, our laptops are 16GB by default, cannot be changed'),

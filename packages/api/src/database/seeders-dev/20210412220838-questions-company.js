@@ -21,7 +21,8 @@ module.exports = {
       ('${questions.company.office_location}', ${categoriesByName['company'].id}, 'office_location', default),
       ('${questions.company.interview_count}', ${categoriesByName['company'].id}, 'interview_count', 'number'),
       ('${questions.company.company_project_count}', ${categoriesByName['company'].id}, 'company_project_count', default),
-      ('${questions.company.salary_currency}', ${categoriesByName['company'].id}, 'salary_currency', 'checkbox')
+      ('${questions.company.salary_currency}', ${categoriesByName['company'].id}, 'salary_currency', 'checkbox'),
+      ('${questions.company.paid_leave_day_count}', ${categoriesByName['company'].id}, 'paid_leave_day_count', default),
       
     `);
   },
