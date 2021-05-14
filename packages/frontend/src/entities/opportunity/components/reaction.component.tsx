@@ -18,6 +18,7 @@ export const Reaction: React.FC<Props> = ({
   let score = 0;
 
   if (iterationSettingsForQ) {
+    console.log('HASSSS');
     score = answers.reduce((acc, cur): number => {
       const answerScore = iterationSettingsForQ.find(
         (setting) => setting.answer_id === cur.answer_id,
@@ -28,6 +29,10 @@ export const Reaction: React.FC<Props> = ({
       return acc;
     }, 0);
   }
+
+  React.useEffect(() => {
+    console.log('score', score);
+  }, [score]);
 
   const memoizedGetColor = React.useMemo(() => getColor(score), [score]);
 

@@ -95,21 +95,43 @@ export const QuestionAndAnswers: React.FC<Props> = ({
     }
   };
 
-  const onSelect = (event: React.ChangeEvent, answerIds: number[]) => {
-    const givenOpportunityAnswers: OpportunityAnswer[] = answerIds.map(
-      // todo refactor this duplication of mapping to OppAnswer
-      (answerId) => ({
-        opportunity_id: Number(activeOpportunityId),
-        answer_id: answerId,
-        question_id: question.id,
-        hr_comment: hrComment,
-        my_comment: hrAnswers.find((a) => a.answer_id === answerId)?.my_comment,
-        is_delayed: undefined,
-        delayed_date: undefined,
-      }),
-    );
+  const onSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const answerId = +event.target.value;
 
-    setSelectedOppAnswers(givenOpportunityAnswers);
+    console.log('onSelect: answerId', answerId);
+    console.dir(event.target);
+
+    if (isNaN(answerId)) {
+      console.debug('answerId is NaN');
+
+      return;
+    }
+
+    const alreadySelectedAnswerIds = selectedOppAnswers.map((a) => a.answer_id);
+
+    if (alreadySelectedAnswerIds.includes(answerId)) {
+      setSelectedOppAnswers((prev) =>
+        prev.filter((answer) => answer.answer_id !== answerId),
+      );
+
+      return;
+    }
+
+    const newOpportunityAnswer: OpportunityAnswer = {
+      opportunity_id: Number(activeOpportunityId),
+      answer_id: answerId,
+      question_id: question.id,
+      hr_comment: hrComment,
+      my_comment: hrAnswers.find((a) => a.answer_id === answerId)?.my_comment,
+      is_delayed: undefined,
+      delayed_date: undefined,
+    };
+
+    if (question.input_type === 'checkbox') {
+      setSelectedOppAnswers((prev) => [...prev, newOpportunityAnswer]);
+    } else {
+      setSelectedOppAnswers([newOpportunityAnswer]);
+    }
   };
 
   const onConfirmAnswer = (event: React.MouseEvent) => {
@@ -154,6 +176,10 @@ export const QuestionAndAnswers: React.FC<Props> = ({
     console.log('DELAYED!');
     // dispatch(recordDelay());
   };
+
+  React.useEffect(() => {
+    console.log('showmyreaction', showMyReaction);
+  }, [showMyReaction]);
 
   React.useEffect(() => {
     if (hrAnswers.length) {

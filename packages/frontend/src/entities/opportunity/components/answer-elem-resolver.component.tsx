@@ -12,7 +12,7 @@ interface Props {
   hrAnswers: OpportunityAnswer[]; // came from backend
   selectedOpportunityAnswers: OpportunityAnswer[]; // our changes to these answers on frontend
   disabled: boolean;
-  onSelect: (e: React.ChangeEvent, data: number[]) => void;
+  onSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onTextInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textOrNumericAnswer: string | number;
 }
@@ -69,11 +69,12 @@ export const AnswerElementResolver: React.FC<Props> = ({
             <div key={answer.id} className="SingleOption">
               <Checkbox
                 defaultChecked={defaultChecked}
-                onChange={(e) => onSelect(e, [answer.id])}
+                onChange={onSelect}
                 checked={disabled ? defaultChecked : checkedId === answer.id}
                 disabled={disabled}
                 name={`${answer.question_id}`}
                 label={answer.answer_text}
+                value={answer.id.toString()}
               />
             </div>
           );
@@ -92,7 +93,7 @@ export const AnswerElementResolver: React.FC<Props> = ({
             <Radio
               key={answer.id}
               defaultChecked={defaultChecked}
-              onChange={(e) => onSelect(e, [answer.id])}
+              onChange={onSelect}
               checked={disabled ? defaultChecked : checkedId === answer.id}
               disabled={disabled}
               name={`${answer.id}`}
