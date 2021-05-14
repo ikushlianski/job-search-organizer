@@ -57,7 +57,7 @@ const questions = {
     overtimes: 'How often do overtimes happen on this project?',
     expected_work_schedule:
       'What are the expected hours when I should be at work (available)?',
-    project_communication_tool: "What are the team's communication tools?",
+    project_communication_tool: 'What are communication tools within the team?',
 
     // project processes
     is_scrum: 'Does the team follow Scrum practices?',
