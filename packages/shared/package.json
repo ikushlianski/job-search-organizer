@@ -20,8 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/ikushlianski/job-search-organizer.git"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "bugs": {
     "url": "https://github.com/ikushlianski/job-search-organizer/issues"
   },
@@ -34,6 +33,7 @@
   },
   "dependencies": {
     "eslint-config-prettier": "^6.14.0",
+    "lodash": "^4.17.21",
     "typeorm": "^0.2.28"
   }
 }
